@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import listEndpoints from 'express-list-endpoints';
+import listEndpoints from "express-list-endpoints";
 import bcrypt from "bcrypt"; // It generates a very long random string, like a second id
 import crypto from "crypto"; // To hash and unhash the password
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject";
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -61,6 +61,9 @@ const TodoSchema = new mongoose.Schema({
     type: Number,
     default: () => Date.now(),
   },
+  done: {
+    type: Boolean,
+  },
 });
 
 // Todo model that uses the TodoSchema
@@ -98,7 +101,7 @@ const authenticateUser = async (req, res, next) => {
       });
     }
   } catch (error) {
-    res.status(400).json({ response: error, success: false });
+    res.status(400).json({ message: "Invalid request", response: error, success: false });
   }
 };
 
@@ -108,8 +111,8 @@ app.get("/", (req, res) => {
 });
 
 // Get all the endpoints
-app.get('/endpoints', (req, res) => {
-	res.send(listEndpoints(app));
+app.get("/endpoints", (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 // Endpoint to show the task overviews
@@ -118,6 +121,71 @@ app.get("/dashboard", authenticateUser);
 app.get("/dashboard", async (req, res) => {
   const dashboard = await Dashboard.find({});
   res.status(200).json({ response: dashboard, success: true });
+});
+
+// Endpoint to get all the tasks
+app.get("/tasks", async (req, res) => {
+  const tasks = await Todo.find({});
+  res.status(201).json({ response: tasks, success: true });
+});
+
+// Endpoint to add todo tasks
+app.post("/addtask", async (req, res) => {
+  const { task } = req.body;
+
+  try {
+    const newTask = await new Todo({ task }).save();
+    res.status(201).json({ response: newTask, success: true });
+  } catch (error) {
+    res.status(400).json({ message: "Invalid request", response: error, success: false });
+  }
+});
+
+// Endpoint to edit todo tasks
+app.patch("/tasks/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+  const { task } = req.body;
+
+  try {
+    const updatedTask = await Todo.findByIdAndUpdate(
+        taskId,
+       { task },
+      { new: true }
+    );
+    if (updatedTask) {
+      res.status(200).json({ response: updatedTask, success: true });
+    } else {
+      res.status(404).json({
+        message: "Could not find the task",
+        success: false,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Invalid request",
+      error: error,
+      success: false,
+    });
+  }
+});
+
+// Endpoint to delete todo tasks
+app.delete("/tasks/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+
+  try {
+    const deleteTask = await Todo.findOneAndDelete({ _id: taskId });
+
+    if (deleteTask) {
+      res.status(200).json({ response: deleteTask, success: true });
+    } else {
+      res.status(404).json({ response: "Task not found", success: false });
+    }
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Invalid request", response: error, success: false });
+  }
 });
 
 // Endpoint to sign up
@@ -146,7 +214,7 @@ app.post("/signup", async (req, res) => {
       success: true,
     });
   } catch (error) {
-    res.status(400).json({ response: error, message: "error", success: false });
+    res.status(400).json({ message: "Invalid request", response: error, message: "error", success: false });
   }
 });
 
@@ -175,7 +243,7 @@ app.post("/signin", async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({ response: error, success: false });
+    res.status(400).json({ message: "Invalid request", response: error, success: false });
   }
 });
 
