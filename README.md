@@ -1,13 +1,31 @@
-# Project Auth
+# Final project
 
-Replace this readme with your own information about your project.
+MODELS:
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+- User
+- Dashboard
+- Todo
+
+ENDPOINTS:
+
+Task endpoints:
+
+- To get all tasks: -----> get "/tasks"
+- To add a task ---------> post "/addtask"
+- To edit a task --------> patch "/tasks/taskId"
+- To delete a task ------> delete "/tasks/taskId"
+
+User endpoints:
+
+- To signup -------------> post "/signup"
+- To signin -------------> post "/signin"
+
+Dashboard endpoints:
+
+- To show tasks overview -------> get "/dashboard"
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+mongodb://127.0.0.1/finalProject
 
 ## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.

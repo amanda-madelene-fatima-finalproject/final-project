@@ -1,42 +1,42 @@
 {
-  "name": "project-auth-frontend",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@babel/helper-compilation-targets": "^7.16.7",
-    "@reduxjs/toolkit": "^1.7.1",
-    "babel-eslint": "^10.1.0",
-    "cra-template-pwa": "^1.0.3",
-    "eslint": "^6.7.1",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^2.5.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "^3.4.4",
-    "styled-components": "^5.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint ."
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "final-project-frontend",
+	"version": "1.0.0",
+	"private": true,
+	"dependencies": {
+		"@babel/helper-compilation-targets": "^7.16.7",
+		"@reduxjs/toolkit": "^1.7.1",
+		"babel-eslint": "^10.1.0",
+		"cra-template-pwa": "^1.0.3",
+		"eslint": "^6.7.1",
+		"eslint-config-airbnb": "^18.2.1",
+		"eslint-plugin-import": "^2.25.4",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-react": "^7.28.0",
+		"eslint-plugin-react-hooks": "^2.5.1",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
+		"react-redux": "^7.2.6",
+		"react-router-dom": "^6.2.1",
+		"react-scripts": "^3.4.4",
+		"styled-components": "^5.3.3"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint": "eslint ."
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
