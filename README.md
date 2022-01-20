@@ -5,6 +5,7 @@ MODELS:
 - User
 - Dashboard
 - Todo
+- Role
 
 ENDPOINTS:
 
@@ -15,17 +16,18 @@ Task endpoints:
 - To edit a task --------> patch "/tasks/taskId"
 - To delete a task ------> delete "/tasks/taskId"
 
-User endpoints:
+Profile endpoints:
 
+- To get user profile ----> get "/user/userId/profile"
 - To signup -------------> post "/signup"
 - To signin -------------> post "/signin"
+
+Role endpoint:
+
+/ To post a role -----------> post "role"
 
 Dashboard endpoints:
 
 - To show tasks overview -------> get "/dashboard"
-
-## The problem
-
-mongodb://127.0.0.1/finalProject
 
 ## View it live
