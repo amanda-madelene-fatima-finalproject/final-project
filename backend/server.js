@@ -5,7 +5,7 @@ import listEndpoints from "express-list-endpoints";
 import bcrypt from "bcrypt"; // It generates a very long random string, like a second id
 import crypto from "crypto"; // To hash and unhash the password
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject"; // SWITCH TO LOCALHOST when not Fatima
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject"; // SWITCH TO LOCALHOST when not Fatima
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Role",
+     // required: true,
   },
   password: {
     type: String,
@@ -29,6 +30,7 @@ const UserSchema = new mongoose.Schema({
   // Unique identifier for authentication when signing in
   accessToken: {
     type: String,
+    // required: true,
     // creates the accessToken by randomizing a string (128 is the length), hex means letters (if removed it generates symbols).
     default: () => crypto.randomBytes(128).toString("hex"),
   },
@@ -77,6 +79,11 @@ const TodoSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  user: { 
+    type: mongoose.Schema.Types.ObjectId,
+    // required: true,
+    ref: 'User'
+  }
 });
 
 // Todo model that uses the TodoSchema
@@ -142,13 +149,23 @@ app.get("/dashboard", async (req, res) => {
 
 // ----- Task Endpoints --------//
 
-app.get("/tasks", authenticateUser);
 // Endpoint to get all the tasks
-app.get("/tasks", async (req, res) => {
+app.get("/tasks/:userId", authenticateUser); //userId here
+app.get("/tasks/:userId", async (req, res) => {
+const { userId } = req.params;
+
+
   try {
-    const tasks = await Todo.find({});
-    if (tasks) {
-      res.status(200).json({ response: tasks, success: true });
+    const queriedUser = await User.findOne({ user: userId }); 
+
+    const queriedTasks = await Todo.find({
+      // user: mongoose.Types.ObjectId(userId),
+      user: userId,
+      
+    });
+    // const tasks = await Todo.find({ user: userId, completed: false });//here need to find the userId
+    if (queriedTasks) {
+      res.status(200).json({ response: queriedTasks  , user: userId, success: true });
     } else {
       res.status(404).json({
         message: "Could not find tasks",
@@ -156,14 +173,12 @@ app.get("/tasks", async (req, res) => {
       });
     }
   } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+    res.status(400).json({ message: "Invalid request", response: error, success: false });
   }
 });
 
-app.post("/tasks/addtasks", authenticateUser);
 // Endpoint to add todo tasks
+app.post("/tasks/addtask", authenticateUser);
 app.post("/tasks/addtask", async (req, res) => {
   const { task } = req.body;
 
@@ -184,8 +199,8 @@ app.post("/tasks/addtask", async (req, res) => {
   }
 });
 
-app.patch("/tasks/:taskId/edit", authenticateUser);
 // Endpoint to edit todo tasks
+app.patch("/tasks/:taskId/edit", authenticateUser);
 app.patch("/tasks/:taskId/edit", async (req, res) => {
   const { taskId } = req.params;
   const { task } = req.body;
@@ -213,8 +228,8 @@ app.patch("/tasks/:taskId/edit", async (req, res) => {
   }
 });
 
-app.delete("/tasks/:taskId/delete", authenticateUser);
 // Endpoint to delete todo tasks
+app.delete("/tasks/:taskId/delete", authenticateUser);
 app.delete("/tasks/:taskId/delete", async (req, res) => {
   const { taskId } = req.params;
 
@@ -257,8 +272,8 @@ app.post("/signup", async (req, res) => {
     // To randomize password
     const salt = bcrypt.genSaltSync();
 
-    if (password.length < 5 && username.length < 5) {
-      throw "password and username must be at least 5 characters long";
+    if (password.length < 5) {
+      throw "password and must be at least 5 characters long";
     }
     const queriedRole = await Role.findById(role);
     // Creating a new user and generating an _id: "shshj5k4773sddf"
@@ -276,6 +291,7 @@ app.post("/signup", async (req, res) => {
           username: newUser.username,
           role: newUser.role,
           accessToken: newUser.accessToken,
+
         },
         success: true,
       });
@@ -309,6 +325,7 @@ app.post("/signin", async (req, res) => {
 
   try {
     const user = await User.findOne({ username });
+    // const user = await User.findOne({ username }).populate("role"); // shall we populate here aswell? if so, when a user signs is, can see his/her role 
 
     // Checking if user and password already exist
     // Comparing if password (normal) sent in the body is the same as the password(hashed) saved in the database
@@ -318,6 +335,7 @@ app.post("/signin", async (req, res) => {
           userId: user._id,
           username: user.username,
           accessToken: user.accessToken,
+          // role: user.role,
         },
         success: true,
       });
