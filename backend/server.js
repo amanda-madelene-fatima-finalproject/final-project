@@ -56,7 +56,6 @@ const DashboardSchema = new mongoose.Schema({
   },
 });
 
-// Dashboard model that uses the DashboardSchema
 const Dashboard = mongoose.model("Dashboard", DashboardSchema);
 
 // ----- TodoSchema --------//
@@ -86,7 +85,6 @@ const TodoSchema = new mongoose.Schema({
   }
 });
 
-// Todo model that uses the TodoSchema
 const Todo = mongoose.model("Todo", TodoSchema);
 
 // Defines the port the app will run on. Defaults to 8080, but can be
@@ -149,6 +147,37 @@ app.get("/dashboard", async (req, res) => {
 
 // ----- Task Endpoints --------//
 
+// Endpoint to add todo tasks
+app.post("/tasks/addtask", authenticateUser);
+app.post("/tasks/addtask", async (req, res) => {
+  const { task, userId} = req.body;
+
+  try {
+    const queriedId = await User.findById(userId);
+    const newTask = await new Todo({ task, user: queriedId}).save();
+
+    if (newTask) {
+      res.status(201).json({ response: {
+        task:newTask.task,
+        creationDay: newTask.createdAt,
+        done:newTask.done,
+        author:newTask.user.username,
+
+      }, success: true });
+
+    } else {
+      res.status(404).json({
+        message: "Could not find task",
+        success: false,
+      });
+    }
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Invalid request", response: error, success: false });
+  }
+});
+
 // Endpoint to get all the tasks
 app.get("/tasks/:userId", authenticateUser); //userId here
 app.get("/tasks/:userId", async (req, res) => {
@@ -177,27 +206,6 @@ const { userId } = req.params;
   }
 });
 
-// Endpoint to add todo tasks
-app.post("/tasks/addtask", authenticateUser);
-app.post("/tasks/addtask", async (req, res) => {
-  const { task } = req.body;
-
-  try {
-    const newTask = await new Todo({ task }).save();
-    if (newTask) {
-      res.status(201).json({ response: newTask, success: true });
-    } else {
-      res.status(404).json({
-        message: "Could not find task",
-        success: false,
-      });
-    }
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
-  }
-});
 
 // Endpoint to edit todo tasks
 app.patch("/tasks/:taskId/edit", authenticateUser);
@@ -266,7 +274,7 @@ app.post("/role", async (req, res) => {
 
 // Endpoint to sign up
 app.post("/signup", async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username, password, roleId } = req.body;
 
   try {
     // To randomize password
@@ -275,7 +283,7 @@ app.post("/signup", async (req, res) => {
     if (password.length < 5) {
       throw "password and must be at least 5 characters long";
     }
-    const queriedRole = await Role.findById(role);
+    const queriedRole = await Role.findById(roleId);
     // Creating a new user and generating an _id: "shshj5k4773sddf"
     const newUser = await new User({
       username,
@@ -311,6 +319,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+//Endpoint to get the user's info
 app.get("/user/:userId/profile", async (req, res) => {
   const { userId } = req.params;
   // in order to return a document and not only an id we need to populate, it takes one argument with what property needs to be populated
@@ -318,6 +327,7 @@ app.get("/user/:userId/profile", async (req, res) => {
   const user = await User.findById(userId).populate("role");
   res.status(201).json({ response: user, success: true });
 });
+
 
 // Endpoint to sign in: Here we see if the user model exist in database above.
 app.post("/signin", async (req, res) => {
@@ -335,7 +345,7 @@ app.post("/signin", async (req, res) => {
           userId: user._id,
           username: user.username,
           accessToken: user.accessToken,
-          // role: user.role,
+          role: user.role,
         },
         success: true,
       });
