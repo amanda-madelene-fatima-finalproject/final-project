@@ -5,87 +5,16 @@ import listEndpoints from "express-list-endpoints";
 import bcrypt from "bcrypt"; // It generates a very long random string, like a second id
 import crypto from "crypto"; // To hash and unhash the password
 
+import { addTask, editTask, getTask, deleteTask } from "./endpoints/Tasks.js";
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject"; // SWITCH TO LOCALHOST when not Fatima
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-//----- UserSchema ------//
-const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-  },
-  role: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Role",
-     // required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  // Unique identifier for authentication when signing in
-  accessToken: {
-    type: String,
-    // required: true,
-    // creates the accessToken by randomizing a string (128 is the length), hex means letters (if removed it generates symbols).
-    default: () => crypto.randomBytes(128).toString("hex"),
-  },
-});
-
-// User model that uses the UserSchema
-const User = mongoose.model("User", UserSchema);
-
-// ------- ROLE Schema ------------//
-
-const RoleSchema = mongoose.Schema({
-  description: String,
-});
-
-const Role = mongoose.model("Role", RoleSchema);
-
-// ----- DashboardSchema --------//
-const DashboardSchema = new mongoose.Schema({
-  message: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-});
-
-const Dashboard = mongoose.model("Dashboard", DashboardSchema);
-
-// ----- TodoSchema --------//
-const TodoSchema = new mongoose.Schema({
-  task: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 1,
-  },
-  category: {
-    type: String,
-    enum: ["work", "home", "social", "health", "other"],
-  },
-  createdAt: {
-    type: Number,
-    default: () => Date.now(),
-  },
-  done: {
-    type: Boolean,
-    default: false,
-  },
-  user: { 
-    type: mongoose.Schema.Types.ObjectId,
-    // required: true,
-    ref: 'User'
-  }
-});
-
-const Todo = mongoose.model("Todo", TodoSchema);
+const Dashboard = require('./models/Dashboard.js');
+const User = require('./models/User.js');
+// const Todo = require('./models/Todo.js');
+const Role = require('./models/Role.js');
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
@@ -135,6 +64,17 @@ app.get("/endpoints", (req, res) => {
   res.send(listEndpoints(app));
 });
 
+// ----- Task Endpoints --------//
+app.post("/tasks/addtask", authenticateUser);
+app.post("/tasks/addtask", addTask)
+app.get("/tasks/:userId", authenticateUser); //userId here
+app.get("/tasks/:userId", getTask)
+app.patch("/tasks/:taskId/edit", authenticateUser);
+app.patch("/tasks/:taskId/edit", editTask)
+app.delete("/tasks/:taskId/delete", authenticateUser);
+app.delete("/tasks/:taskId/delete", deleteTask);
+
+
 // ----- Dashboard Endpoints --------//
 
 // Endpoint to show the task overviews
@@ -145,115 +85,7 @@ app.get("/dashboard", async (req, res) => {
   res.status(200).json({ response: dashboard, success: true });
 });
 
-// ----- Task Endpoints --------//
 
-// Endpoint to add todo tasks
-app.post("/tasks/addtask", authenticateUser);
-app.post("/tasks/addtask", async (req, res) => {
-  const { task, userId} = req.body;
-
-  try {
-    const queriedId = await User.findById(userId);
-    const newTask = await new Todo({ task, user: queriedId}).save();
-
-    if (newTask) {
-      res.status(201).json({ response: {
-        task:newTask.task,
-        creationDay: newTask.createdAt,
-        done:newTask.done,
-        author:newTask.user.username,
-
-      }, success: true });
-
-    } else {
-      res.status(404).json({
-        message: "Could not find task",
-        success: false,
-      });
-    }
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
-  }
-});
-
-// Endpoint to get all the tasks
-app.get("/tasks/:userId", authenticateUser); //userId here
-app.get("/tasks/:userId", async (req, res) => {
-const { userId } = req.params;
-
-
-  try {
-    const queriedUser = await User.findOne({ user: userId }); 
-
-    const queriedTasks = await Todo.find({
-      // user: mongoose.Types.ObjectId(userId),
-      user: userId,
-      
-    });
-    // const tasks = await Todo.find({ user: userId, completed: false });//here need to find the userId
-    if (queriedTasks) {
-      res.status(200).json({ response: queriedTasks  , user: userId, success: true });
-    } else {
-      res.status(404).json({
-        message: "Could not find tasks",
-        success: false,
-      });
-    }
-  } catch (error) {
-    res.status(400).json({ message: "Invalid request", response: error, success: false });
-  }
-});
-
-
-// Endpoint to edit todo tasks
-app.patch("/tasks/:taskId/edit", authenticateUser);
-app.patch("/tasks/:taskId/edit", async (req, res) => {
-  const { taskId } = req.params;
-  const { task } = req.body;
-
-  try {
-    const updatedTask = await Todo.findByIdAndUpdate(
-      taskId,
-      { task },
-      { new: true }
-    );
-    if (updatedTask) {
-      res.status(200).json({ response: updatedTask, success: true });
-    } else {
-      res.status(404).json({
-        message: "Could not find task",
-        success: false,
-      });
-    }
-  } catch (error) {
-    res.status(400).json({
-      message: "Invalid request",
-      error: error,
-      success: false,
-    });
-  }
-});
-
-// Endpoint to delete todo tasks
-app.delete("/tasks/:taskId/delete", authenticateUser);
-app.delete("/tasks/:taskId/delete", async (req, res) => {
-  const { taskId } = req.params;
-
-  try {
-    const deleteTask = await Todo.findOneAndDelete({ _id: taskId });
-    if (deleteTask) {
-      res.status(200).json({ response: deleteTask, success: true });
-    } else {
-      res.status(404).json({ response: "Could not find task", success: false });
-    }
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
-  }
-});
 
 // ----- Create Role Endpoint --------//
 

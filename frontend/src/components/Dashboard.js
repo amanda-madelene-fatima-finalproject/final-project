@@ -13,7 +13,7 @@ const Headline = styled.h1`
 const Dashboard = () => {
   const todoItems = useSelector((store) => store.todo.items);
   const accessToken = useSelector((store) => store.user.accessToken);
-  const userId = useSelector((store) => store.user.userId)
+  const userId = useSelector((store) => store.user.userId);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,11 +31,10 @@ const Dashboard = () => {
         Authorization: accessToken,
       },
     };
-fetch(API_URL(`tasks/${userId}`), options)
-
+    fetch(API_URL(`tasks/${userId}`), options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         if (data.success) {
           dispatch(todo.actions.setItems(data.response));
           dispatch(todo.actions.setError(null));
