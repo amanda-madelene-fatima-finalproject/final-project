@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 // Imported user reducer
 // import { setUserId, setAccessToken } from './user';
-import { API_URL } from 'utils/urls';
+import { API_URL } from "utils/urls";
 
 export const todo = createSlice({
-  name: 'todo',
+  name: "todo",
   initialState: {
     items: [],
     error: null,
@@ -24,7 +24,7 @@ export const todo = createSlice({
 export const fetchTasks = (accessToken, userId) => {
   return (dispatch) => {
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
         Authorization: accessToken,
       },
@@ -35,6 +35,29 @@ export const fetchTasks = (accessToken, userId) => {
         console.log(data);
         if (data.success) {
           dispatch(todo.actions.setItems(data.response));
+          dispatch(todo.actions.setError(null));
+        } else {
+          dispatch(todo.actions.setItems([]));
+          dispatch(todo.actions.setError(data.response));
+        }
+      });
+  };
+};
+
+export const postTasks = (accessToken, userId, task) => {
+  return (dispatch) => {
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ task, user: userId }),
+    };
+    fetch(API_URL("tasks/addtask"), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(fetchTasks(accessToken, userId));
           dispatch(todo.actions.setError(null));
         } else {
           dispatch(todo.actions.setItems([]));

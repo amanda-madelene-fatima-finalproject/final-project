@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import AddTodo from "./AddTodo";
 
 // import { API_URL } from '../utils/urls';
-import { fetchTasks } from '../reducers/todo';
+import { fetchTasks, postTasks } from "../reducers/todo";
 
-// Thunk fetchTaks/reducers/todo';
+// Thunk fetchTask/reducers/todo';
 
 const Headline = styled.h1`
   color: blue;
@@ -22,39 +23,31 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!accessToken) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [accessToken, navigate]);
 
   useEffect(() => {
     dispatch(fetchTasks(accessToken, userId));
-    // const options = {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: accessToken,
-    //   },
-    // };
-    // fetch(API_URL(`tasks/${userId}`), options)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.success) {
-    //       dispatch(todo.actions.setItems(data.response));
-    //       dispatch(todo.actions.setError(null));
-    //     } else {
-    //       dispatch(todo.actions.setItems([]));
-    //       dispatch(todo.actions.setError(data.response));
-    //     }
-    //   });
+  }, [dispatch, accessToken, userId]);
+
+  useEffect(() => {
+    dispatch(postTasks(accessToken, userId));
   }, [dispatch, accessToken, userId]);
 
   return (
-    <div>
-      <Headline>My todos:</Headline>
-      {todoItems.map((item) => (
-        <div key={item._id}>{item.task}</div>
-      ))}
-    </div>
+    <>
+      <div>
+        <Headline>My todos:</Headline>
+        {todoItems.map((item) => (
+          <div key={item._id}>{item.task}</div>
+        ))}
+      </div>
+      <div>
+        {" "}
+        <AddTodo />
+      </div>
+    </>
   );
 };
 export default Dashboard;
