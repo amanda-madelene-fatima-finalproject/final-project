@@ -10,26 +10,26 @@ import Dashboard from './components/Dashboard';
 
 //Import reducers
 import user from './reducers/user';
-import todo from './reducers/todo';
+import { todo } from './reducers/todo';
 
 //Reducers
 const reducer = combineReducers({
-	user: user.reducer,
-	todo: todo.reducer,
+  user: user.reducer,
+  todo: todo.reducer,
 });
 
 const store = configureStore({ reducer });
 
 export const App = () => {
-	return (
-		<Provider store={store}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Dashboard />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
-			</BrowserRouter>
-		</Provider>
-	);
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  );
 };

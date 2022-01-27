@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { API_URL } from "../utils/urls";
-import todo from "../reducers/todo";
+// import { API_URL } from '../utils/urls';
+import { fetchTasks } from '../reducers/todo';
+
+// Thunk fetchTaks/reducers/todo';
 
 const Headline = styled.h1`
   color: blue;
@@ -20,29 +22,30 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!accessToken) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [accessToken, navigate]);
 
   useEffect(() => {
-    const options = {
-      method: "GET",
-      headers: {
-        Authorization: accessToken,
-      },
-    };
-    fetch(API_URL(`tasks/${userId}`), options)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.success) {
-          dispatch(todo.actions.setItems(data.response));
-          dispatch(todo.actions.setError(null));
-        } else {
-          dispatch(todo.actions.setItems([]));
-          dispatch(todo.actions.setError(data.response));
-        }
-      });
+    dispatch(fetchTasks(accessToken, userId));
+    // const options = {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: accessToken,
+    //   },
+    // };
+    // fetch(API_URL(`tasks/${userId}`), options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.success) {
+    //       dispatch(todo.actions.setItems(data.response));
+    //       dispatch(todo.actions.setError(null));
+    //     } else {
+    //       dispatch(todo.actions.setItems([]));
+    //       dispatch(todo.actions.setError(data.response));
+    //     }
+    //   });
   }, [dispatch, accessToken, userId]);
 
   return (
