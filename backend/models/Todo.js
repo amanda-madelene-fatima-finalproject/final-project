@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import crypto from 'crypto';
 
 // ----- TodoSchema --------//
 const TodoSchema = new mongoose.Schema({

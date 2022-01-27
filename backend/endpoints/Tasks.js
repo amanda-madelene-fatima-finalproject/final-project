@@ -1,71 +1,65 @@
-import express from "express";
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-
-const { Todo } = require('../models/Todo');
-
-
+const Todo = require('../models/Todo');
+const User = require('../models/User.js');
 
 // ----- Task Endpoints --------//
 
 // Endpoint to add todo tasks
 export const addTask = async (req, res) => {
-  const { task, userId} = req.body;
+  const { task, userId } = req.body;
 
   try {
     const queriedId = await User.findById(userId);
-    const newTask = await new Todo({ task, user: queriedId}).save();
+    const newTask = await new Todo({ task, user: queriedId }).save();
 
     if (newTask) {
-      res.status(201).json({ response: {
-        task:newTask.task,
-        creationDay: newTask.createdAt,
-        done:newTask.done,
-        author:newTask.user.username,
-
-      }, success: true });
-
+      res.status(201).json({
+        response: {
+          task: newTask.task,
+          creationDay: newTask.createdAt,
+          done: newTask.done,
+          author: newTask.user.username,
+        },
+        success: true,
+      });
     } else {
       res.status(404).json({
-        message: "Could not find task",
+        message: 'Could not find task',
         success: false,
       });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };
 
-
 // Endpoint to get all the tasks
 export const getTask = async (req, res) => {
-const { userId } = req.params;
-
+  const { userId } = req.params;
 
   try {
-    const queriedUser = await User.findOne({ user: userId }); 
-
     const queriedTasks = await Todo.find({
       // user: mongoose.Types.ObjectId(userId),
       user: userId,
-      
     });
     // const tasks = await Todo.find({ user: userId, completed: false });//here need to find the userId
     if (queriedTasks) {
-      res.status(200).json({ response: queriedTasks  , user: userId, success: true });
+      res
+        .status(200)
+        .json({ response: queriedTasks, user: userId, success: true });
     } else {
       res.status(404).json({
-        message: "Could not find tasks",
+        message: 'Could not find tasks',
         success: false,
       });
     }
   } catch (error) {
-    res.status(400).json({ message: "Invalid request", response: error, success: false });
+    res
+      .status(400)
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };
-
 
 // Endpoint to edit todo tasks
 export const editTask = async (req, res) => {
@@ -82,13 +76,13 @@ export const editTask = async (req, res) => {
       res.status(200).json({ response: updatedTask, success: true });
     } else {
       res.status(404).json({
-        message: "Could not find task",
+        message: 'Could not find task',
         success: false,
       });
     }
   } catch (error) {
     res.status(400).json({
-      message: "Invalid request",
+      message: 'Invalid request',
       error: error,
       success: false,
     });
@@ -104,12 +98,11 @@ export const deleteTask = async (req, res) => {
     if (deleteTask) {
       res.status(200).json({ response: deleteTask, success: true });
     } else {
-      res.status(404).json({ response: "Could not find task", success: false });
+      res.status(404).json({ response: 'Could not find task', success: false });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };
-
