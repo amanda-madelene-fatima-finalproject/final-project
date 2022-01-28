@@ -7,9 +7,72 @@ import { API_URL } from "../utils/urls";
 import user from "../reducers/user";
 
 const Label = styled.label`
-  color: red;
+  font-family: "Poppins", sans-serif;
+  padding: 3px;
 `;
 
+const LoginContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ef737d;
+`;
+const RadioContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+const RadioInput = styled.input`
+  opacity: 0.6;
+`;
+
+const RadioButton = styled.div`
+  margin: 0 10px;
+`;
+
+const Input = styled.input`
+  border-radius: 5px;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  /* border: 1px solid black; */
+  border-radius: 50px;
+  padding: 50px;
+  background-color: white;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  font-family: "Poppins", sans-serif;
+  margin-top: 40px;
+  padding: 5px 10px;
+  font-weight: 600;
+  background-color: #ef737d;
+  border: solid 1px transparent;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-size: 18px;
+  letter-spacing: 2px;
+  :hover {
+    background-color: white;
+    color: #ef737d;
+    border: solid 1px #ef737d;
+    /* transform: scale(1.2, 1.2); */
+  }
+`;
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -58,42 +121,52 @@ const Login = () => {
   };
 
   return (
-    <>
-      <Label htmlFor="signup">Signup</Label>
-      <input
-        id="signup"
-        type="radio"
-        checked={mode === "signup"}
-        onChange={() => setMode("signup")}
-      />
+    <LoginContainer>
+      <Wrapper>
+        <RadioContainer>
+          <RadioButton>
+            <Label htmlFor="signup">Signup</Label>
+            <RadioInput
+              id="signup"
+              type="radio"
+              checked={mode === "signup"}
+              onChange={() => setMode("signup")}
+            />
+          </RadioButton>
 
-      <label htmlFor="sigin">Signin</label>
-      <input
-        id="signin"
-        type="radio"
-        checked={mode === "signin"}
-        onChange={() => setMode("signin")}
-      />
+          <RadioButton>
+            <Label htmlFor="sigin">Signin</Label>
+            <RadioInput
+              id="signin"
+              type="radio"
+              checked={mode === "signin"}
+              onChange={() => setMode("signin")}
+            />
+          </RadioButton>
+        </RadioContainer>
 
-      <form onSubmit={onFormSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <Form onSubmit={onFormSubmit}>
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            type="text"
+            placeholder="Jane Doe"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </>
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Wrapper>
+    </LoginContainer>
   );
 };
 

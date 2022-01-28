@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 
 import { postTasks } from "../reducers/todo";
+
+const AddContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+  background-color: whitesmoke;
+  margin-bottom: 20px;
+`;
 
 const AddTodo = () => {
   const [task, setTask] = useState("");
@@ -16,7 +27,7 @@ const AddTodo = () => {
     setTask(""); // clears the input
   };
   return (
-    <section>
+    <AddContainer>
       <h1>Today</h1>
       <div>
         <input
@@ -33,7 +44,7 @@ const AddTodo = () => {
           Add Task
         </button>
       </div>
-    </section>
+    </AddContainer>
   );
 };
 

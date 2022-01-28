@@ -65,7 +65,7 @@ app.get("/endpoints", (req, res) => {
 });
 
 // ----- Task Endpoints --------//
-app.post("/tasks/addtask", authenticateUser, addTask);
+app.post("/tasks/addtask", addTask);
 app.get("/tasks/:userId", authenticateUser, getTask);
 app.patch("/tasks/:taskId/edit", authenticateUser, editTask);
 app.delete("/tasks/:taskId/delete", authenticateUser, deleteTask);

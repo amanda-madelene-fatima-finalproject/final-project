@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-//import styled from "styled-components";
-import AddTodo from "./AddTodo";
+import styled from "styled-components";
+// import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
 
 // import { API_URL } from '../utils/urls';
 import { postTasks } from "../reducers/todo";
 
 // Thunk fetchTask/reducers/todo';
+
+const MainContainer = styled.main`
+  min-height: 100vh;
+`;
 
 const Dashboard = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -32,10 +36,9 @@ const Dashboard = () => {
   }, [dispatch, accessToken, userId]);
 
   return (
-    <div>
-      <AddTodo />
+    <MainContainer>
       <TodoList />
-    </div>
+    </MainContainer>
   );
 };
 export default Dashboard;
