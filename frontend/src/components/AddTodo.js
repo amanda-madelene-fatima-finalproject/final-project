@@ -11,7 +11,7 @@ const AddTodo = () => {
 
   const dispatch = useDispatch;
 
-  const onAddTodo = (accessToken, userId, task) => {
+  const onPostTasks = (accessToken, userId, task) => {
     dispatch(postTasks(accessToken, userId, task));
     setTask(""); // clears the input
   };
@@ -28,7 +28,7 @@ const AddTodo = () => {
         ></input>
         <button
           type="submit"
-          onClick={() => onAddTodo(accessToken, userId, task)}
+          onClick={() => onPostTasks(accessToken, userId, task)}
         >
           Add Task
         </button>

@@ -49,6 +49,7 @@ export const postTasks = (accessToken, userId, task) => {
     const options = {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: accessToken,
       },
       body: JSON.stringify({ task, user: userId }),
@@ -57,6 +58,7 @@ export const postTasks = (accessToken, userId, task) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          console.log(data);
           dispatch(fetchTasks(accessToken, userId));
           dispatch(todo.actions.setError(null));
         } else {

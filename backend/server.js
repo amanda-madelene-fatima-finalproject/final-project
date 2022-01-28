@@ -1,20 +1,20 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import listEndpoints from 'express-list-endpoints';
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import listEndpoints from "express-list-endpoints";
 
-import { addTask, editTask, getTask, deleteTask } from './endpoints/Tasks.js';
-import { assignRole, signIn, signUp } from './endpoints/CreateAccount.js';
+import { addTask, editTask, getTask, deleteTask } from "./endpoints/Tasks.js";
+import { assignRole, signIn, signUp } from "./endpoints/CreateAccount.js";
 import {
   accessDashboard,
   accessUserProfile,
-} from './endpoints/AccessAccount.js';
+} from "./endpoints/AccessAccount.js";
 
-const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject'; // SWITCH TO 'mongodb://localhost/finalProject' when not Fatima
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject"; // SWITCH TO 'mongodb://localhost/finalProject' when not Fatima
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const User = require('./models/User.js');
+const User = require("./models/User.js");
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
@@ -30,7 +30,7 @@ app.use(express.json());
 // Authentication:  to check if you are a user
 const authenticateUser = async (req, res, next) => {
   // Authorization: When signed in this authorizes what you have access to and can do
-  const accessToken = req.header('Authorization');
+  const accessToken = req.header("Authorization");
 
   try {
     // Checks if user has an accessToken
@@ -42,7 +42,7 @@ const authenticateUser = async (req, res, next) => {
     } else {
       res.status(401).json({
         response: {
-          message: 'Please, login!',
+          message: "Please, login!",
         },
         success: false,
       });
@@ -50,34 +50,34 @@ const authenticateUser = async (req, res, next) => {
   } catch (error) {
     res
       .status(400)
-      .json({ message: 'Invalid request', response: error, success: false });
+      .json({ message: "Invalid request", response: error, success: false });
   }
 };
 
 // Start defining your routes here
-app.get('/', (req, res) => {
-  res.send('Hello World, Welcome to our Debug Todo app!');
+app.get("/", (req, res) => {
+  res.send("Hello World, Welcome to our Debug Todo app 🐞!");
 });
 
 // Get all the endpoints
-app.get('/endpoints', (req, res) => {
+app.get("/endpoints", (req, res) => {
   res.send(listEndpoints(app));
 });
 
 // ----- Task Endpoints --------//
-app.post('/tasks/addtask', authenticateUser, addTask);
-app.get('/tasks/:userId', authenticateUser, getTask);
-app.patch('/tasks/:taskId/edit', authenticateUser, editTask);
-app.delete('/tasks/:taskId/delete', authenticateUser, deleteTask);
+app.post("/tasks/addtask", authenticateUser, addTask);
+app.get("/tasks/:userId", authenticateUser, getTask);
+app.patch("/tasks/:taskId/edit", authenticateUser, editTask);
+app.delete("/tasks/:taskId/delete", authenticateUser, deleteTask);
 
 // ----- Access Account Endpoints --------//
-app.get('/dashboard', authenticateUser, accessDashboard);
-app.get('/user/:userId/profile', accessUserProfile);
+app.get("/dashboard", authenticateUser, accessDashboard);
+app.get("/user/:userId/profile", accessUserProfile);
 
 // ----- Create Account Endpoints --------//
-app.post('/signup', signUp);
-app.post('/signin', signIn);
-app.post('/role', assignRole);
+app.post("/signup", signUp);
+app.post("/signin", signIn);
+app.post("/role", assignRole);
 
 // Start the server
 app.listen(port, () => {
