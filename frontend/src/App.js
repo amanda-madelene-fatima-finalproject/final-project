@@ -1,16 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 //Import components
-import Login from './components/Login';
-import NotFound from './components/NotFound';
-import Dashboard from './components/Dashboard';
+import Login from "./components/Login";
+import NotFound from "./components/NotFound";
+import Dashboard from "./components/Dashboard";
 
 //Import reducers
-import user from './reducers/user';
-import { todo } from './reducers/todo';
+import user from "./reducers/user";
+import { todo } from "./reducers/todo";
 
 //Reducers
 const reducer = combineReducers({
