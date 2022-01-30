@@ -1,39 +1,33 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
 
-// import { API_URL } from '../utils/urls';
-import { postTasks } from "../reducers/todo";
-
-// Thunk fetchTask/reducers/todo';
-
+//--------- STYLED COMPONENTS ----------//
 const MainContainer = styled.main`
   min-height: 100vh;
 `;
 
 const Dashboard = () => {
-  const accessToken = useSelector((store) => store.user.accessToken);
-  const userId = useSelector((store) => store.user.userId);
 
-  const dispatch = useDispatch();
+  //----------- SELECTORS ----------//
+  const accessToken = useSelector((store) => store.user.accessToken);
+  // const userId = useSelector((store) => store.user.userId);
+
+  //--------- DISPATCHES ----------//
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
   useEffect(() => {
+    // Once you are in the dashboard, the accessToken is set to true because the user has first logged in  
+    // so this condition right now, only executes when we refresh the page
     if (!accessToken) {
       navigate("/login");
     }
   }, [accessToken, navigate]);
 
-  // useEffect(() => {
-  //   dispatch(fetchTasks(accessToken, userId));
-  // }, [dispatch, accessToken, userId]);
-
-  useEffect(() => {
-    dispatch(postTasks(accessToken, userId));
-  }, [dispatch, accessToken, userId]);
 
   return (
     <MainContainer>

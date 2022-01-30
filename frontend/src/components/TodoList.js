@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTasks } from "../reducers/todo";
+import { getTasks } from "../reducers/todo";
 import styled from "styled-components";
 import AddTodo from "./AddTodo";
+
+//--------- STYLED COMPONENTS ----------//
 
 const ListContainer = styled.section`
   display: flex;
@@ -32,15 +34,22 @@ const Headline = styled.h1`
 const Tasks = styled.div``;
 
 const TodoList = () => {
+
+  //----------- SELECTORS ----------//
   const todoItems = useSelector((store) => store.todo.items);
   const accessToken = useSelector((store) => store.user.accessToken);
   const userId = useSelector((store) => store.user.userId);
 
+ //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
 
+//--------- USEEFFECT FOR DISPATCHING THE GetTASKS THUNK  ----------//
+
   useEffect(() => {
-    dispatch(fetchTasks(accessToken, userId));
-  }, [dispatch, accessToken, userId]); //
+    dispatch(getTasks(accessToken, userId)); 
+    // getTask is a function being executed here but defined in the todo reducer that fetches the tasks by userId.
+    // If the fetch is success, the todo reducer gets updated with the tasks and that's why they appear in the return below.
+  }, [dispatch, accessToken, userId]); 
 
   return (
     <ListContainer>

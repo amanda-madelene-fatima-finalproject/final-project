@@ -1,33 +1,51 @@
 # Final project
 
-MODELS:
 
+----- FEATURES -----
+
+MODELS:
 - User
 - Dashboard
 - Todo
 - Role
 
-ENDPOINTS:
+ENSPOINTS:
 
 Task endpoints:
+- To get all tasks (method: get) ---------> "/tasks"
+- To add a task (method: post) -----------> "/addtask"
+- To edit a task (method: patch) ---------> "/tasks/taskId"
+- To delete a task (method: delete) ------> "/tasks/taskId"
 
-- To get all tasks: -----> get "/tasks"
-- To add a task ---------> post "/addtask"
-- To edit a task --------> patch "/tasks/taskId"
-- To delete a task ------> delete "/tasks/taskId"
+CreateAccount endpoints:
+- To signup (method: post) -------------> "/signup"
+- To signin (method: post) -------------> "/signin"
+- To post a role (method: post) --------> "/role"
 
-Profile endpoints:
 
-- To get user profile ----> get "/user/userId/profile"
-- To signup -------------> post "/signup"
-- To signin -------------> post "/signin"
+AccessAccount endpoints:
+- To get user profile (method: get) ----> "/user/userId/profile"
+- To show tasks overview (method: get) ----> "/dashboard"
 
-Role endpoint:
 
-/ To post a role -----------> post "role"
+----- TECH & TOOLS -----
 
-Dashboard endpoints:
+Tech:
 
-- To show tasks overview -------> get "/dashboard"
+JavaScript ES6
+React
+Redux
+React router
+Node express
+MongoDB / Mongoose
+Styled components
+
+Tools:
+
+Postman
+VS Code
+MongoDB Compass
+Slack
+Stack Overflow
 
 ## View it live

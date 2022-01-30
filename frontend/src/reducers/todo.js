@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// Imported user reducer
-// import { setUserId, setAccessToken } from './user';
 import { API_URL } from "utils/urls";
 
 export const todo = createSlice({
@@ -19,9 +17,10 @@ export const todo = createSlice({
   },
 });
 
-// Thunk fetchTasks: getting all the users tasks
-
-export const fetchTasks = (accessToken, userId) => {
+// REDUX THUNK: to get the user's tasks
+// This function fetches the tasks API and returns the tasks, which are saved in the database,
+// and then, we save the tasks in this reducer via actions
+export const getTasks = (accessToken, userId) => {
   return (dispatch) => {
     const options = {
       method: "GET",
@@ -32,8 +31,7 @@ export const fetchTasks = (accessToken, userId) => {
     fetch(API_URL(`tasks/${userId}`), options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if (data.success) {
+         if (data.success) {
           dispatch(todo.actions.setItems(data.response));
           dispatch(todo.actions.setError(null));
         } else {
@@ -44,6 +42,9 @@ export const fetchTasks = (accessToken, userId) => {
   };
 };
 
+// REDUX THUNK: to post a task
+// This function fetches the API to post a task and it returns the task posted,
+// and then, it calls the getTask thunk, which gets this store updated with the new tasks.
 export const postTasks = (accessToken, userId, task) => {
   return (dispatch) => {
     const options = {
@@ -58,8 +59,7 @@ export const postTasks = (accessToken, userId, task) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
-          dispatch(fetchTasks(accessToken, userId));
+          dispatch(getTasks(accessToken, userId));
           dispatch(todo.actions.setError(null));
         } else {
           dispatch(todo.actions.setItems([]));
@@ -68,5 +68,3 @@ export const postTasks = (accessToken, userId, task) => {
       });
   };
 };
-
-// export default todo;

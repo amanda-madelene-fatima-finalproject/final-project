@@ -10,7 +10,12 @@ import {
   accessUserProfile,
 } from "./endpoints/AccessAccount.js";
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject"; // SWITCH TO 'mongodb://localhost/finalProject' when not Fatima
+// Madelene and Amanda
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject"; 
+
+// Fatima
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject";  
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
@@ -28,6 +33,8 @@ app.use(cors());
 app.use(express.json());
 
 // Authentication:  to check if you are a user
+// When a user signs up, an accessTocken is created and sent from the backend to the frontend so each user have their own tocken. 
+
 const authenticateUser = async (req, res, next) => {
   // Authorization: When signed in this authorizes what you have access to and can do
   const accessToken = req.header("Authorization");

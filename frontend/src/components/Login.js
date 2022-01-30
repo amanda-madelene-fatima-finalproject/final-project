@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch, batch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 import { API_URL } from "../utils/urls";
 import user from "../reducers/user";
+
+//--------- STYLED COMPONENTS ----------//
 
 const Label = styled.label`
   font-family: "Poppins", sans-serif;
@@ -73,21 +74,40 @@ const Button = styled.button`
     /* transform: scale(1.2, 1.2); */
   }
 `;
+
 const Login = () => {
+
+  //----------- LOCAL STATES ----------//
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState("signup");
 
+  //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
+  const errorMessage = useSelector((store) => store.user.error);
 
+  //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
   useEffect(() => {
+    // This condition can be only true if the user has signed up first as the accessToken is generated when a newUser model is created in the database.
+    // Once the user has signed up, the accessToken is sent by the backend in the data response and updated in the redux store by the actions.
     if (accessToken) {
       navigate("/");
     }
   }, [accessToken, navigate]);
+
+  //--------- USEEFFECT FOR THE ERRORMESSAGE ----------//
+
+  useEffect(() => {
+    // This condition can be only true if the the data comming from the database when fetching is not success.
+    // If the user tries to sign in without having signed up first or if the username does not match the password, this function executes.
+    if (errorMessage) {
+      alert(errorMessage);
+    }
+  }, [errorMessage]);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -114,7 +134,9 @@ const Login = () => {
             dispatch(user.actions.setUserId(null));
             dispatch(user.actions.setUsername(null));
             dispatch(user.actions.setAccessToken(null));
-            dispatch(user.actions.setError(data.response));
+            dispatch(user.actions.setError(data.response)); // here we send the message we have recieved from the database to the redux store and the error key from the store gets updated.
+            setUsername(""); // This clears the username's value in the input
+            setPassword("")  // This clears the password's value in the input
           });
         }
       });
