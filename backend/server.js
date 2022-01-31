@@ -9,6 +9,7 @@ import {
   accessDashboard,
   accessUserProfile,
 } from "./endpoints/AccessAccount.js";
+import authenticateUser from "./authorization/authenticateUser.js";
 
 // Madelene and Amanda
 // const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject"; 
@@ -32,34 +33,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Authentication:  to check if you are a user
-// When a user signs up, an accessTocken is created and sent from the backend to the frontend so each user have their own tocken. 
 
-const authenticateUser = async (req, res, next) => {
-  // Authorization: When signed in this authorizes what you have access to and can do
-  const accessToken = req.header("Authorization");
-
-  try {
-    // Checks if user has an accessToken
-    const user = await User.findOne({ accessToken });
-    // If it does we can proceed with sign in
-    if (user) {
-      next();
-      // If not, the user is prompted to sign in
-    } else {
-      res.status(401).json({
-        response: {
-          message: "Please, login!",
-        },
-        success: false,
-      });
-    }
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
-  }
-};
 
 // Start defining your routes here
 app.get("/", (req, res) => {
@@ -72,14 +46,14 @@ app.get("/endpoints", (req, res) => {
 });
 
 // ----- Task Endpoints --------//
-app.post("/tasks/addtask", addTask);
+app.post("/tasks/addtask", authenticateUser, addTask);
 app.get("/tasks/:userId", authenticateUser, getTask);
 app.patch("/tasks/:taskId/edit", authenticateUser, editTask);
 app.delete("/tasks/:taskId/delete", authenticateUser, deleteTask);
 
 // ----- Access Account Endpoints --------//
 app.get("/dashboard", authenticateUser, accessDashboard);
-app.get("/user/:userId/profile", accessUserProfile);
+app.get("/user/:userId/profile", authenticateUser, accessUserProfile);
 
 // ----- Create Account Endpoints --------//
 app.post("/signup", signUp);

@@ -50,7 +50,7 @@ export const signUp = async (req, res) => {
     });
   }
 };
-// Endpoint to sign in: Here we see if the user model exist in database above.
+// Endpoint to sign in: Here we check if the user model exist in database
 export const signIn = async (req, res) => {
   const { username, password } = req.body;
 

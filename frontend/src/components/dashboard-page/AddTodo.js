@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { postTasks } from "../reducers/todo";
-
+import { getTasks } from "../../reducers/todo";
+// import { postTasks } from "../../reducers/todo";
 
 //--------- STYLED COMPONENTS ----------//
 const AddContainer = styled.section`
@@ -25,10 +25,10 @@ const AddTodo = () => {
   const userId = useSelector((store) => store.user.userId);
 
   //--------- DISPATCHES ----------//
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const onPostTasks = (accessToken, userId, task) => {
-    dispatch(postTasks(accessToken, userId, task));
+    dispatch(getTasks(accessToken, userId, task));
     setTask(""); // clears the input
   };
 

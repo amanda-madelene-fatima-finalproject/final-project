@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch, batch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { API_URL } from "../utils/urls";
-import user from "../reducers/user";
+// import { API_URL } from "../../utils/urls";
+// import { user } from "../../reducers/user"
+import { userAccess } from "../../reducers/user"
 
 //--------- STYLED COMPONENTS ----------//
 
@@ -18,7 +19,7 @@ const LoginContainer = styled.section`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #ef737d;
+  // background-color: #ef737d;
 `;
 const RadioContainer = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const Wrapper = styled.div`
   /* border: 1px solid black; */
   border-radius: 50px;
   padding: 50px;
-  background-color: white;
+  background-color: #ef737d;
 `;
 
 const Form = styled.form`
@@ -61,16 +62,16 @@ const Button = styled.button`
   margin-top: 40px;
   padding: 5px 10px;
   font-weight: 600;
-  background-color: #ef737d;
+  background-color: white;
   border: solid 1px transparent;
   border-radius: 5px;
-  color: whitesmoke;
+  color: #ef737d;
   font-size: 18px;
   letter-spacing: 2px;
   :hover {
-    background-color: white;
-    color: #ef737d;
-    border: solid 1px #ef737d;
+    background-color: #ef737d;
+    color: whitesmoke;
+    border: solid 1px whitesmoke;
     /* transform: scale(1.2, 1.2); */
   }
 `;
@@ -109,37 +110,38 @@ const Login = () => {
     }
   }, [errorMessage]);
 
-  const onFormSubmit = (event) => {
+  const onFormSubmit = (event, username, password, mode) => {
     event.preventDefault();
+    dispatch(userAccess(username, password, mode))
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    };
-    fetch(API_URL(mode), options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          batch(() => {
-            dispatch(user.actions.setUserId(data.response.userId));
-            dispatch(user.actions.setUsername(data.response.username));
-            dispatch(user.actions.setAccessToken(data.response.accessToken));
-            dispatch(user.actions.setError(null));
-          });
-        } else {
-          batch(() => {
-            dispatch(user.actions.setUserId(null));
-            dispatch(user.actions.setUsername(null));
-            dispatch(user.actions.setAccessToken(null));
-            dispatch(user.actions.setError(data.response)); // here we send the message we have recieved from the database to the redux store and the error key from the store gets updated.
-            setUsername(""); // This clears the username's value in the input
-            setPassword("")  // This clears the password's value in the input
-          });
-        }
-      });
+    // const options = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ username, password }),
+    // };
+    // fetch(API_URL(mode), options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.success) {
+    //       batch(() => {
+    //         dispatch(user.actions.setUserId(data.response.userId));
+    //         dispatch(user.actions.setUsername(data.response.username));
+    //         dispatch(user.actions.setAccessToken(data.response.accessToken));
+    //         dispatch(user.actions.setError(null));
+    //       });
+    //     } else {
+    //       batch(() => {
+    //         dispatch(user.actions.setUserId(null));
+    //         dispatch(user.actions.setUsername(null));
+    //         dispatch(user.actions.setAccessToken(null));
+    //         dispatch(user.actions.setError(data.response)); // here we send the message we have recieved from the database to the redux store and the error key from the store gets updated.
+    //         setUsername(""); // This clears the username's value in the input
+    //         setPassword("")  // This clears the password's value in the input
+    //       });
+    //     }
+    //   });
   };
 
   return (
@@ -167,7 +169,7 @@ const Login = () => {
           </RadioButton>
         </RadioContainer>
 
-        <Form onSubmit={onFormSubmit}>
+        <Form onSubmit={(event) => onFormSubmit(username, password, mode)}>
           <Label htmlFor="username">Username</Label>
           <Input
             id="username"

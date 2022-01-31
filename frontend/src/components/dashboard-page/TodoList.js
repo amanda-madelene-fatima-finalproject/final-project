@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTasks } from "../reducers/todo";
+import { getTasks } from "../../reducers/todo";
 import styled from "styled-components";
 import AddTodo from "./AddTodo";
+
 
 //--------- STYLED COMPONENTS ----------//
 

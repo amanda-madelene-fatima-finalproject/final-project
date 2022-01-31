@@ -24,7 +24,7 @@ const Dashboard = () => {
     // Once you are in the dashboard, the accessToken is set to true because the user has first logged in  
     // so this condition right now, only executes when we refresh the page
     if (!accessToken) {
-      navigate("/login");
+      navigate("/welcome");
     }
   }, [accessToken, navigate]);
 

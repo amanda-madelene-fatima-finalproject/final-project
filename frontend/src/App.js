@@ -2,14 +2,16 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { ChakraProvider } from '@chakra-ui/react'
 
 //Import components
-import Login from "./components/Login";
-import NotFound from "./components/NotFound";
-import Dashboard from "./components/Dashboard";
+// import Login from "./components/welcome-page/Login";
+import NotFound from "./components/notfound-page/NotFound";
+import Dashboard from "./components/dashboard-page/Dashboard";
+import Welcome from "./components/welcome-page/Welcome";
 
 //Import reducers
-import user from "./reducers/user";
+import { user } from "./reducers/user";
 import { todo } from "./reducers/todo";
 
 //Reducers
@@ -22,14 +24,18 @@ const store = configureStore({ reducer });
 
 export const App = () => {
   return (
-    <Provider store={store}>
+   
+      <Provider store={store}>
+         <ChakraProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/welcome" element={<Welcome />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+  
+    </ChakraProvider>
     </Provider>
   );
 };
