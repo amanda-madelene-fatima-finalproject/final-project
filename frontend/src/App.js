@@ -1,18 +1,17 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { ChakraProvider } from '@chakra-ui/react'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 //Import components
 // import Login from "./components/welcome-page/Login";
-import NotFound from "./components/notfound-page/NotFound";
-import Dashboard from "./components/dashboard-page/Dashboard";
-import Welcome from "./components/welcome-page/Welcome";
+import NotFound from './components/notfound-page/NotFound';
+import Dashboard from './components/dashboard-page/Dashboard';
+import Welcome from './components/welcome-page/Welcome';
 
 //Import reducers
-import { user } from "./reducers/user";
-import { todo } from "./reducers/todo";
+import { user } from './reducers/user';
+import { todo } from './reducers/todo';
 
 //Reducers
 const reducer = combineReducers({
@@ -24,9 +23,7 @@ const store = configureStore({ reducer });
 
 export const App = () => {
   return (
-   
-      <Provider store={store}>
-         <ChakraProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
@@ -34,8 +31,6 @@ export const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-  
-    </ChakraProvider>
     </Provider>
   );
 };
