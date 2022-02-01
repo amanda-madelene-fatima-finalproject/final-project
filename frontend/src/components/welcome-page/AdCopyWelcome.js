@@ -22,7 +22,7 @@ const Text = styled.p``;
 const AdCopyWelcome = () => {
   return (
     <Container>
-      <Headline>Unscramble your brain &amp; &amp; DeBug your life.</Headline>
+      <Headline>Unscramble your brain &amp;&amp; DeBug your life.</Headline>
 
       <Text>
         Do you have a tendency to disappear into your work? Maybe you sit down

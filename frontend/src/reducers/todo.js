@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { API_URL } from "utils/urls";
+import { createSlice } from '@reduxjs/toolkit';
+import { API_URL } from 'utils/urls';
 
 export const todo = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState: {
     items: [],
     error: null,
@@ -23,7 +23,7 @@ export const todo = createSlice({
 export const getTasks = (accessToken, userId) => {
   return (dispatch) => {
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: accessToken,
       },
@@ -31,7 +31,7 @@ export const getTasks = (accessToken, userId) => {
     fetch(API_URL(`tasks/${userId}`), options)
       .then((res) => res.json())
       .then((data) => {
-         if (data.success) {
+        if (data.success) {
           dispatch(todo.actions.setItems(data.response));
           dispatch(todo.actions.setError(null));
         } else {
@@ -48,14 +48,14 @@ export const getTasks = (accessToken, userId) => {
 export const postTasks = (accessToken, userId, task) => {
   return (dispatch) => {
     const options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: accessToken,
       },
-      body: JSON.stringify({ task, user: userId }),
+      body: JSON.stringify({ task, userId }),
     };
-    fetch(API_URL("tasks/addtask"), options)
+    fetch(API_URL('tasks/addtask'), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

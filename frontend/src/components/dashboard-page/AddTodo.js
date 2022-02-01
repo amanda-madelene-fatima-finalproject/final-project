@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { getTasks } from "../../reducers/todo";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { postTasks } from '../../reducers/todo';
 // import { postTasks } from "../../reducers/todo";
 
 //--------- STYLED COMPONENTS ----------//
@@ -16,9 +16,8 @@ const AddContainer = styled.section`
 `;
 
 const AddTodo = () => {
-
   //--------- LOCAL STATE ----------//
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState('');
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -28,8 +27,8 @@ const AddTodo = () => {
   const dispatch = useDispatch();
 
   const onPostTasks = (accessToken, userId, task) => {
-    dispatch(getTasks(accessToken, userId, task));
-    setTask(""); // clears the input
+    dispatch(postTasks(accessToken, userId, task));
+    setTask(''); // clears the input
   };
 
   return (

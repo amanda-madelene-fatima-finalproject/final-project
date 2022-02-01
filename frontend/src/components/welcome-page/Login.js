@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 // import { API_URL } from "../../utils/urls";
 // import { user } from "../../reducers/user"
-import { userAccess } from "../../reducers/user"
+import { userAccess } from '../../reducers/user';
 
 //--------- STYLED COMPONENTS ----------//
 
 const Label = styled.label`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 3px;
 `;
 
@@ -40,7 +40,7 @@ const RadioButton = styled.div`
 const Input = styled.input`
   border-radius: 5px;
   padding: 10px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
 `;
 
@@ -58,7 +58,7 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin-top: 40px;
   padding: 5px 10px;
   font-weight: 600;
@@ -77,11 +77,10 @@ const Button = styled.button`
 `;
 
 const Login = () => {
-
   //----------- LOCAL STATES ----------//
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [mode, setMode] = useState("signup");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [mode, setMode] = useState('signup');
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -96,7 +95,7 @@ const Login = () => {
     // This condition can be only true if the user has signed up first as the accessToken is generated when a newUser model is created in the database.
     // Once the user has signed up, the accessToken is sent by the backend in the data response and updated in the redux store by the actions.
     if (accessToken) {
-      navigate("/");
+      navigate('/dashboard');
     }
   }, [accessToken, navigate]);
 
@@ -112,7 +111,7 @@ const Login = () => {
 
   const onFormSubmit = (event, username, password, mode) => {
     event.preventDefault();
-    dispatch(userAccess(username, password, mode))
+    dispatch(userAccess(username, password, mode));
 
     // const options = {
     //   method: "POST",
@@ -153,8 +152,8 @@ const Login = () => {
             <RadioInput
               id="signup"
               type="radio"
-              checked={mode === "signup"}
-              onChange={() => setMode("signup")}
+              checked={mode === 'signup'}
+              onChange={() => setMode('signup')}
             />
           </RadioButton>
 
@@ -163,13 +162,15 @@ const Login = () => {
             <RadioInput
               id="signin"
               type="radio"
-              checked={mode === "signin"}
-              onChange={() => setMode("signin")}
+              checked={mode === 'signin'}
+              onChange={() => setMode('signin')}
             />
           </RadioButton>
         </RadioContainer>
 
-        <Form onSubmit={(event) => onFormSubmit(username, password, mode)}>
+        <Form
+          onSubmit={(event) => onFormSubmit(event, username, password, mode)}
+        >
           <Label htmlFor="username">Username</Label>
           <Input
             id="username"
