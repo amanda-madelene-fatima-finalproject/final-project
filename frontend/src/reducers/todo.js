@@ -68,3 +68,55 @@ export const postTasks = (accessToken, userId, task) => {
       });
   };
 };
+
+// REDUX THUNK: to edit a task
+
+export const editTasks = (accessToken, taskId, task) => {
+  return (dispatch) => {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ task, taskId }),
+    };
+    fetch(API_URL(`tasks/${taskId}/edit`), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(getTasks(accessToken, taskId));
+          dispatch(todo.actions.setError(null));
+        } else {
+          dispatch(todo.actions.setItems([]));
+          dispatch(todo.actions.setError(data.response));
+        }
+      });
+  };
+};
+
+// REDUX THUNK: to delete a task
+
+export const deleteTasks = (accessToken, taskId) => {
+  return (dispatch) => {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ taskId }),
+    };
+    fetch(API_URL(`tasks/${taskId}/delete`), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(getTasks(accessToken, taskId));
+          dispatch(todo.actions.setError(null));
+        } else {
+          dispatch(todo.actions.setItems([]));
+          dispatch(todo.actions.setError(data.response));
+        }
+      });
+  };
+};
