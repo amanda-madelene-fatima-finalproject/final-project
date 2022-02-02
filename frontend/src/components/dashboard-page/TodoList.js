@@ -39,7 +39,7 @@ const TodoList = () => {
   const todoItems = useSelector((store) => store.todo.items);
   const accessToken = useSelector((store) => store.user.accessToken);
   const userId = useSelector((store) => store.user.userId);
-  const taskId = useSelector((store) => store.todo.taskId);
+  //const taskId = useSelector((store) => store.todo.taskId);
 
   const [editTask, setEditTask] = useState('');
   //--------- DISPATCHES ----------//
@@ -53,8 +53,8 @@ const TodoList = () => {
     // If the fetch is success, the todo reducer gets updated with the tasks and that's why they appear in the return below.
   }, [dispatch, accessToken, userId]);
 
-  const onEditTasks = (accessToken, taskId, editTask) => {
-    dispatch(editTasks(accessToken, taskId, editTask));
+  const onEditTasks = (accessToken, taskId, editTask, userId) => {
+    dispatch(editTasks(accessToken, taskId, editTask, userId));
   };
 
   const onDeleteTasks = (accessToken, taskId) => {
@@ -71,25 +71,34 @@ const TodoList = () => {
           {todoItems.map((item) => (
             <>
               <div key={item._id}>{item.task}</div>
-              <div>
-                {/* <input
-                  type="text"
-                  placeholder="Add new task here.."
-                  value={editTask}
-                  onChange={(event) => setEditTask(event.target.value)}
-                /> */}
-                <button
-                  type="submit"
-                  onClick={() => onEditTasks(accessToken, taskId, editTask)}
-                >
-                  Edit
-                </button>
-                <div>
-                  <button onClick={() => onDeleteTasks(accessToken, taskId)}>
-                    Delete
-                  </button>
-                </div>
-              </div>
+
+              <input
+                // key={index}
+                type="text"
+                placeholder="Add new task here.."
+                value={editTask}
+                onChange={(event) => setEditTask(event.target.value)}
+              />
+              <button
+                type="submit"
+                onClick={() =>
+                  onEditTasks(accessToken, item._id, editTask, userId)
+                }
+              >
+                Edit
+              </button>
+              {/* 
+              <input
+                id={item._id}
+                type="text"
+                placeholder="Add new task here.."
+                value={editTask}
+                onChange={(event) => setEditTask(event.target.value)}
+              /> */}
+
+              <button onClick={() => onDeleteTasks(accessToken, item._id)}>
+                Delete
+              </button>
             </>
           ))}
         </Tasks>

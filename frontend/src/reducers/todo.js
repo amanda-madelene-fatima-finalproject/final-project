@@ -14,6 +14,29 @@ export const todo = createSlice({
     setError: (store, action) => {
       store.error = action.payload;
     },
+    deleteTask: (store, action) => {
+      // This filter is executed when the deleteTasks function is called
+      // and deletes the tasks that are stored in the items array above (so the items kept in the redux store)
+      const deletedTasks = store.items.filter(
+        (item) => item._id !== action.payload
+      );
+      store.items = deletedTasks;
+    },
+
+    // const editTodo = (taskId) => {
+    //   setTodos(
+    //     todos.map(todo => {
+    //       if(items.taskId === taskId){
+    //         return {...items}
+    //       };
+    //       return todo;
+    //     }))
+    // }
+
+    // editTask: (store, action) => {
+    //   const editedTasks = store.items.
+
+    // },
   },
 });
 
@@ -71,7 +94,7 @@ export const postTasks = (accessToken, userId, task) => {
 
 // REDUX THUNK: to edit a task
 
-export const editTasks = (accessToken, taskId, task) => {
+export const editTasks = (accessToken, taskId, task, userId) => {
   return (dispatch) => {
     const options = {
       method: 'PATCH',
@@ -79,13 +102,17 @@ export const editTasks = (accessToken, taskId, task) => {
         'Content-Type': 'application/json',
         Authorization: accessToken,
       },
-      body: JSON.stringify({ task, taskId }),
+      body: JSON.stringify({ task }),
     };
     fetch(API_URL(`tasks/${taskId}/edit`), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          dispatch(getTasks(accessToken, taskId));
+          dispatch(getTasks(accessToken, userId));
+
+          // dispatch(todo.actions.setItems(data.response));
+          // dispatch(todo.actions.editTask(taskId));
+
           dispatch(todo.actions.setError(null));
         } else {
           dispatch(todo.actions.setItems([]));
@@ -105,13 +132,14 @@ export const deleteTasks = (accessToken, taskId) => {
         'Content-Type': 'application/json',
         Authorization: accessToken,
       },
-      body: JSON.stringify({ taskId }),
+      // body: JSON.stringify({ taskId }),
     };
     fetch(API_URL(`tasks/${taskId}/delete`), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          dispatch(getTasks(accessToken, taskId));
+          // dispatch(getTasks(accessToken, taskId));
+          dispatch(todo.actions.deleteTask(taskId));
           dispatch(todo.actions.setError(null));
         } else {
           dispatch(todo.actions.setItems([]));

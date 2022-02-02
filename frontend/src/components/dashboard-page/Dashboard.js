@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TodoList from './TodoList';
+//import EditTask from './EditTask.js';
 
 //--------- STYLED COMPONENTS ----------//
 const MainContainer = styled.main`
@@ -29,6 +30,7 @@ const Dashboard = () => {
 
   return (
     <MainContainer>
+      {/* <EditTask /> */}
       <TodoList />
     </MainContainer>
   );
