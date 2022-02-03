@@ -174,7 +174,7 @@ export const toggleTasks = (accessToken, taskId, done) => {
           dispatch(todo.actions.toggleTask(taskId));
           dispatch(todo.actions.setError(null));
         } else {
-          dispatch(todo.actions.setItems([]));
+          // dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
       });

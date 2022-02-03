@@ -33,7 +33,7 @@ const AddTodo = () => {
 
   return (
     <AddContainer>
-      <h1>Today</h1>
+      <h1>Plan your day</h1>
       <div>
         <input
           id="task"

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import EditModal from "./EditModal.js";
+import moment from "moment";
 
 import { deleteTasks, toggleTasks } from "../../reducers/todo";
 
@@ -33,7 +34,9 @@ const TodoItem = ({ data }) => {
 
   return (
     <Container>
-      <div key={data._id}>{data.task}</div>
+      <div key={data._id}>
+        {data.task} {moment(data.createdAt).format("ddd D MMM")}
+      </div>
       <input
         type="checkbox"
         checked={data.done}

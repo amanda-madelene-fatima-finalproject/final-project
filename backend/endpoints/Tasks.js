@@ -113,13 +113,15 @@ export const toggleTask = async (req, res) => {
   const { done } = req.body;
 
   try {
-    const updatedDone = await Task.findByIdAndUpdate(
+    const updatedDone = await Todo.findByIdAndUpdate(
       taskId,
       { done },
       { new: true }
     );
     res.status(200).json({ response: updatedDone, success: true });
   } catch (error) {
-    res.status(400).json({ response: error, success: false });
+    res
+      .status(400)
+      .json({ message: "Invalid request", response: error, success: false });
   }
 };
