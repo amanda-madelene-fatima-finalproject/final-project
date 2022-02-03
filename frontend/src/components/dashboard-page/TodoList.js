@@ -4,7 +4,6 @@ import styled from "styled-components";
 import AddTodo from "./AddTodo";
 import TodoItem from "./TodoItem.js";
 import { getTasks } from "../../reducers/todo";
-import moment from "moment";
 
 //--------- STYLED COMPONENTS ----------//
 
@@ -57,9 +56,7 @@ const TodoList = () => {
     <ListContainer>
       <Wrapper>
         <AddTodo />
-        <Headline>
-          Today <span>{moment().format("ddd D MMM")}</span>
-        </Headline>
+        <Headline></Headline>
 
         <Tasks>
           {todoItems.map((item) => (

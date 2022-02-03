@@ -1,24 +1,25 @@
-const Role = require('../models/Role.js');
-const User = require('../models/User.js');
+const Role = require("../models/Role.js");
+const User = require("../models/User.js");
 
-import bcrypt from 'bcrypt'; // It generates a very long random string, like a second id
+import bcrypt from "bcrypt"; // It generates a very long random string, like a second id
 
 // ----- Create Profile Account Endpoints --------//
 
 // Endpoint to sign up
 export const signUp = async (req, res) => {
-  const { username, password, roleId } = req.body;
+  const { name, username, password, roleId } = req.body;
 
   try {
     // To randomize password
     const salt = bcrypt.genSaltSync();
 
     if (password.length < 5) {
-      throw 'password and must be at least 5 characters long';
+      throw "password and must be at least 5 characters long";
     }
     const queriedRole = await Role.findById(roleId);
     // Creating a new user and generating an _id: "shshj5k4773sddf"
     const newUser = await new User({
+      name,
       username,
       password: bcrypt.hashSync(password, salt),
       role: queriedRole,
@@ -29,6 +30,7 @@ export const signUp = async (req, res) => {
         // Instead of sending the whole newUser model, we refer to them by key value as to leave out the password for security reasons.
         response: {
           userId: newUser._id,
+          name: newUser.name,
           username: newUser.username,
           role: newUser.role,
           accessToken: newUser.accessToken,
@@ -37,15 +39,15 @@ export const signUp = async (req, res) => {
       });
     } else {
       res.status(404).json({
-        response: 'Can not register user',
+        response: "Can not register user",
         success: false,
       });
     }
   } catch (error) {
     res.status(400).json({
-      message: 'Invalid request',
+      message: "Invalid request",
       response: error,
-      message: 'error',
+      message: "error",
       success: false,
     });
   }
@@ -72,14 +74,14 @@ export const signIn = async (req, res) => {
       });
     } else {
       res.status(404).json({
-        response: 'User or password does not match',
+        response: "User or password does not match",
         success: false,
       });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: 'Invalid request', response: error, success: false });
+      .json({ message: "Invalid request", response: error, success: false });
   }
 };
 

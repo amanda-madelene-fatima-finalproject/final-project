@@ -12,6 +12,37 @@ const Container = styled.section`
   align-items: center;
 `;
 
+const List = styled.li``;
+
+const UL = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  font-size: 12px;
+
+  p {
+    margin: 2px;
+  }
+`;
+
+const TodoText = styled.p`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+const TimeText = styled.p`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #ef737d;
+
+  span {
+    margin-right: 4px;
+    font-size: 10px;
+  }
+`;
+
 const TodoItem = ({ data }) => {
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -34,9 +65,18 @@ const TodoItem = ({ data }) => {
 
   return (
     <Container>
-      <div key={data._id}>
-        {data.task} {moment(data.createdAt).format("ddd D MMM")}
-      </div>
+      <UL key={data._id}>
+        <List>
+          <TodoText>{data.task}</TodoText>
+          <TimeText>
+            <span>
+              <i class="fas fa-calendar-day"></i>
+            </span>
+            {moment(data.createdAt).format("ddd D MMM")}
+          </TimeText>
+        </List>
+      </UL>
+
       <input
         type="checkbox"
         checked={data.done}

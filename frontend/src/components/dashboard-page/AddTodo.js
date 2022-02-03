@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { postTasks } from "../../reducers/todo";
+import moment from "moment";
 // import { postTasks } from "../../reducers/todo";
 
 //--------- STYLED COMPONENTS ----------//
@@ -33,7 +34,9 @@ const AddTodo = () => {
 
   return (
     <AddContainer>
-      <h1>Plan your day</h1>
+      <h1>
+        Today <span>{moment().format("ddd D MMM")}</span>
+      </h1>
       <div>
         <input
           id="task"
