@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { API_URL } from 'utils/urls';
+import { createSlice } from "@reduxjs/toolkit";
+import { API_URL } from "utils/urls";
 
 export const todo = createSlice({
-  name: 'todo',
+  name: "todo",
   initialState: {
     items: [],
     error: null,
@@ -21,6 +21,10 @@ export const todo = createSlice({
         (item) => item._id !== action.payload
       );
       store.items = deletedTasks;
+    },
+    toggleTask: (store, action) => {
+      const task = store.items.find((item) => item._id === action.payload);
+      task.done = !task.done;
     },
 
     // const editTodo = (taskId) => {
@@ -46,7 +50,7 @@ export const todo = createSlice({
 export const getTasks = (accessToken, userId) => {
   return (dispatch) => {
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
         Authorization: accessToken,
       },
@@ -71,14 +75,14 @@ export const getTasks = (accessToken, userId) => {
 export const postTasks = (accessToken, userId, task) => {
   return (dispatch) => {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: accessToken,
       },
       body: JSON.stringify({ task, userId }),
     };
-    fetch(API_URL('tasks/addtask'), options)
+    fetch(API_URL("tasks/addtask"), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -97,9 +101,9 @@ export const postTasks = (accessToken, userId, task) => {
 export const editTasks = (accessToken, taskId, task, userId) => {
   return (dispatch) => {
     const options = {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: accessToken,
       },
       body: JSON.stringify({ task }),
@@ -127,9 +131,9 @@ export const editTasks = (accessToken, taskId, task, userId) => {
 export const deleteTasks = (accessToken, taskId) => {
   return (dispatch) => {
     const options = {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: accessToken,
       },
       // body: JSON.stringify({ taskId }),
@@ -140,6 +144,34 @@ export const deleteTasks = (accessToken, taskId) => {
         if (data.success) {
           // dispatch(getTasks(accessToken, taskId));
           dispatch(todo.actions.deleteTask(taskId));
+          dispatch(todo.actions.setError(null));
+        } else {
+          dispatch(todo.actions.setItems([]));
+          dispatch(todo.actions.setError(data.response));
+        }
+      });
+  };
+};
+
+// REDUX THUNK: to complete a task
+
+export const toggleTasks = (accessToken, taskId, done) => {
+  console.log("test");
+  console.log(accessToken, taskId, done);
+  return (dispatch) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ done: !done }),
+    };
+    fetch(API_URL(`tasks/${taskId}/done`), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(todo.actions.toggleTask(taskId));
           dispatch(todo.actions.setError(null));
         } else {
           dispatch(todo.actions.setItems([]));

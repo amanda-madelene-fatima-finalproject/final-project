@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { postTasks } from '../../reducers/todo';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { postTasks } from "../../reducers/todo";
 // import { postTasks } from "../../reducers/todo";
 
 //--------- STYLED COMPONENTS ----------//
@@ -17,7 +17,7 @@ const AddContainer = styled.section`
 
 const AddTodo = () => {
   //--------- LOCAL STATE ----------//
-  const [task, setTask] = useState('');
+  const [task, setTask] = useState("");
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -28,7 +28,7 @@ const AddTodo = () => {
 
   const onPostTasks = (accessToken, userId, task) => {
     dispatch(postTasks(accessToken, userId, task));
-    setTask(''); // clears the input
+    setTask(""); // clears the input
   };
 
   return (
@@ -46,7 +46,7 @@ const AddTodo = () => {
           type="submit"
           onClick={() => onPostTasks(accessToken, userId, task)} //WHY IS THIS FUNCTION NOT WORKIIIIING? SOS
         >
-          Add Task
+          <i class="fas fa-plus-square"></i>
         </button>
       </div>
     </AddContainer>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getTasks } from '../../reducers/todo';
-import styled from 'styled-components';
-import AddTodo from './AddTodo';
-import { editTasks } from '../../reducers/todo';
-import { deleteTasks } from '../../reducers/todo';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import AddTodo from "./AddTodo";
+import TodoItem from "./TodoItem.js";
+import { getTasks } from "../../reducers/todo";
+
 //--------- STYLED COMPONENTS ----------//
 
 const ListContainer = styled.section`
@@ -41,7 +41,6 @@ const TodoList = () => {
   const userId = useSelector((store) => store.user.userId);
   //const taskId = useSelector((store) => store.todo.taskId);
 
-  const [editTask, setEditTask] = useState('');
   //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
 
@@ -53,14 +52,6 @@ const TodoList = () => {
     // If the fetch is success, the todo reducer gets updated with the tasks and that's why they appear in the return below.
   }, [dispatch, accessToken, userId]);
 
-  const onEditTasks = (accessToken, taskId, editTask, userId) => {
-    dispatch(editTasks(accessToken, taskId, editTask, userId));
-  };
-
-  const onDeleteTasks = (accessToken, taskId) => {
-    dispatch(deleteTasks(accessToken, taskId));
-  };
-
   return (
     <ListContainer>
       <Wrapper>
@@ -69,37 +60,7 @@ const TodoList = () => {
 
         <Tasks>
           {todoItems.map((item) => (
-            <>
-              <div key={item._id}>{item.task}</div>
-
-              <input
-                // key={index}
-                type="text"
-                placeholder="Add new task here.."
-                value={editTask}
-                onChange={(event) => setEditTask(event.target.value)}
-              />
-              <button
-                type="submit"
-                onClick={() =>
-                  onEditTasks(accessToken, item._id, editTask, userId)
-                }
-              >
-                Edit
-              </button>
-              {/* 
-              <input
-                id={item._id}
-                type="text"
-                placeholder="Add new task here.."
-                value={editTask}
-                onChange={(event) => setEditTask(event.target.value)}
-              /> */}
-
-              <button onClick={() => onDeleteTasks(accessToken, item._id)}>
-                Delete
-              </button>
-            </>
+            <TodoItem data={item} />
           ))}
         </Tasks>
       </Wrapper>

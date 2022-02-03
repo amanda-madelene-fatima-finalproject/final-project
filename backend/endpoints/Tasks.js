@@ -1,5 +1,5 @@
-const Todo = require('../models/Todo');
-const User = require('../models/User.js');
+const Todo = require("../models/Todo");
+const User = require("../models/User.js");
 
 // ----- Task Endpoints --------//
 
@@ -23,14 +23,14 @@ export const addTask = async (req, res) => {
       });
     } else {
       res.status(404).json({
-        message: 'Could not find task',
+        message: "Could not find task",
         success: false,
       });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: 'Invalid request', response: error, success: false });
+      .json({ message: "Invalid request", response: error, success: false });
   }
 };
 
@@ -50,14 +50,14 @@ export const getTask = async (req, res) => {
         .json({ response: queriedTasks, user: userId, success: true });
     } else {
       res.status(404).json({
-        message: 'Could not find tasks',
+        message: "Could not find tasks",
         success: false,
       });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: 'Invalid request', response: error, success: false });
+      .json({ message: "Invalid request", response: error, success: false });
   }
 };
 
@@ -76,13 +76,13 @@ export const editTask = async (req, res) => {
       res.status(200).json({ response: updatedTask, success: true });
     } else {
       res.status(404).json({
-        message: 'Could not find task',
+        message: "Could not find task",
         success: false,
       });
     }
   } catch (error) {
     res.status(400).json({
-      message: 'Invalid request',
+      message: "Invalid request",
       error: error,
       success: false,
     });
@@ -98,11 +98,28 @@ export const deleteTask = async (req, res) => {
     if (deleteTask) {
       res.status(200).json({ response: deleteTask, success: true });
     } else {
-      res.status(404).json({ response: 'Could not find task', success: false });
+      res.status(404).json({ response: "Could not find task", success: false });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: 'Invalid request', response: error, success: false });
+      .json({ message: "Invalid request", response: error, success: false });
+  }
+};
+
+// Endpoint to toggle todo tasks
+export const toggleTask = async (req, res) => {
+  const { taskId } = req.params;
+  const { done } = req.body;
+
+  try {
+    const updatedDone = await Task.findByIdAndUpdate(
+      taskId,
+      { done },
+      { new: true }
+    );
+    res.status(200).json({ response: updatedDone, success: true });
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
   }
 };

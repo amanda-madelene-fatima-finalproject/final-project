@@ -7,6 +7,7 @@
 		"@chakra-ui/react": "^1.8.1",
 		"@emotion/react": "^11.7.1",
 		"@emotion/styled": "^11.6.0",
+		"@material-ui/core": "^4.12.3",
 		"@reduxjs/toolkit": "^1.7.1",
 		"babel-eslint": "^10.1.0",
 		"cra-template-pwa": "^1.0.3",
