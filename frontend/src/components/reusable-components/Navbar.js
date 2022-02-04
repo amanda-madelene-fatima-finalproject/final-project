@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import logoImg from "../../assets/logo.svg";
-const NavbarWelcome = () => {
+const Navbar = () => {
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
   const [isOpen, setIsOpen] = useState(false);
@@ -22,13 +22,10 @@ const NavbarWelcome = () => {
       </Hamburger>
       {/* passing prop isOpen here */}
       <Menu isOpen={isOpen}>
-        <Link to="/dashboard">Home</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/essentials">Essentials</Link>
-        {/* <MenuLink href="">Home</MenuLink>
-        <MenuLink href="">About</MenuLink>
-        <MenuLink href="">Info</MenuLink>
-        <MenuLink href="">Contact</MenuLink> */}
+        <MenuLink href="/dashboard">Home</MenuLink>
+        <MenuLink href="/profile">About</MenuLink>
+        <MenuLink href="/Essentials">Info</MenuLink>
+        <MenuLink href="">Contact</MenuLink>
       </Menu>
     </Nav>
   );
@@ -116,4 +113,4 @@ const Logo = styled.a`
   }
 `;
 
-export default NavbarWelcome;
+export default Navbar;

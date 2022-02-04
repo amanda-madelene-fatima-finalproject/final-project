@@ -11,9 +11,11 @@ export const todo = createSlice({
     setItems: (store, action) => {
       store.items = action.payload;
     },
+
     setError: (store, action) => {
       store.error = action.payload;
     },
+
     deleteTask: (store, action) => {
       // This filter is executed when the deleteTasks function is called
       // and deletes the tasks that are stored in the items array above (so the items kept in the redux store)
@@ -22,25 +24,28 @@ export const todo = createSlice({
       );
       store.items = deletedTasks;
     },
+
     toggleTask: (store, action) => {
       const task = store.items.find((item) => item._id === action.payload);
       task.done = !task.done;
     },
 
-    // const editTodo = (taskId) => {
-    //   setTodos(
-    //     todos.map(todo => {
-    //       if(items.taskId === taskId){
-    //         return {...items}
-    //       };
-    //       return todo;
-    //     }))
-    // }
+    completeAllTasks: (store) => {
+      const itemsAllCompleted = store.items.map((item) => {
+        return {
+          ...item,
+          done: true,
+        };
+      });
+      store.items = itemsAllCompleted;
+    },
 
-    // editTask: (store, action) => {
-    //   const editedTasks = store.items.
-
-    // },
+    removeAllTasks: (store) => {
+      return {
+        ...store,
+        items: [],
+      };
+    },
   },
 });
 

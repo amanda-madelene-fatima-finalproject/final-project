@@ -33,6 +33,7 @@ const QuoteText = styled.p`
 `;
 
 const Quotes = () => {
+  // return <p>HELLO</p>;
   const [quote, setQuote] = useState([]);
 
   useEffect(() => {
@@ -43,14 +44,18 @@ const Quotes = () => {
       });
   }, []);
 
-  return (
-    <Container>
-      <QuoteText>
-        <p>{quote.quote}</p>
-      </QuoteText>
-    </Container>
-  );
+  //   return quote.forEach((item) => {
+  //     for (let key in item) {
+  //       console.log(`${key}: ${item[key]}`);
+  //     }
+  //   });
 };
+
+// <Container>
+//   <QuoteText>
+//     <p>{quote.quote}</p>
+//   </QuoteText>
+// </Container>
 
 // {quote.map((data) => {
 //     return <p>{data.quote}</p>;

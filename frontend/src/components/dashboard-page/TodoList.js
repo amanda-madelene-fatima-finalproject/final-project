@@ -5,6 +5,7 @@ import AddTodo from "./AddTodo";
 import TodoItem from "./TodoItem.js";
 import { getTasks } from "../../reducers/todo";
 import TodoCount from "../dashboard-page/TodoCount.js";
+import AllTasksButton from "./AllTasksButton.js";
 
 //--------- STYLED COMPONENTS ----------//
 
@@ -64,6 +65,7 @@ const TodoList = () => {
             <TodoItem data={item} />
           ))}
         </Tasks>
+        <AllTasksButton />
         <TodoCount />
       </Wrapper>
     </ListContainer>

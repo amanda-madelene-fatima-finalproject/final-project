@@ -5,7 +5,8 @@ import styled from "styled-components";
 import TodoList from "./TodoList";
 import DashboardImage from "../dashboard-page/DashboardImage.js";
 import AdCopyDashboard from "../../components/dashboard-page/AdCopyDashboard.js";
-import Quotes from "../dashboard-page/Quotes.js";
+// import Quotes from "../dashboard-page/Quotes.js";
+import Navbar from "components/reusable-components/Navbar.js";
 
 //import EditTask from './EditTask.js';
 
@@ -49,13 +50,13 @@ const Dashboard = () => {
 
   return (
     <MainContainer>
+      <Navbar />
       <Grid>
         <AdCopyWrapper>
           <AdCopyDashboard />
         </AdCopyWrapper>
         <DashboardImage />
         <TodoList />
-        <Quotes />
       </Grid>
     </MainContainer>
   );
