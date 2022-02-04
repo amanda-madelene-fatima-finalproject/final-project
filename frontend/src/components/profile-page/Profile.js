@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import ProfileImage from "./ProfileImage.js";
+import TodoCompleted from "components/profile-page/TodoCompleted.js";
 // import AdCopy from "../../components/reusable-components/AdCopy.js";
 
 const MainContainer = styled.main`
@@ -24,6 +25,7 @@ const Profile = () => {
     <MainContainer>
       <Grid>
         <ProfileImage />
+        <TodoCompleted />
       </Grid>
     </MainContainer>
   );

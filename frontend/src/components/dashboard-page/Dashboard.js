@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TodoList from "./TodoList";
 import DashboardImage from "../dashboard-page/DashboardImage.js";
-import AdCopy from "../../components/reusable-components/AdCopy.js";
+import AdCopyDashboard from "../../components/dashboard-page/AdCopyDashboard.js";
+import Quotes from "../dashboard-page/Quotes.js";
 
 //import EditTask from './EditTask.js';
 
@@ -22,6 +23,10 @@ const Grid = styled.div`
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
+`;
+
+const AdCopyWrapper = styled.div`
+  border: solid 2px red;
 `;
 
 const Dashboard = () => {
@@ -45,10 +50,12 @@ const Dashboard = () => {
   return (
     <MainContainer>
       <Grid>
-        <AdCopy />
+        <AdCopyWrapper>
+          <AdCopyDashboard />
+        </AdCopyWrapper>
         <DashboardImage />
         <TodoList />
-        <TodoList />
+        <Quotes />
       </Grid>
     </MainContainer>
   );

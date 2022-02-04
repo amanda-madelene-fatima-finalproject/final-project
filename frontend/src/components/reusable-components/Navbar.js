@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import logoImg from '../../assets/logo.svg';
-const Navbar = () => {
+import logoImg from "../../assets/logo.svg";
+const NavbarWelcome = () => {
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +22,13 @@ const Navbar = () => {
       </Hamburger>
       {/* passing prop isOpen here */}
       <Menu isOpen={isOpen}>
-        <MenuLink href="">Home</MenuLink>
+        <Link to="/dashboard">Home</Link>
+        <Link to="/profile">Profile</Link>
+        <Link to="/essentials">Essentials</Link>
+        {/* <MenuLink href="">Home</MenuLink>
         <MenuLink href="">About</MenuLink>
         <MenuLink href="">Info</MenuLink>
-        <MenuLink href="">Contact</MenuLink>
+        <MenuLink href="">Contact</MenuLink> */}
       </Menu>
     </Nav>
   );
@@ -79,13 +83,13 @@ const Menu = styled.div`
     width: 100%;
     // we set the height here to make the menu move up and down
     // if it is open the max height is 300px, if not it is 0px
-    max-height: ${({ isOpen }) => (isOpen ? '300px' : '0')};
+    max-height: ${({ isOpen }) => (isOpen ? "300px" : "0")};
     transition: max-height 0.3s ease-in;
   }
 `;
 
 const MenuLink = styled.a`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   padding: 1rem 2rem;
   cursor: pointer;
   text-align: center;
@@ -112,4 +116,4 @@ const Logo = styled.a`
   }
 `;
 
-export default Navbar;
+export default NavbarWelcome;

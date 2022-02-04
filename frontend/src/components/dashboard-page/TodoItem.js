@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import EditModal from "./EditModal.js";
 import moment from "moment";
+import { Button } from "@material-ui/core";
 
 import { deleteTasks, toggleTasks } from "../../reducers/todo";
 
@@ -85,9 +86,14 @@ const TodoItem = ({ data }) => {
 
       <EditModal data={data} />
 
-      <button onClick={() => onDeleteTasks(accessToken, data._id)}>
+      <Button
+        type="submit"
+        color="secondary"
+        variant="outlined"
+        onClick={() => onDeleteTasks(accessToken, data._id)}
+      >
         <i class="fas fa-trash"></i>
-      </button>
+      </Button>
     </Container>
   );
 };

@@ -1,10 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Login from './Login';
-import Navbar from './Navbar.js';
-import AdCopyWelcome from './AdCopyWelcome.js';
-import WelcomeImage from './WelcomeImage.js';
+import Login from "./Login";
+import NavbarWelcome from "./NavbarWelcome.js";
+import AdCopyWelcome from "./AdCopyWelcome.js";
+import WelcomeImage from "./WelcomeImage.js";
+import Footer from "../reusable-components/Footer.js";
 
 const Container = styled.main`
   background-color: white;
@@ -25,13 +26,14 @@ const Grid = styled.div`
 const Welcome = () => {
   return (
     <Container>
-      <Navbar />
+      <NavbarWelcome />
       <Grid>
         <AdCopyWelcome />
         <WelcomeImage />
         <Login />
         <Login />
       </Grid>
+      <Footer />
     </Container>
   );
 };

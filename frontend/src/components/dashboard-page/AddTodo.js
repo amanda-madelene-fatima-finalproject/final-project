@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { postTasks } from "../../reducers/todo";
 import moment from "moment";
+import { TextField } from "@material-ui/core";
 // import { postTasks } from "../../reducers/todo";
 
 //--------- STYLED COMPONENTS ----------//
@@ -38,16 +39,19 @@ const AddTodo = () => {
         Today <span>{moment().format("ddd D MMM")}</span>
       </h1>
       <div>
-        <input
+        <TextField
+          color="secondary"
+          variant="outlined"
+          label="Add your tasks"
           id="task"
           type="text"
           value={task}
           placeholder="Add tasks here.."
           onChange={(event) => setTask(event.target.value)}
-        ></input>
+        ></TextField>
         <button
           type="submit"
-          onClick={() => onPostTasks(accessToken, userId, task)} //WHY IS THIS FUNCTION NOT WORKIIIIING? SOS
+          onClick={() => onPostTasks(accessToken, userId, task)}
         >
           <i class="fas fa-plus-square"></i>
         </button>
