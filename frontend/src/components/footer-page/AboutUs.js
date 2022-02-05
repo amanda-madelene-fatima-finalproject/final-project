@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Navbar from "../reusable-components/Navbar.js";
+
 //--------- STYLED COMPONENTS ----------//
 const HeadingOne = styled.h1``;
 
@@ -32,6 +34,7 @@ const Article = styled.article``;
 const AboutUs = () => {
   return (
     <MainContainer>
+      <Navbar />
       <HeadingOne>Who are we?</HeadingOne>
 
       <Grid>

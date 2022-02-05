@@ -11,12 +11,12 @@ const CounterText = styled.p`
 `;
 
 const TodoCompleted = () => {
-  const amountTasks = useSelector((store) => store.todos.items.length);
+  const amountTasks = useSelector((store) => store.todo.items.length);
 
   return (
     <>
       <CounterText>
-        You have completed<span>{amountTasks}</span>tasks<span>.</span>
+        You have completed <span>{amountTasks}</span> tasks today<span>!</span>
       </CounterText>
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import logoImg from "../../assets/logo.svg";
 const NavbarWelcome = () => {
@@ -21,10 +22,9 @@ const NavbarWelcome = () => {
       </Hamburger>
       {/* passing prop isOpen here */}
       <Menu isOpen={isOpen}>
-        <MenuLink href="">Home</MenuLink>
-        <MenuLink href="">About</MenuLink>
-        <MenuLink href="">Info</MenuLink>
-        <MenuLink href="">Contact</MenuLink>
+        <MenuLink href="/">Home</MenuLink>
+        <MenuLink href="/essentials">Essentials</MenuLink>
+        <MenuLink href="/aboutus">About</MenuLink>
       </Menu>
     </Nav>
   );
@@ -85,6 +85,21 @@ const Menu = styled.div`
 `;
 
 const MenuLink = styled.a`
+  font-family: "Poppins", sans-serif;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #ef737d;
+  transition: all 0.3s ease-in;
+  font-size: 0.9rem;
+
+  &:hover {
+    color: #e5e5e5;
+  }
+`;
+
+const MenuLinks = styled.div`
   font-family: "Poppins", sans-serif;
   padding: 1rem 2rem;
   cursor: pointer;

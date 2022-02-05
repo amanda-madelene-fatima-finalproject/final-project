@@ -7,6 +7,7 @@ import DashboardImage from "../dashboard-page/DashboardImage.js";
 import AdCopyDashboard from "../../components/dashboard-page/AdCopyDashboard.js";
 // import Quotes from "../dashboard-page/Quotes.js";
 import Navbar from "components/reusable-components/Navbar.js";
+//import LoadingIndicator from "components/LoadingIndicator.js";
 
 //import EditTask from './EditTask.js';
 
@@ -33,6 +34,8 @@ const AdCopyWrapper = styled.div`
 const Dashboard = () => {
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
+  //const loading = useSelector((store) => store.ui.Loading);
+
   // const userId = useSelector((store) => store.user.userId);
 
   //--------- DISPATCHES ----------//
@@ -49,16 +52,19 @@ const Dashboard = () => {
   }, [accessToken, navigate]);
 
   return (
-    <MainContainer>
-      <Navbar />
-      <Grid>
-        <AdCopyWrapper>
-          <AdCopyDashboard />
-        </AdCopyWrapper>
-        <DashboardImage />
-        <TodoList />
-      </Grid>
-    </MainContainer>
+    <>
+      {/* {loading && <LoadingIndicator />} */}
+      <MainContainer>
+        <Navbar />
+        <Grid>
+          <AdCopyWrapper>
+            <AdCopyDashboard />
+          </AdCopyWrapper>
+          <DashboardImage />
+          <TodoList />
+        </Grid>
+      </MainContainer>
+    </>
   );
 };
 export default Dashboard;

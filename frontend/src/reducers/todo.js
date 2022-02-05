@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { API_URL } from "utils/urls";
+import { ui } from "./ui.js";
 
 export const todo = createSlice({
   name: "todo",
@@ -60,6 +61,7 @@ export const getTasks = (accessToken, userId) => {
         Authorization: accessToken,
       },
     };
+    dispatch(ui.actions.setLoading(true));
     fetch(API_URL(`tasks/${userId}`), options)
       .then((res) => res.json())
       .then((data) => {
@@ -70,7 +72,8 @@ export const getTasks = (accessToken, userId) => {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
-      });
+      })
+      .finally(() => dispatch(ui.actions.setLoading(false)));
   };
 };
 
@@ -87,6 +90,7 @@ export const postTasks = (accessToken, userId, task) => {
       },
       body: JSON.stringify({ task, userId }),
     };
+    dispatch(ui.actions.setLoading(true));
     fetch(API_URL("tasks/addtask"), options)
       .then((res) => res.json())
       .then((data) => {
@@ -97,7 +101,8 @@ export const postTasks = (accessToken, userId, task) => {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
-      });
+      })
+      .finally(() => dispatch(ui.actions.setLoading(false)));
   };
 };
 
@@ -113,6 +118,7 @@ export const editTasks = (accessToken, taskId, task, userId) => {
       },
       body: JSON.stringify({ task }),
     };
+    dispatch(ui.actions.setLoading(true));
     fetch(API_URL(`tasks/${taskId}/edit`), options)
       .then((res) => res.json())
       .then((data) => {
@@ -127,7 +133,8 @@ export const editTasks = (accessToken, taskId, task, userId) => {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
-      });
+      })
+      .finally(() => dispatch(ui.actions.setLoading(false)));
   };
 };
 
@@ -143,6 +150,7 @@ export const deleteTasks = (accessToken, taskId) => {
       },
       // body: JSON.stringify({ taskId }),
     };
+    dispatch(ui.actions.setLoading(true));
     fetch(API_URL(`tasks/${taskId}/delete`), options)
       .then((res) => res.json())
       .then((data) => {
@@ -154,7 +162,8 @@ export const deleteTasks = (accessToken, taskId) => {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
-      });
+      })
+      .finally(() => dispatch(ui.actions.setLoading(false)));
   };
 };
 
@@ -172,6 +181,7 @@ export const toggleTasks = (accessToken, taskId, done) => {
       },
       body: JSON.stringify({ done: !done }),
     };
+    dispatch(ui.actions.setLoading(true));
     fetch(API_URL(`tasks/${taskId}/done`), options)
       .then((res) => res.json())
       .then((data) => {
@@ -182,6 +192,7 @@ export const toggleTasks = (accessToken, taskId, done) => {
           // dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
-      });
+      })
+      .finally(() => dispatch(ui.actions.setLoading(false)));
   };
 };

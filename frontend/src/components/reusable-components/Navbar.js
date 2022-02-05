@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 import logoImg from "../../assets/logo.svg";
+
 const Navbar = () => {
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const onHomePageRedirect = () => {
+    navigate.push("/dashboard");
+  };
 
   return (
     <Nav>
@@ -23,9 +31,8 @@ const Navbar = () => {
       {/* passing prop isOpen here */}
       <Menu isOpen={isOpen}>
         <MenuLink href="/dashboard">Home</MenuLink>
-        <MenuLink href="/profile">About</MenuLink>
-        <MenuLink href="/Essentials">Info</MenuLink>
-        <MenuLink href="">Contact</MenuLink>
+        <MenuLink href="/profile">Profile</MenuLink>
+        <MenuLink href="/Essentials">Essentials</MenuLink>
       </Menu>
     </Nav>
   );
@@ -86,6 +93,21 @@ const Menu = styled.div`
 `;
 
 const MenuLink = styled.a`
+  font-family: "Poppins", sans-serif;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #ef737d;
+  transition: all 0.3s ease-in;
+  font-size: 0.9rem;
+
+  &:hover {
+    color: #e5e5e5;
+  }
+`;
+
+const MenuLinks = styled.div`
   font-family: "Poppins", sans-serif;
   padding: 1rem 2rem;
   cursor: pointer;

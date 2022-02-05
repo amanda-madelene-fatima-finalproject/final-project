@@ -1,11 +1,12 @@
 import React from "react";
 import Lottie from "react-lottie";
-import notfound from "../../animations/notfound.json";
-const NotFound = () => {
+import loading from "../animations/loading.json";
+
+const LoadingIndicator = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    notfound: notfound,
+    loading: loading,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -18,4 +19,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default LoadingIndicator;

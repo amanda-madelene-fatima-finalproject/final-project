@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { API_URL } from "../../utils/urls";
 // import { user } from "../../reducers/user"
-import { userAccess } from "../../reducers/user";
+import { user, userAccess } from "../../reducers/user";
 
 //--------- STYLED COMPONENTS ----------//
 
@@ -73,6 +73,19 @@ const Button = styled.button`
     color: whitesmoke;
     border: solid 1px whitesmoke;
     /* transform: scale(1.2, 1.2); */
+  }
+`;
+
+const LinkText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  border-top: 1px solid #b4b2b2;
+  padding: 10px;
+  p {
+    margin: 5px;
   }
 `;
 
@@ -147,6 +160,40 @@ const Login = () => {
   return (
     <LoginContainer>
       <Wrapper>
+        {mode === "signin" ? (
+          <LinkText>
+            <p>First time here? </p>
+            <p
+              onClick={() => setMode("signup")}
+              style={{
+                fontWeight: "700",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Create an account
+            </p>
+          </LinkText>
+        ) : (
+          <LinkText>
+            <p>Already have an account? </p>
+            <p
+              onClick={() => {
+                setMode("signin");
+                dispatch(user.actions.setError(null));
+                setUsername("");
+                setPassword("");
+              }}
+              style={{
+                fontWeight: "700",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Log in
+            </p>
+          </LinkText>
+        )}
         <RadioContainer>
           <RadioButton>
             <Label htmlFor="signup">Signup</Label>

@@ -10,15 +10,19 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import NotFound from "./components/notfound-page/NotFound";
 import Dashboard from "./components/dashboard-page/Dashboard";
 import Welcome from "./components/welcome-page/Welcome";
+import Profile from "./components/profile-page/Profile.js";
+import AboutUs from "./components/footer-page/AboutUs.js";
 
 //Import reducers
 import { user } from "./reducers/user";
 import { todo } from "./reducers/todo";
+import { ui } from "./reducers/ui";
 
 //Reducers
 const reducer = combineReducers({
   user: user.reducer,
   todo: todo.reducer,
+  ui: ui.reducer,
 });
 
 const store = configureStore({ reducer });
@@ -42,6 +46,8 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/aboutus" element={<AboutUs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
