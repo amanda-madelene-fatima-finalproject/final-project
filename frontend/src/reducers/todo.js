@@ -7,7 +7,7 @@ export const todo = createSlice({
   initialState: {
     items: [],
     error: null,
-    category: null,
+    // category: null,
   },
   reducers: {
     setItems: (store, action) => {
@@ -49,9 +49,9 @@ export const todo = createSlice({
       };
     },
 
-    setCategory: (store, action) => {
-      store.category = action.payload;
-    },
+    // setCategory: (store, action) => {
+    //   store.category = action.payload;
+    // },
   },
 });
 
@@ -74,7 +74,7 @@ export const getTasks = (accessToken, userId) => {
           setTimeout(() => {
             dispatch(todo.actions.setItems(data.response));
             dispatch(todo.actions.setError(null));
-            dispatch(add.actions.setCategory(data.response.category)); //////////
+            // dispatch(add.actions.setCategory(data.response.category));
           }, 2000);
         } else {
           dispatch(todo.actions.setItems([]));

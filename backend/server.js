@@ -19,10 +19,10 @@ import authenticateUser from "./authorization/authenticateUser.js";
 import quotesData from "./data/quotes.json";
 
 // Madelene and Amanda
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject";
+// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject";
 
 // Fatima
-//const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject";
+const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject";
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;

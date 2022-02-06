@@ -22,6 +22,7 @@ const AddContainer = styled.section`
 const AddTodo = () => {
   //--------- LOCAL STATE ----------//
   const [task, setTask] = useState("");
+
   // const [category, setCategory] = useState({
   //   work: "Work",
   //   home: "Home",
@@ -68,11 +69,11 @@ const AddTodo = () => {
 
         <select id="category" onChange={onNewCategoryChange}>
           <option value="">Select category</option>
-          <option value="Work">Work</option>
-          <option value="Home">Home</option>
-          <option value="Social">Social</option>
-          <option value="Health">Wellness</option>
-          <option value="Other">Other</option>
+          <option value="work">Work</option>
+          <option value="home">Home</option>
+          <option value="social">Social</option>
+          <option value="health">Wellness</option>
+          <option value="other">Other</option>
         </select>
 
         <button

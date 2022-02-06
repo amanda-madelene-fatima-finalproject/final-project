@@ -14,6 +14,7 @@ const TodoSchema = new mongoose.Schema({
   },
   category: {
     type: String,
+    required: true,
     enum: ["work", "home", "social", "health", "other"],
   },
   createdAt: {
