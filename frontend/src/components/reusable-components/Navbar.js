@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+
 import { batch, useDispatch } from "react-redux";
 import { user } from "../../reducers/user.js";
 import Button from "@material-ui/core/Button";
@@ -13,7 +13,6 @@ const Navbar = () => {
   // inital state set to false so that when you load the page the menu is closed.
   const [isOpen, setIsOpen] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -24,15 +23,10 @@ const Navbar = () => {
     });
   };
 
-  const onHomePageRedirect = () => {
-    navigate.push("/dashboard");
-  };
-
   return (
     <Nav>
-      <Logo href="">
+      <Logo href="/dashboard">
         <Img src={logoImg} alt="logo" />
-        {/* Debug <span>Task Manager</span> */}
       </Logo>
       {/* Here we setIsOpen to the opposite of false, this way when it is false it will set it to true and vice versa */}
       <Hamburger onClick={() => setIsOpen(!isOpen)}>
@@ -44,7 +38,7 @@ const Navbar = () => {
       <Menu isOpen={isOpen}>
         <MenuLink href="/dashboard">Home</MenuLink>
         <MenuLink href="/profile">Profile</MenuLink>
-        <MenuLink href="/Essentials">Essentials</MenuLink>
+        <MenuLink href="/essentials">Essentials</MenuLink>
       </Menu>
       <Button color="secondary" variant="outlined" href="/" onClick={signOut}>
         Sign Out

@@ -1,25 +1,31 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TodoList from "./TodoList";
+import Footer from "components/reusable-components/Footer.js";
 import DashboardImage from "../dashboard-page/DashboardImage.js";
 import AdCopyDashboard from "../../components/dashboard-page/AdCopyDashboard.js";
 // import Quotes from "../dashboard-page/Quotes.js";
 import Navbar from "components/reusable-components/Navbar.js";
 import LoadingIndicator from "components/LoadingIndicator.js";
-import { ButtonGroup } from "@material-ui/core";
-
 //import EditTask from './EditTask.js';
+import Quotes from "./Quotes.js";
 
 //--------- STYLED COMPONENTS ----------//
 const MainContainer = styled.main`
   min-height: 100vh;
+  background-color: white;
+  /* height: 100vh; */
+  /* margin-left: 20px;
+  margin-right: 20px; */
+  margin: 0 20px 0 20px;
 `;
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  row-gap: 40px;
   align-items: center;
   justify-content: center;
 
@@ -38,7 +44,6 @@ const Dashboard = () => {
   //--------- DISPATCHES ----------//
   // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
   useEffect(() => {
@@ -59,7 +64,9 @@ const Dashboard = () => {
           <DashboardImage />
           <TodoList />
           <TodoList />
+          {/* <Quotes /> */}
         </Grid>
+        <Footer />
       </MainContainer>
     </>
   );

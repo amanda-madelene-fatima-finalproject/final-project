@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.section`
   display: flex;
@@ -7,13 +7,14 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   height: 500px;
-  width: 500px;
+  width: 600px;
   margin: 0 auto;
 `;
 
 const Headline = styled.h1`
-  font-family: 'poppins, sans-serif';
-  font-size: 50px;
+  font-weight: 900;
+  font-size: 70px;
+  /* margin: 0; */
 `;
 
 // const AdCopyContainer = styled.div``;
@@ -31,7 +32,7 @@ const AdCopyWelcome = () => {
         is your mouth. Maybe your body hurts in more places than one? Don’t get
         us wrong, it’s amazing that you love your work, but you know what? We
         bet you could love it even more, and be even more efficient if you took
-        a minute look over your daily habits.{' '}
+        a minute look over your daily habits.{" "}
       </Text>
     </Container>
   );

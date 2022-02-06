@@ -10,11 +10,14 @@ import Footer from "../reusable-components/Footer.js";
 const Container = styled.main`
   background-color: white;
   height: 100vh;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  row-gap: 40px;
   align-items: center;
   justify-content: center;
 

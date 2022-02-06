@@ -22,6 +22,13 @@ const AddContainer = styled.section`
 const AddTodo = () => {
   //--------- LOCAL STATE ----------//
   const [task, setTask] = useState("");
+  const [category, setCategory] = useState({
+    work: "Work",
+    home: "home",
+    social: "social",
+    health: "health",
+    other: "other",
+  });
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -30,9 +37,14 @@ const AddTodo = () => {
   //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
 
-  const onPostTasks = (accessToken, userId, task) => {
-    dispatch(postTasks(accessToken, userId, task));
+  const onPostTasks = (accessToken, userId, task, category) => {
+    dispatch(postTasks(accessToken, userId, task, category));
     setTask(""); // clears the input
+    setCategory(""); // clears the input
+  };
+
+  const onNewCategoryChange = (event) => {
+    setCategory(event.target.value);
   };
 
   return (
@@ -51,11 +63,20 @@ const AddTodo = () => {
           placeholder="Add tasks here.."
           onChange={(event) => setTask(event.target.value)}
         ></TextField>
+        <select id="category" onChange={onNewCategoryChange}>
+          <option value="">Select tag..</option>
+          <option value="Work">Work</option>
+          <option value="Home">Home</option>
+          <option value="Social">Social</option>
+          <option value="Health">Wellness</option>
+          <option value="Other">Other</option>
+        </select>
+
         <button
           type="submit"
-          onClick={() => onPostTasks(accessToken, userId, task)}
+          onClick={() => onPostTasks(accessToken, userId, task, category)}
         >
-          <i class="fas fa-plus-square"></i>
+          <i className="fas fa-plus-square"></i>
         </button>
       </div>
     </AddContainer>

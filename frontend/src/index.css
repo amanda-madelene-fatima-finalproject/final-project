@@ -13,3 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.menu-link > .active {
+  border-bottom: 1px solid #333;
+}

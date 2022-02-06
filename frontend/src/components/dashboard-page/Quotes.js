@@ -32,24 +32,38 @@ const QuoteText = styled.p`
   border: 2px solid black;
 `;
 
+// useState
 const Quotes = () => {
-  // return <p>HELLO</p>;
   const [quote, setQuote] = useState([]);
 
+  //useEffect reacts to changes happening in the useState
+  // The empty array is the second argument of the useEffect hook and that's to prevents this fetch to happen every time the state changes, otherwise, it will make an infinite loop.
+  // This way the useEffect only listens to when the component is mounted, not the changes or the unmount, only the mounted
   useEffect(() => {
     fetch(API_URL("quotes"))
       .then((res) => res.json())
       .then((data) => {
         setQuote(data);
+        console.log(quote);
       });
   }, []);
 
-  //   return quote.forEach((item) => {
-  //     for (let key in item) {
-  //       console.log(`${key}: ${item[key]}`);
-  //     }
-  //   });
+  return (
+    <>
+      <div>
+        {quote.map((item) => (
+          <p key={item.quote}>{item.quote}</p>
+        ))}
+      </div>
+    </>
+  );
 };
+
+//   return quote.forEach((item) => {
+//     for (let key in item) {
+//       console.log(`${key}: ${item[key]}`);
+//     }
+//   });
 
 // <Container>
 //   <QuoteText>

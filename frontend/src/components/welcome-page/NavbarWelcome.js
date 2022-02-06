@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 import logoImg from "../../assets/logo.svg";
 const NavbarWelcome = () => {
@@ -10,7 +11,7 @@ const NavbarWelcome = () => {
 
   return (
     <Nav>
-      <Logo href="">
+      <Logo href="/">
         <Img src={logoImg} alt="logo" />
         {/* Debug <span>Task Manager</span> */}
       </Logo>
@@ -23,9 +24,21 @@ const NavbarWelcome = () => {
       {/* passing prop isOpen here */}
       <Menu isOpen={isOpen}>
         <MenuLink href="/">Home</MenuLink>
-        <MenuLink href="/essentials">Essentials</MenuLink>
+        <MenuLink href="/essentialinfo">Essentials</MenuLink>
         <MenuLink href="/aboutus">About</MenuLink>
       </Menu>
+      <Button color="secondary" variant="outlined" href="/">
+        <Link
+          activeClass="active"
+          to="signin"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+        >
+          Sign In
+        </Link>
+      </Button>
     </Nav>
   );
 };

@@ -70,9 +70,10 @@ const TodoItem = ({ data }) => {
       <UL key={data._id}>
         <List>
           <TodoText>{data.task}</TodoText>
+          <TodoText>{data.category}</TodoText>
           <TimeText>
             <span>
-              <i class="fas fa-calendar-day"></i>
+              <i className="fas fa-calendar-day"></i>
             </span>
             {moment(data.createdAt).format("ddd D MMM")}
           </TimeText>

@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import {
   createStore,
-  configureStore,
   combineReducers,
   applyMiddleware,
   compose,
@@ -19,6 +18,8 @@ import Dashboard from "./components/dashboard-page/Dashboard";
 import Welcome from "./components/welcome-page/Welcome";
 import Profile from "./components/profile-page/Profile.js";
 import AboutUs from "./components/footer-page/AboutUs.js";
+import EssentialInfo from "components/welcome-page/EssentialInfo.js";
+import Essentials from "components/dashboard-page/Essentials.js";
 
 //Import reducers
 import { user } from "./reducers/user";
@@ -83,6 +84,8 @@ export const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/essentialinfo" element={<EssentialInfo />} />
+            <Route path="/essentials" element={<Essentials />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
