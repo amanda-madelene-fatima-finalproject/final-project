@@ -24,11 +24,13 @@ const AddTodo = () => {
   const [task, setTask] = useState("");
   const [category, setCategory] = useState({
     work: "Work",
-    home: "home",
-    social: "social",
-    health: "health",
-    other: "other",
+    home: "Home",
+    social: "Social",
+    health: "Health",
+    other: "Other",
   });
+
+  // const [category, setCategory] = useState("");
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -63,8 +65,9 @@ const AddTodo = () => {
           placeholder="Add tasks here.."
           onChange={(event) => setTask(event.target.value)}
         ></TextField>
+
         <select id="category" onChange={onNewCategoryChange}>
-          <option value="">Select tag..</option>
+          <option value="">Select category</option>
           <option value="Work">Work</option>
           <option value="Home">Home</option>
           <option value="Social">Social</option>

@@ -7,6 +7,7 @@ export const todo = createSlice({
   initialState: {
     items: [],
     error: null,
+    category: null,
   },
   reducers: {
     setItems: (store, action) => {
@@ -47,6 +48,10 @@ export const todo = createSlice({
         items: [],
       };
     },
+
+    setCategory: (store, action) => {
+      store.category = action.payload;
+    },
   },
 });
 
@@ -69,6 +74,7 @@ export const getTasks = (accessToken, userId) => {
           setTimeout(() => {
             dispatch(todo.actions.setItems(data.response));
             dispatch(todo.actions.setError(null));
+            dispatch(add.actions.setCategory(data.response.category)); //////////
           }, 2000);
         } else {
           dispatch(todo.actions.setItems([]));
@@ -82,7 +88,7 @@ export const getTasks = (accessToken, userId) => {
 // REDUX THUNK: to post a task
 // This function fetches the API to post a task and it returns the task posted,
 // and then, it calls the getTask thunk, which gets this store updated with the new tasks.
-export const postTasks = (accessToken, userId, task) => {
+export const postTasks = (accessToken, userId, task, category) => {
   return (dispatch) => {
     const options = {
       method: "POST",
@@ -90,7 +96,7 @@ export const postTasks = (accessToken, userId, task) => {
         "Content-Type": "application/json",
         Authorization: accessToken,
       },
-      body: JSON.stringify({ task, userId }),
+      body: JSON.stringify({ userId, task, category }),
     };
     dispatch(ui.actions.setLoading(true));
     fetch(API_URL("tasks/addtask"), options)

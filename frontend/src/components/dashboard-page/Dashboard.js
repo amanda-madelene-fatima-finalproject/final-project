@@ -63,8 +63,7 @@ const Dashboard = () => {
           <AdCopyDashboard />
           <DashboardImage />
           <TodoList />
-          <TodoList />
-          {/* <Quotes /> */}
+          <Quotes />
         </Grid>
         <Footer />
       </MainContainer>
