@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { batch, useDispatch } from "react-redux";
+import { user } from "../../reducers/user.js";
+import Button from "@material-ui/core/Button";
 
 import styled from "styled-components";
 
@@ -11,6 +14,15 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const signOut = () => {
+    batch(() => {
+      dispatch(user.actions.setUserId(null));
+      dispatch(user.actions.setUsername(null));
+      dispatch(user.actions.setAccessToken(null));
+    });
+  };
 
   const onHomePageRedirect = () => {
     navigate.push("/dashboard");
@@ -34,6 +46,9 @@ const Navbar = () => {
         <MenuLink href="/profile">Profile</MenuLink>
         <MenuLink href="/Essentials">Essentials</MenuLink>
       </Menu>
+      <Button color="secondary" variant="outlined" href="/" onClick={signOut}>
+        Sign Out
+      </Button>
     </Nav>
   );
 };
@@ -93,21 +108,6 @@ const Menu = styled.div`
 `;
 
 const MenuLink = styled.a`
-  font-family: "Poppins", sans-serif;
-  padding: 1rem 2rem;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  color: #ef737d;
-  transition: all 0.3s ease-in;
-  font-size: 0.9rem;
-
-  &:hover {
-    color: #e5e5e5;
-  }
-`;
-
-const MenuLinks = styled.div`
   font-family: "Poppins", sans-serif;
   padding: 1rem 2rem;
   cursor: pointer;

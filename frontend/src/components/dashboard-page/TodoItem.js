@@ -19,7 +19,7 @@ const UL = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   font-size: 12px;
 
   p {
@@ -28,7 +28,7 @@ const UL = styled.ul`
 `;
 
 const TodoText = styled.p`
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
 `;
 
@@ -37,10 +37,11 @@ const TimeText = styled.p`
   flex-direction: row;
   align-items: center;
   color: #ef737d;
+  font-size: 10px;
 
   span {
     margin-right: 4px;
-    font-size: 10px;
+    font-size: 9px;
   }
 `;
 
@@ -65,7 +66,7 @@ const TodoItem = ({ data }) => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="xs">
       <UL key={data._id}>
         <List>
           <TodoText>{data.task}</TodoText>

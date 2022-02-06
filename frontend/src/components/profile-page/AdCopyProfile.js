@@ -1,8 +1,8 @@
 import React from "react";
 // import { useSelector } from "react-redux";
-import AdCopy from "../../components/reusable-components/AdCopy.js";
+import AdCopy from "../reusable-components/AdCopy.js";
 
-const AdCopyDashboard = () => {
+const AdCopyProfile = () => {
   // const nameItem = useSelector((store) => store.user.name);
 
   // const test = "amanda";
@@ -15,9 +15,9 @@ const AdCopyDashboard = () => {
 
   return (
     <>
-      <AdCopy text="Welcome! Let’s make this day great." />
+      <AdCopy text="Hey! Let’s see how you’ve been doing." />
     </>
   );
 };
 
-export default AdCopyDashboard;
+export default AdCopyProfile;

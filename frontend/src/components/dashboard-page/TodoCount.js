@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const CounterText = styled.p`
   margin-top: 50px;
+  font-family: "Poppins";
   span {
     color: #ef737d;
     font-weight: bold;

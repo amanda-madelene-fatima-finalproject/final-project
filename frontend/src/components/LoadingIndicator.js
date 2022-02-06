@@ -1,21 +1,30 @@
 import React from "react";
 import Lottie from "react-lottie";
-import loading from "../animations/loading.json";
+import { useSelector } from "react-redux";
+import animationData from "../animations/loading.json";
+import styled from "styled-components";
+
+const LoaderWrapper = styled.div`
+  min-height: 100vh;
+  width: 100vw;
+`;
 
 const LoadingIndicator = () => {
+  const loading = useSelector((store) => store.ui.Loading);
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    loading: loading,
+    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
 
   return (
-    <div>
-      <Lottie options={defaultOptions} height={800} width={800} />
-    </div>
+    <LoaderWrapper>
+      {loading && <Lottie options={defaultOptions} height={800} width={800} />}
+    </LoaderWrapper>
   );
 };
 

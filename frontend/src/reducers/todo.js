@@ -66,8 +66,10 @@ export const getTasks = (accessToken, userId) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          dispatch(todo.actions.setItems(data.response));
-          dispatch(todo.actions.setError(null));
+          setTimeout(() => {
+            dispatch(todo.actions.setItems(data.response));
+            dispatch(todo.actions.setError(null));
+          }, 2000);
         } else {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const ImageContainer = styled.section`
   display: flex;
@@ -8,8 +8,8 @@ const ImageContainer = styled.section`
 `;
 
 const Img = styled.img`
-  width: 500px;
-  height: 500px;
+  width: 300px;
+  height: 300px;
 `;
 
 const Image = (props) => {

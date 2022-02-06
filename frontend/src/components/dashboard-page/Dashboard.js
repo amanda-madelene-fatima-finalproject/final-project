@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TodoList from "./TodoList";
@@ -7,7 +7,8 @@ import DashboardImage from "../dashboard-page/DashboardImage.js";
 import AdCopyDashboard from "../../components/dashboard-page/AdCopyDashboard.js";
 // import Quotes from "../dashboard-page/Quotes.js";
 import Navbar from "components/reusable-components/Navbar.js";
-//import LoadingIndicator from "components/LoadingIndicator.js";
+import LoadingIndicator from "components/LoadingIndicator.js";
+import { ButtonGroup } from "@material-ui/core";
 
 //import EditTask from './EditTask.js';
 
@@ -27,20 +28,17 @@ const Grid = styled.div`
   }
 `;
 
-const AdCopyWrapper = styled.div`
-  border: solid 2px red;
-`;
-
 const Dashboard = () => {
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
-  //const loading = useSelector((store) => store.ui.Loading);
+  const loading = useSelector((store) => store.ui.Loading);
 
-  // const userId = useSelector((store) => store.user.userId);
+  //const userId = useSelector((store) => store.user.userId);
 
   //--------- DISPATCHES ----------//
   // const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
   useEffect(() => {
@@ -53,18 +51,18 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* {loading && <LoadingIndicator />} */}
+      {loading && <LoadingIndicator />}
       <MainContainer>
         <Navbar />
         <Grid>
-          <AdCopyWrapper>
-            <AdCopyDashboard />
-          </AdCopyWrapper>
+          <AdCopyDashboard />
           <DashboardImage />
+          <TodoList />
           <TodoList />
         </Grid>
       </MainContainer>
     </>
   );
 };
+
 export default Dashboard;

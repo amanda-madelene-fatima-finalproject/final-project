@@ -1,20 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { todo } from "../../reducers/todo.js";
+import Button from "@material-ui/core/Button";
+
+import Container from "@material-ui/core/Container";
 
 const AllTasksButton = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <button onClick={() => dispatch(todo.actions.completeAllTasks())}>
+    <Container>
+      <Button
+        color="secondary"
+        variant="outlined"
+        onClick={() => dispatch(todo.actions.completeAllTasks())}
+      >
         Complete All
-      </button>
+      </Button>
 
-      <button onClick={() => dispatch(todo.actions.removeAllTasks())}>
+      <Button
+        color="secondary"
+        variant="outlined"
+        onClick={() => dispatch(todo.actions.removeAllTasks())}
+      >
         Remove All
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 };
 export default AllTasksButton;

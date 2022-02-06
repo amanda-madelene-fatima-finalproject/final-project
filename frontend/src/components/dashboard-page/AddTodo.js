@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { postTasks } from "../../reducers/todo";
 import moment from "moment";
 import { TextField } from "@material-ui/core";
+
 // import { postTasks } from "../../reducers/todo";
 
 //--------- STYLED COMPONENTS ----------//
@@ -14,7 +15,8 @@ const AddContainer = styled.section`
   align-items: center;
   /* min-height: 100vh; */
   background-color: whitesmoke;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin: 0;
 `;
 
 const AddTodo = () => {
@@ -35,9 +37,9 @@ const AddTodo = () => {
 
   return (
     <AddContainer>
-      <h1>
+      <Headline>
         Today <span>{moment().format("ddd D MMM")}</span>
-      </h1>
+      </Headline>
       <div>
         <TextField
           color="secondary"
@@ -59,5 +61,12 @@ const AddTodo = () => {
     </AddContainer>
   );
 };
+
+const Headline = styled.h1`
+  span {
+    font-size: 14px;
+    font-weight: 300;
+  }
+`;
 
 export default AddTodo;

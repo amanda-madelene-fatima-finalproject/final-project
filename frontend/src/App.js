@@ -3,7 +3,14 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import thunkMiddleware from "redux-thunk";
+import {
+  createStore,
+  configureStore,
+  combineReducers,
+  applyMiddleware,
+  compose,
+} from "@reduxjs/toolkit";
 
 //Import components
 // import Login from "./components/welcome-page/Login";
@@ -25,7 +32,35 @@ const reducer = combineReducers({
   ui: ui.reducer,
 });
 
-const store = configureStore({ reducer });
+// // retrieve localstorage as inital state
+const persistedState = localStorage.getItem("redux")
+  ? JSON.parse(localStorage.getItem("redux"))
+  : {};
+
+// compose lets you write deeply nested function transformations without the rightward drift of the code.
+const composedEnhancers =
+  (process.env.NODE_ENV !== "production" &&
+    typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+// create store with inital state
+const store = createStore(
+  reducer,
+  persistedState,
+  composedEnhancers(applyMiddleware(thunkMiddleware))
+);
+
+// store the state in localstorage on redux state change
+store.subscribe(() => {
+  localStorage.setItem("redux", JSON.stringify(store.getState()));
+});
+
+// window.onload = () => {
+//   window.sessionStorage.clear();
+// };
+
+// const store = configureStore({ reducer });
 
 const theme = createTheme({
   palette: {

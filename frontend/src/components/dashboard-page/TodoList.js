@@ -6,17 +6,10 @@ import TodoItem from "./TodoItem.js";
 import { getTasks } from "../../reducers/todo";
 import TodoCount from "../dashboard-page/TodoCount.js";
 import AllTasksButton from "./AllTasksButton.js";
+import Container from "@material-ui/core/Container";
+import { Typography } from "@material-ui/core";
 
 //--------- STYLED COMPONENTS ----------//
-
-const ListContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #ef737d;
-`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,7 +17,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 40px;
+  /* padding: 40px; */
   border: solid 1px black;
   border-radius: 50px;
   background-color: whitesmoke;
@@ -34,14 +27,13 @@ const Headline = styled.h1`
   color: #ef737d;
 `;
 
-const Tasks = styled.div``;
+//const Tasks = styled.div``;
 
 const TodoList = () => {
   //----------- SELECTORS ----------//
   const todoItems = useSelector((store) => store.todo.items);
   const accessToken = useSelector((store) => store.user.accessToken);
   const userId = useSelector((store) => store.user.userId);
-  //const taskId = useSelector((store) => store.todo.taskId);
 
   //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
@@ -55,20 +47,21 @@ const TodoList = () => {
   }, [dispatch, accessToken, userId]);
 
   return (
-    <ListContainer>
+    <Container maxWidth="xs" disableGutters={true}>
       <Wrapper>
         <AddTodo />
         <Headline></Headline>
-
-        <Tasks>
-          {todoItems.map((item) => (
-            <TodoItem data={item} />
-          ))}
-        </Tasks>
+        <Container>
+          <Typography variant="h4">
+            {todoItems.map((item) => (
+              <TodoItem data={item} />
+            ))}
+          </Typography>
+        </Container>
         <AllTasksButton />
         <TodoCount />
       </Wrapper>
-    </ListContainer>
+    </Container>
   );
 };
 export default TodoList;

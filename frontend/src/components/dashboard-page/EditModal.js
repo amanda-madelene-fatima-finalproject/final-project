@@ -46,7 +46,7 @@ const EditModal = ({ data }) => {
 
   return (
     <div>
-      <Button variant="contained" color="secondary" onClick={handleOpen}>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         <i class="far fa-edit"></i>
       </Button>
       <Modal
