@@ -5,11 +5,11 @@ const User = require("../models/User.js");
 
 // Endpoint to add todo tasks
 export const addTask = async (req, res) => {
-  const { task, userId } = req.body;
+  const { task, userId, category } = req.body;
 
   try {
     const queriedId = await User.findById(userId);
-    const newTask = await new Todo({ task, user: queriedId }).save();
+    const newTask = await new Todo({ task, user: queriedId, category }).save();
 
     if (newTask) {
       res.status(201).json({
@@ -17,7 +17,9 @@ export const addTask = async (req, res) => {
           task: newTask.task,
           creationDay: newTask.createdAt,
           done: newTask.done,
-          author: newTask.user.username,
+          // author: newTask.user.username,
+          // author: newTask.username,
+          category: newTask.category,
         },
         success: true,
       });
