@@ -22,15 +22,15 @@ const AddContainer = styled.section`
 const AddTodo = () => {
   //--------- LOCAL STATE ----------//
   const [task, setTask] = useState("");
-  const [category, setCategory] = useState({
-    work: "Work",
-    home: "Home",
-    social: "Social",
-    health: "Health",
-    other: "Other",
-  });
+  // const [category, setCategory] = useState({
+  //   work: "Work",
+  //   home: "Home",
+  //   social: "Social",
+  //   health: "Health",
+  //   other: "Other",
+  // });
 
-  // const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);

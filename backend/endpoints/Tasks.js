@@ -13,14 +13,14 @@ export const addTask = async (req, res) => {
 
     if (newTask) {
       res.status(201).json({
-        response: {
-          task: newTask.task,
-          creationDay: newTask.createdAt,
-          done: newTask.done,
-          // author: newTask.user.username,
-          // author: newTask.username,
-          category: newTask.category,
-        },
+        // response: {
+        //   task: newTask.task,
+        //   creationDay: newTask.createdAt,
+        //   done: newTask.done,
+        //   author: newTask.user.username,
+        //   category: newTask.category,
+        // },
+        response: newTask,
         success: true,
       });
     } else {
