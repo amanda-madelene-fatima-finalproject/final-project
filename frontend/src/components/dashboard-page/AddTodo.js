@@ -72,7 +72,7 @@ const AddTodo = () => {
           <option value="work">Work</option>
           <option value="home">Home</option>
           <option value="social">Social</option>
-          <option value="health">Wellness</option>
+          <option value="wellness">Wellness</option>
           <option value="other">Other</option>
         </select>
 

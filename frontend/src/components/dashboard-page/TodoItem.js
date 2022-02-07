@@ -19,6 +19,10 @@ const Section = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  /* input {
+    display: none;
+  } */
 `;
 
 const List = styled.li``;
@@ -83,7 +87,24 @@ const TodoItem = ({ data }) => {
   return (
     <Container maxWidth="xs">
       <Section>
+      <StyledCheckBox
+                className='checkbox'
+                type='checkbox'
+                checked={data.done}
+                onChange={() => onToggleTasks(accessToken, data._id, data.done)}
+              />
+              <div>
+          
+                {/* <p
+                  className={
+                    data.done ? 'complete-todo' : 'uncomplete-todo'
+                  }
+                >
+                  {data.task}
+                </p> */}
+              </div>
         <UL key={data._id}>
+        
           <List>
             <TodoText>{data.task}</TodoText>
             <TodoText>{data.category}</TodoText>
@@ -98,15 +119,21 @@ const TodoItem = ({ data }) => {
       </Section>
 
       <Section>
-        <Button variant="contained" color="primary" className={classes.checked}>
+        <form>
+        {/* <Button variant="contained" color="primary" className={classes.checked}>
           <input
-            type="checkbox"
-            checked={data.done}
-            onChange={() => onToggleTasks(accessToken, data._id, data.done)}
-            hidden
+          type="checkbox"
+          checked={data.done}
+          onChange={() => onToggleTasks(accessToken, data._id, data.done)}
           />
+          
           <i class="fas fa-check"></i>
-        </Button>
+        </Button > */}
+        </form>
+        
+              
+           
+        
 
         <EditModal data={data} />
 
@@ -126,6 +153,37 @@ const TodoItem = ({ data }) => {
     </Container>
   );
 };
+
+const StyledCheckBox = styled.input`
+  cursor: pointer;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: black;
+  width: 0.7em;
+  height: 0.7em;
+  border: 0.10em solid #ef737d;
+  border-radius: 1em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  &::before {
+    content: '';
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #ef737d;
+  }
+  &:checked::before {
+    transform: scale(1);
+  }
+  @media (max-width: 500px) {
+    width: 1.2em;
+    height: 1.2em;
+  }`
 
 export default TodoItem;
 
