@@ -62,6 +62,7 @@ const useStyles = makeStyles({
 const TodoItem = ({ data }) => {
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
+
   // const userId = useSelector((store) => store.user.userId);
   //const taskId = useSelector((store) => store.todo.taskId);
 
@@ -117,9 +118,14 @@ const TodoItem = ({ data }) => {
         >
           <i class="fas fa-trash"></i>
         </Button>
+
+
+        
+
       </Section>
     </Container>
   );
 };
 
 export default TodoItem;
+

@@ -7,6 +7,8 @@ export const todo = createSlice({
   initialState: {
     items: [],
     error: null,
+    essentialTasks: ["hydrate", "exercise", "break", "restore", "nature"],
+  
     // category: null,
   },
   reducers: {

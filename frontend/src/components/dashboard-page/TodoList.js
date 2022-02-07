@@ -34,6 +34,7 @@ const TodoList = () => {
   const todoItems = useSelector((store) => store.todo.items);
   const accessToken = useSelector((store) => store.user.accessToken);
   const userId = useSelector((store) => store.user.userId);
+  const essentialTasks = useSelector((store) => store.todo.essentialTasks);
 
   //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
@@ -52,6 +53,13 @@ const TodoList = () => {
         <AddTodo />
         <Headline></Headline>
         <Container>
+          <div>
+            <h2>Essential Tasks</h2>
+            {essentialTasks.map((item) => (
+              <p>{item}</p>
+            ))}
+          </div>
+
           <Typography variant="h4">
             {todoItems.map((item) => (
               <TodoItem data={item} />
