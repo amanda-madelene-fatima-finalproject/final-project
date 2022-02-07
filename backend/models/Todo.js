@@ -8,10 +8,10 @@ const TodoSchema = new mongoose.Schema({
     trim: true,
     minlength: 1,
   },
-  essentialTasks: {
-    type: String,
-    enum: ["hydrate", "exercise", "break", "restore", "nature"],
-  },
+  // essentialTasks: {
+  //   type: String,
+  //   enum: ["hydrate", "exercise", "break", "restore", "nature"],
+  // },
   category: {
     type: String,
     required: true,

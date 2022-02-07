@@ -4,7 +4,7 @@ import styled from "styled-components";
 import EditModal from "./EditModal.js";
 import moment from "moment";
 import { Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+
 
 import { deleteTasks, toggleTasks } from "../../reducers/todo";
 
@@ -57,11 +57,7 @@ const TimeText = styled.p`
   }
 `;
 
-const useStyles = makeStyles({
-  checked: {
-    "&:hover": { color: "#e5e5e5", backgroundColor: "white" },
-  },
-});
+
 
 const TodoItem = ({ data }) => {
   //----------- SELECTORS ----------//
@@ -80,12 +76,11 @@ const TodoItem = ({ data }) => {
   };
 
   const onToggleTasks = (accessToken, taskId, done) => {
-    console.log(accessToken, taskId, done);
     dispatch(toggleTasks(accessToken, taskId, done));
   };
-  const classes = useStyles();
+  
   return (
-    <Container maxWidth="xs">
+    <Container>
       <Section>
       <StyledCheckBox
                 className='checkbox'
@@ -93,20 +88,22 @@ const TodoItem = ({ data }) => {
                 checked={data.done}
                 onChange={() => onToggleTasks(accessToken, data._id, data.done)}
               />
-              <div>
+              {/* <div>
           
-                {/* <p
+                <p
                   className={
                     data.done ? 'complete-todo' : 'uncomplete-todo'
                   }
                 >
                   {data.task}
-                </p> */}
-              </div>
+                </p>
+              </div> */}
         <UL key={data._id}>
         
           <List>
-            <TodoText>{data.task}</TodoText>
+            <TodoText className={
+                    data.done ? 'complete-todo' : 'uncomplete-todo'
+                  }>{data.task}</TodoText>
             <TodoText>{data.category}</TodoText>
             <TimeText>
               <span>
@@ -143,7 +140,7 @@ const TodoItem = ({ data }) => {
           variant="outlined"
           onClick={() => onDeleteTasks(accessToken, data._id)}
         >
-          <i class="fas fa-trash"></i>
+          <i className="fas fa-trash"></i>
         </Button>
 
 
@@ -170,8 +167,8 @@ const StyledCheckBox = styled.input`
   place-content: center;
   &::before {
     content: '';
-    width: 0.5em;
-    height: 0.5em;
+    width: 0.4em;
+    height: 0.4em;
     border-radius: 50%;
     transform: scale(0);
     transition: 120ms transform ease-in-out;

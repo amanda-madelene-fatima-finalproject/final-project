@@ -47,7 +47,7 @@ const EditModal = ({ data }) => {
   return (
     <>
       <Button variant="contained" color="primary" onClick={handleOpen}>
-        <i class="far fa-edit"></i>
+        <i className="far fa-edit"></i>
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"

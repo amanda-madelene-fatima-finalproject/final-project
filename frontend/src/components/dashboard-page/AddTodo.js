@@ -15,6 +15,7 @@ const AddContainer = styled.section`
   align-items: center;
   /* min-height: 100vh; */
   background-color: whitesmoke;
+  border-radius: 50px;
   /* margin-bottom: 20px; */
   margin: 0;
 `;
@@ -55,7 +56,7 @@ const AddTodo = () => {
       <Headline>
         Today <span>{moment().format("ddd D MMM")}</span>
       </Headline>
-      <div>
+      <form>
         <TextField
           color="secondary"
           variant="outlined"
@@ -67,7 +68,7 @@ const AddTodo = () => {
           onChange={(event) => setTask(event.target.value)}
         ></TextField>
 
-        <select id="category" onChange={onNewCategoryChange}>
+        <select id="category"  onChange={onNewCategoryChange}>
           <option value="">Select category</option>
           <option value="work">Work</option>
           <option value="home">Home</option>
@@ -77,12 +78,13 @@ const AddTodo = () => {
         </select>
 
         <button
+          disabled={task === '' && category === ''}
           type="submit"
           onClick={() => onPostTasks(accessToken, userId, task, category)}
         >
           <i className="fas fa-plus-square"></i>
         </button>
-      </div>
+      </form>
     </AddContainer>
   );
 };

@@ -7,7 +7,7 @@ export const todo = createSlice({
   initialState: {
     items: [],
     error: null,
-    essentialTasks: ["hydrate", "exercise", "break", "restore", "nature"],
+    essentialTasks: { hydrate: false, exercise:false, break:false, restore:false, nature:false}
   
     // category: null,
   },
@@ -33,6 +33,18 @@ export const todo = createSlice({
       const task = store.items.find((item) => item._id === action.payload);
       task.done = !task.done;
     },
+
+    toggleEssentialTasks: (store, action) => {
+      const essentialTasks = store.essentialTasks; // selecting the object from the store and storing it in a variable
+      //object.key is a method that we need here in order to be able to use the method find,
+      // we need to first find the key inside the essentialTasks object and then, we compare it with the key sent in the payload from tddoList component.
+      const importantTasks = Object.keys(essentialTasks).find(
+        (key) => key === action.payload //importantTask will be always the same as the payload (like nature === nature)
+      );
+      essentialTasks[importantTasks] = !essentialTasks[importantTasks]; // here we change the value from false to true
+    // console.log(essentialTasks);
+    // console.log(importantTasks); // is the same key as the payload
+      },
 
     completeAllTasks: (store) => {
       const itemsAllCompleted = store.items.map((item) => {

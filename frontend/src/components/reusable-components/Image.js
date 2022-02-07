@@ -8,8 +8,13 @@ const ImageContainer = styled.section`
 `;
 
 const Img = styled.img`
-  width: 500px;
-  height: 500px;
+  width: auto;
+  height: 200px;
+
+  @media (min-width: 768px) {
+    width: auto;
+  height: 400px;
+  }
 `;
 
 const Image = (props) => {
