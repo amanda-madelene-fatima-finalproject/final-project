@@ -1,21 +1,14 @@
 import React from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AdCopy from "../../components/reusable-components/AdCopy.js";
 
 const AdCopyDashboard = () => {
-  // const nameItem = useSelector((store) => store.user.name);
-
-  // const test = "amanda";
-
-  //   useEffect(() => {
-  //     if (nameItem === false) {
-  //       console.log("working");
-  //     }
-  //   }, [nameItem]);
+  const nameItem = useSelector((store) => store.user.username);
 
   return (
     <>
-      <AdCopy text="Welcome! Let’s make this day great." />
+      <AdCopy text={`Welcome ${nameItem}! Let’s make this day great.`} />
+
     </>
   );
 };
