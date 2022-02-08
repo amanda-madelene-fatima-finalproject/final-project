@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 // import { API_URL } from "../../utils/urls";
 // import { user } from "../../reducers/user"
-import { user, userAccess } from "../../reducers/user";
+import { user, userAccess } from '../../reducers/user';
 
 //--------- STYLED COMPONENTS ----------//
 
 const Label = styled.label`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 3px;
 `;
 
@@ -18,7 +18,8 @@ const LoginContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
+
   // background-color: #ef737d;
 `;
 const RadioContainer = styled.div`
@@ -40,15 +41,34 @@ const RadioButton = styled.div`
 const Input = styled.input`
   border-radius: 5px;
   padding: 10px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
 `;
 
 const Wrapper = styled.div`
   /* border: 1px solid black; */
-  border-radius: 50px;
+  /* border-radius: 50px; */
   padding: 50px;
   background-color: #ef737d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  /* border: solid 1px black; */
+  border-radius: 50px;
+  /* background-color: whitesmoke; */
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+  min-height: 200px;
+  width: 260px;
+  margin: 50px auto;
+  /* background: white; */
+  border-radius: 10px;
 `;
 
 const Form = styled.form`
@@ -58,7 +78,7 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin-top: 40px;
   padding: 5px 10px;
   font-weight: 600;
@@ -91,10 +111,10 @@ const LinkText = styled.div`
 
 const Login = () => {
   //----------- LOCAL STATES ----------//
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [mode, setMode] = useState("signup");
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [mode, setMode] = useState('signup');
 
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -109,7 +129,7 @@ const Login = () => {
     // This condition can be only true if the user has signed up first as the accessToken is generated when a newUser model is created in the database.
     // Once the user has signed up, the accessToken is sent by the backend in the data response and updated in the redux store by the actions.
     if (accessToken) {
-      navigate("/dashboard");
+      navigate('/dashboard');
     }
   }, [accessToken, navigate]);
 
@@ -131,15 +151,15 @@ const Login = () => {
   return (
     <LoginContainer>
       <Wrapper>
-        {mode === "signin" ? (
+        {mode === 'signin' ? (
           <LinkText>
             <p>First time here? </p>
             <p
-              onClick={() => setMode("signup")}
+              onClick={() => setMode('signup')}
               style={{
-                fontWeight: "700",
-                cursor: "pointer",
-                textDecoration: "underline",
+                fontWeight: '700',
+                cursor: 'pointer',
+                textDecoration: 'underline',
               }}
             >
               Create an account
@@ -150,15 +170,15 @@ const Login = () => {
             <p>Already have an account? </p>
             <p
               onClick={() => {
-                setMode("signin");
+                setMode('signin');
                 dispatch(user.actions.setError(null));
-                setUsername("");
-                setPassword("");
+                setUsername('');
+                setPassword('');
               }}
               style={{
-                fontWeight: "700",
-                cursor: "pointer",
-                textDecoration: "underline",
+                fontWeight: '700',
+                cursor: 'pointer',
+                textDecoration: 'underline',
               }}
             >
               Log in
@@ -171,8 +191,8 @@ const Login = () => {
             <RadioInput
               id="signup"
               type="radio"
-              checked={mode === "signup"}
-              onChange={() => setMode("signup")}
+              checked={mode === 'signup'}
+              onChange={() => setMode('signup')}
             />
           </RadioButton>
 
@@ -182,8 +202,8 @@ const Login = () => {
               title="signin"
               id="signin"
               type="radio"
-              checked={mode === "signin"}
-              onChange={() => setMode("signin")}
+              checked={mode === 'signin'}
+              onChange={() => setMode('signin')}
             />
           </RadioButton>
         </RadioContainer>

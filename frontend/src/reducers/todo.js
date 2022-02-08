@@ -1,14 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { API_URL } from "utils/urls";
-import { ui } from "./ui.js";
+import { createSlice } from '@reduxjs/toolkit';
+import { API_URL } from 'utils/urls';
+import { ui } from './ui.js';
 
 export const todo = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState: {
     items: [],
     error: null,
-    essentialTasks: { hydrate: false, exercise:false, break:false, restore:false, nature:false}
-  
+    essentialTasks: {
+      Hydrate: false,
+      Move: false,
+      Break: false,
+      Sleep: false,
+      Nature: false,
+      // 'Drink at least 5 glasses of water!': false,
+      // 'Move your body; walk, run, dance!': false,
+      // 'Remember to teak breaks': false,
+      // 'Sleep is important, make it a priority!': false,
+      // 'Spend time in nature, it heals!': false,
+    },
+
     // category: null,
   },
   reducers: {
@@ -42,9 +53,9 @@ export const todo = createSlice({
         (key) => key === action.payload //importantTask will be always the same as the payload (like nature === nature)
       );
       essentialTasks[importantTasks] = !essentialTasks[importantTasks]; // here we change the value from false to true
-    // console.log(essentialTasks);
-    // console.log(importantTasks); // is the same key as the payload
-      },
+      // console.log(essentialTasks);
+      // console.log(importantTasks); // is the same key as the payload
+    },
 
     completeAllTasks: (store) => {
       const itemsAllCompleted = store.items.map((item) => {
@@ -75,7 +86,7 @@ export const todo = createSlice({
 export const getTasks = (accessToken, userId) => {
   return (dispatch) => {
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: accessToken,
       },
@@ -105,15 +116,15 @@ export const getTasks = (accessToken, userId) => {
 export const postTasks = (accessToken, userId, task, category) => {
   return (dispatch) => {
     const options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: accessToken,
       },
       body: JSON.stringify({ userId, task, category }),
     };
     dispatch(ui.actions.setLoading(true));
-    fetch(API_URL("tasks/addtask"), options)
+    fetch(API_URL('tasks/addtask'), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -133,9 +144,9 @@ export const postTasks = (accessToken, userId, task, category) => {
 export const editTasks = (accessToken, taskId, task, userId) => {
   return (dispatch) => {
     const options = {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: accessToken,
       },
       body: JSON.stringify({ task }),
@@ -165,9 +176,9 @@ export const editTasks = (accessToken, taskId, task, userId) => {
 export const deleteTasks = (accessToken, taskId) => {
   return (dispatch) => {
     const options = {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: accessToken,
       },
       // body: JSON.stringify({ taskId }),
@@ -192,13 +203,13 @@ export const deleteTasks = (accessToken, taskId) => {
 // REDUX THUNK: to complete a task
 
 export const toggleTasks = (accessToken, taskId, done) => {
-  console.log("test");
+  console.log('test');
   console.log(accessToken, taskId, done);
   return (dispatch) => {
     const options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: accessToken,
       },
       body: JSON.stringify({ done: !done }),

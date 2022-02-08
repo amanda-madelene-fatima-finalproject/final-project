@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import { Link, animateScroll as scroll } from "react-scroll";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
-import logoImg from "../../assets/logo.svg";
+import logoImg from '../../assets/logo.svg';
 const NavbarWelcome = () => {
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
@@ -26,19 +26,19 @@ const NavbarWelcome = () => {
         <MenuLink href="/">Home</MenuLink>
         <MenuLink href="/essentialinfo">Essentials</MenuLink>
         <MenuLink href="/aboutus">About</MenuLink>
+        <Button size="small" color="secondary" variant="outlined" href="/">
+          <Link
+            activeClass="active"
+            to="signin"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+          >
+            Sign In
+          </Link>
+        </Button>
       </Menu>
-      <Button color="secondary" variant="outlined" href="/">
-        <Link
-          activeClass="active"
-          to="signin"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-        >
-          Sign In
-        </Link>
-      </Button>
     </Nav>
   );
 };
@@ -90,15 +90,16 @@ const Menu = styled.div`
     overflow: hidden;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 30px;
     // we set the height here to make the menu move up and down
     // if it is open the max height is 300px, if not it is 0px
-    max-height: ${({ isOpen }) => (isOpen ? "300px" : "0")};
+    max-height: ${({ isOpen }) => (isOpen ? '300px' : '0')};
     transition: max-height 0.3s ease-in;
   }
 `;
 
 const MenuLink = styled.a`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 1rem 2rem;
   cursor: pointer;
   text-align: center;

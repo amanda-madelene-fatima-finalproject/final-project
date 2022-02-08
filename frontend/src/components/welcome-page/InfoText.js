@@ -39,34 +39,17 @@ const QuoteText = styled.p`
   font-weight: bold;
 `;
 
-const Quotes = () => {
-  const [quote, setQuote] = useState([]);
-  const [randomQuote, setRandomQuote] = useState({});
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://type.fit/api/quotes');
-      const data = await response.json();
-      setQuote(data);
-      let randIndex = Math.floor(Math.random() * data.length);
-      setRandomQuote(data[randIndex]);
-    }
-    fetchData();
-  }, []);
-
+const InfoText = () => {
   return (
     <Container>
-      {randomQuote ? (
-        <>
-          <Wrapper>
-            <QuoteText>&quot;{randomQuote.text}&quot;</QuoteText>{' '}
-          </Wrapper>
-        </>
-      ) : (
-        <h2>Loading</h2>
-      )}
+      <Wrapper>
+        <QuoteText>
+          &quot; It is great to dream big, but the way to achieve big is to
+          start small &quot;
+        </QuoteText>
+      </Wrapper>
     </Container>
   );
 };
 
-export default Quotes;
+export default InfoText;

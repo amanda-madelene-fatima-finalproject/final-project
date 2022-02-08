@@ -1,18 +1,19 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
-import EditModal from "./EditModal.js";
-import moment from "moment";
-import { Button } from "@material-ui/core";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import EditModal from './EditModal.js';
+import moment from 'moment';
+// import { Button } from '@material-ui/core';
 
-
-import { deleteTasks, toggleTasks } from "../../reducers/todo";
+import { deleteTasks, toggleTasks } from '../../reducers/todo';
 
 const Container = styled.section`
+  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 60px;
+  margin-top: 10px;
 `;
 
 const Section = styled.section`
@@ -25,14 +26,13 @@ const Section = styled.section`
   } */
 `;
 
-const List = styled.li``;
-
-const UL = styled.ul`
+const List = styled.li`
   list-style: none;
   display: flex;
   flex-direction: column;
   /* margin-left: 5px; */
   font-size: 12px;
+  margin-left: 20px;
 
   p {
     margin: 2px;
@@ -40,8 +40,13 @@ const UL = styled.ul`
 `;
 
 const TodoText = styled.p`
-  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 12px;
   font-weight: bold;
+  font-style: italic;
+  text-align: left;
 `;
 
 const TimeText = styled.p`
@@ -57,7 +62,45 @@ const TimeText = styled.p`
   }
 `;
 
+const CategoryText = styled.span`
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #000;
+  font-size: 10px; */
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  background: #e5e5e5;
+  font-weight: 500;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  padding: 3px;
+  margin-left: 5px;
+  letter-spacing: 1px;
+  /* margin-right: 8px;
+  margin-top: 10px; */
+`;
 
+const CatWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Div = styled.div`
+  display: flex;
+`;
+
+const Button = styled.button`
+  border: none;
+  background-color: transparent;
+  &:hover {
+    color: #ef737d;
+    cursor: pointer;
+  }
+`;
 
 const TodoItem = ({ data }) => {
   //----------- SELECTORS ----------//
@@ -78,74 +121,41 @@ const TodoItem = ({ data }) => {
   const onToggleTasks = (accessToken, taskId, done) => {
     dispatch(toggleTasks(accessToken, taskId, done));
   };
-  
+
   return (
     <Container>
       <Section>
-      <StyledCheckBox
-                className='checkbox'
-                type='checkbox'
-                checked={data.done}
-                onChange={() => onToggleTasks(accessToken, data._id, data.done)}
-              />
-              {/* <div>
-          
-                <p
-                  className={
-                    data.done ? 'complete-todo' : 'uncomplete-todo'
-                  }
-                >
-                  {data.task}
-                </p>
-              </div> */}
-        <UL key={data._id}>
-        
-          <List>
-            <TodoText className={
-                    data.done ? 'complete-todo' : 'uncomplete-todo'
-                  }>{data.task}</TodoText>
-            <TodoText>{data.category}</TodoText>
+        <StyledCheckBox
+          className="checkbox"
+          type="checkbox"
+          checked={data.done}
+          onChange={() => onToggleTasks(accessToken, data._id, data.done)}
+        />
+
+        <List>
+          <TodoText className={data.done ? 'complete-todo' : 'uncomplete-todo'}>
+            {data.task}
+          </TodoText>
+          <Div>
             <TimeText>
               <span>
                 <i className="fas fa-calendar-day"></i>
               </span>
-              {moment(data.createdAt).format("ddd D MMM")}
+              {moment(data.createdAt).format('ddd D MMM')}
             </TimeText>
-          </List>
-        </UL>
+            <CatWrap>
+              <CategoryText>{data.category}</CategoryText>
+            </CatWrap>
+          </Div>
+        </List>
       </Section>
 
       <Section>
-        <form>
-        {/* <Button variant="contained" color="primary" className={classes.checked}>
-          <input
-          type="checkbox"
-          checked={data.done}
-          onChange={() => onToggleTasks(accessToken, data._id, data.done)}
-          />
-          
-          <i class="fas fa-check"></i>
-        </Button > */}
-        </form>
-        
-              
-           
-        
-
         <EditModal data={data} />
 
-        <Button
-          type="submit"
-          color="secondary"
-          variant="outlined"
-          onClick={() => onDeleteTasks(accessToken, data._id)}
-        >
+        <Button onClick={() => onDeleteTasks(accessToken, data._id)}>
           <i className="fas fa-trash"></i>
         </Button>
-
-
-        
-
       </Section>
     </Container>
   );
@@ -160,7 +170,7 @@ const StyledCheckBox = styled.input`
   color: black;
   width: 0.7em;
   height: 0.7em;
-  border: 0.10em solid #ef737d;
+  border: 0.1em solid #ef737d;
   border-radius: 1em;
   transform: translateY(-0.075em);
   display: grid;
@@ -177,10 +187,10 @@ const StyledCheckBox = styled.input`
   &:checked::before {
     transform: scale(1);
   }
-  @media (max-width: 500px) {
-    width: 1.2em;
-    height: 1.2em;
-  }`
+  @media (min-width: 768px) {
+    width: 1em;
+    height: 1em;
+  }
+`;
 
 export default TodoItem;
-

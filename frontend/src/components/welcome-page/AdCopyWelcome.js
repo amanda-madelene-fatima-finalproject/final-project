@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.section`
   display: flex;
@@ -12,18 +12,34 @@ const Container = styled.section`
 `;
 
 const Headline = styled.h1`
-  font-weight: 900;
-  font-size: 70px;
+  font-size: 35px;
+  font-weight: 800;
+  width: 300px;
+
+  @media (min-width: 768px) {
+    font-size: 60px;
+    font-weight: 900;
+    width: 600px;
+  }
+`;
+
+const Text = styled.p`
+  width: 300px;
+`;
+
+const Span = styled.span`
+  color: #ef737d;
   /* margin: 0; */
 `;
 
 // const AdCopyContainer = styled.div``;
 
-const Text = styled.p``;
 const AdCopyWelcome = () => {
   return (
     <Container>
-      <Headline>Unscramble your brain &amp;&amp; DeBug your life.</Headline>
+      <Headline>
+        Unscramble your brain &amp;&amp; <Span>DeBug </Span>your life.
+      </Headline>
 
       <Text>
         Do you have a tendency to disappear into your work? Maybe you sit down
@@ -32,7 +48,7 @@ const AdCopyWelcome = () => {
         is your mouth. Maybe your body hurts in more places than one? Don’t get
         us wrong, it’s amazing that you love your work, but you know what? We
         bet you could love it even more, and be even more efficient if you took
-        a minute look over your daily habits.{" "}
+        a minute look over your daily habits.{' '}
       </Text>
     </Container>
   );

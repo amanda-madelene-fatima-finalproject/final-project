@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { batch, useDispatch } from "react-redux";
-import { user } from "../../reducers/user.js";
-import Button from "@material-ui/core/Button";
+import { batch, useDispatch } from 'react-redux';
+import { user } from '../../reducers/user.js';
+import Button from '@material-ui/core/Button';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import logoImg from "../../assets/logo.svg";
+import logoImg from '../../assets/logo.svg';
 
 const Navbar = () => {
   // "useState" for code snippet
@@ -39,10 +39,17 @@ const Navbar = () => {
         <MenuLink href="/dashboard">Home</MenuLink>
         <MenuLink href="/profile">Profile</MenuLink>
         <MenuLink href="/essentials">Essentials</MenuLink>
+
+        <Button
+          size="small"
+          color="secondary"
+          variant="outlined"
+          href="/"
+          onClick={signOut}
+        >
+          Sign Out
+        </Button>
       </Menu>
-      <Button color="secondary" variant="outlined" href="/" onClick={signOut}>
-        Sign Out
-      </Button>
     </Nav>
   );
 };
@@ -96,13 +103,13 @@ const Menu = styled.div`
     width: 100%;
     // we set the height here to make the menu move up and down
     // if it is open the max height is 300px, if not it is 0px
-    max-height: ${({ isOpen }) => (isOpen ? "300px" : "0")};
+    max-height: ${({ isOpen }) => (isOpen ? '300px' : '0')};
     transition: max-height 0.3s ease-in;
   }
 `;
 
 const MenuLink = styled.a`
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 1rem 2rem;
   cursor: pointer;
   text-align: center;

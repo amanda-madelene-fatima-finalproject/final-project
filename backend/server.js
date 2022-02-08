@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import listEndpoints from "express-list-endpoints";
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 
 import {
   addTask,
@@ -9,25 +9,25 @@ import {
   getTask,
   deleteTask,
   toggleTask,
-} from "./endpoints/Tasks.js";
-import { assignRole, signIn, signUp } from "./endpoints/CreateAccount.js";
+} from './endpoints/Tasks.js';
+import { assignRole, signIn, signUp } from './endpoints/CreateAccount.js';
 import {
   accessDashboard,
   accessUserProfile,
-} from "./endpoints/AccessAccount.js";
-import authenticateUser from "./authorization/authenticateUser.js";
-import quotesData from "./data/quotes.json";
+} from './endpoints/AccessAccount.js';
+import authenticateUser from './authorization/authenticateUser.js';
+import quotesData from './data/quotes.json';
 
 // Madelene and Amanda
-// const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalProject";
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
 
 // Fatima
-const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject";
+//const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1/finalProject";
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const User = require("./models/User.js");
+const User = require('./models/User.js');
 
 // Defines the port the app will run on. Defaults to 8080, but can be
 // overridden when starting the server. For example:
@@ -41,33 +41,33 @@ app.use(cors());
 app.use(express.json());
 
 // Start defining your routes here
-app.get("/", (req, res) => {
-  res.send("Hello World, Welcome to our Debug Todo app 🐞!");
+app.get('/', (req, res) => {
+  res.send('Hello World, Welcome to our Debug Todo app 🐞!');
 });
 
 // Get all the endpoints
-app.get("/endpoints", (req, res) => {
+app.get('/endpoints', (req, res) => {
   res.send(listEndpoints(app));
 });
 
 // ----- Task Endpoints --------//
-app.post("/tasks/addtask", authenticateUser, addTask);
-app.get("/tasks/:userId", authenticateUser, getTask);
-app.patch("/tasks/:taskId/edit", authenticateUser, editTask);
-app.delete("/tasks/:taskId/delete", authenticateUser, deleteTask);
-app.post("/tasks/:taskId/done", authenticateUser, toggleTask);
+app.post('/tasks/addtask', authenticateUser, addTask);
+app.get('/tasks/:userId', authenticateUser, getTask);
+app.patch('/tasks/:taskId/edit', authenticateUser, editTask);
+app.delete('/tasks/:taskId/delete', authenticateUser, deleteTask);
+app.post('/tasks/:taskId/done', authenticateUser, toggleTask);
 
 // ----- Access Account Endpoints --------//
-app.get("/dashboard", authenticateUser, accessDashboard);
-app.get("/user/:userId/profile", authenticateUser, accessUserProfile);
+app.get('/dashboard', authenticateUser, accessDashboard);
+app.get('/user/:userId/profile', authenticateUser, accessUserProfile);
 
 // ----- Create Account Endpoints --------//
-app.post("/signup", signUp);
-app.post("/signin", signIn);
-app.post("/role", assignRole);
+app.post('/signup', signUp);
+app.post('/signin', signIn);
+app.post('/role', assignRole);
 
 // Quote Endpoint //
-app.get("/quotes", async (req, res) => {
+app.get('/quotes', async (req, res) => {
   const Quotes = quotesData;
   const getRandomQuote = () =>
     Quotes[Math.floor(Math.random() * Quotes.length)];

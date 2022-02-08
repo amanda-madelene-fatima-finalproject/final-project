@@ -1,13 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import ProfileImage from './ProfileImage.js';
-import TodoCompleted from 'components/profile-page/TodoCompleted.js';
-import Navbar from '../../components/reusable-components/Navbar.js';
-import AdCopyProfile from './AdCopyProfile.js';
+import Navbar from '../reusable-components/Navbar.js';
 import Footer from 'components/reusable-components/Footer.js';
-import EssentialTasks from './EssentialTasks.js';
+import EssentialsImage from './EssentialsImage.js';
+import styled from 'styled-components';
 
-const MainContainer = styled.main`
+const Container = styled.main`
   min-height: 90vh;
   background-color: white;
   /* grid-template-columns: 1fr; */
@@ -24,7 +21,6 @@ const MainContainer = styled.main`
     margin: 0 50px 0 50px;
   }
 `;
-
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -36,21 +32,16 @@ const Grid = styled.div`
   }
 `;
 
-const Profile = () => {
+const Essentials = () => {
   return (
-    <>
-      <MainContainer>
-        <Navbar />
-        <Grid>
-          <AdCopyProfile />
-          <ProfileImage />
-          <TodoCompleted />
-          <EssentialTasks />
-        </Grid>
+    <Container>
+      <Navbar />
+      <Grid>
+        <EssentialsImage />
         <Footer />
-      </MainContainer>
-    </>
+      </Grid>
+    </Container>
   );
 };
 
-export default Profile;
+export default Essentials;

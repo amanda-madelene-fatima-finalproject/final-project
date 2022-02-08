@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Headline = styled.h1`
   font-size: 30px;
   font-weight: 800;
-  width: 400px;
+  width: 300px;
 
   @media (min-width: 768px) {
     font-size: 60px;
-  font-weight: 900;
-  width: 600px;
+    font-weight: 900;
+    width: 600px;
   }
 `;
 
@@ -19,11 +19,11 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   /* height: 400px; */
-  width: 400px; 
+  width: 400px;
   /* margin: 0 auto; */
 
   @media (min-width: 768px) {
-    width: 700px; 
+    width: 700px;
   }
 `;
 

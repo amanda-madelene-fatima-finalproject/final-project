@@ -2,13 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const CounterText = styled.p`
-  margin-top: 50px;
-  span {
-    color: #ef737d;
-    font-weight: bold;
-  }
-`;
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -31,18 +24,35 @@ const Section = styled.section`
   border-radius: 10px;
 `;
 
-const TodoCompleted = () => {
-  const amountTasks = useSelector((store) => store.todo.items.length);
+const EssentialTask = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  text-align: left;
+  color: #ef737d;
+  font-size: 15px;
+  font-weight: 500;
+`;
+
+const EssentialTasks = () => {
+  const essentialTasks = useSelector((store) => store.todo.essentialTasks);
+  const essentialTasksKeys = Object.keys(essentialTasks);
+  console.log(essentialTasks);
 
   return (
     <Section>
-      <h2>Keep up the good work!</h2>
+      <h2>Essential Tasks follow up:</h2>
+      <h3>Have you remembered to do all the daily essential tasks?</h3>
+      <p>Let's have a look!</p>
 
-      <CounterText>
-        You have completed <span>{amountTasks}</span> tasks today<span>!</span>
-      </CounterText>
+      {essentialTasksKeys.map((key) => (
+        <div key={key}>
+          <EssentialTask>
+            {key}: {essentialTasks[key].toString()}
+          </EssentialTask>
+        </div>
+      ))}
     </Section>
   );
 };
 
-export default TodoCompleted;
+export default EssentialTasks;

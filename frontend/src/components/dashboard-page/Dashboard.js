@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import TodoList from "./TodoList";
-import Footer from "components/reusable-components/Footer.js";
-import DashboardImage from "../dashboard-page/DashboardImage.js";
-import AdCopyDashboard from "../../components/dashboard-page/AdCopyDashboard.js";
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import TodoList from './TodoList';
+import Footer from 'components/reusable-components/Footer.js';
+import DashboardImage from '../dashboard-page/DashboardImage.js';
+import AdCopyDashboard from '../../components/dashboard-page/AdCopyDashboard.js';
 // import Quotes from "../dashboard-page/Quotes.js";
-import Navbar from "components/reusable-components/Navbar.js";
-import LoadingIndicator from "components/LoadingIndicator.js";
+import Navbar from 'components/reusable-components/Navbar.js';
+import LoadingIndicator from 'components/LoadingIndicator.js';
 //import EditTask from './EditTask.js';
-import Quotes from "./Quotes.js";
+import Quotes from './Quotes.js';
 
 //--------- STYLED COMPONENTS ----------//
 const MainContainer = styled.main`
@@ -34,26 +34,13 @@ const MainContainer = styled.main`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  /* row-gap: 40px; */
-  /* align-items: center;
-  justify-content: center; */
+  align-items: center;
+  justify-content: center;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-
-const TodoWrap = styled.div`
- 
-  align-items: center;
-  justify-content: center;
-
-  @media (min-width: 768px) {
-   
-  }
-`;
-
-
 
 const Dashboard = () => {
   //----------- SELECTORS ----------//
@@ -71,7 +58,7 @@ const Dashboard = () => {
     // Once you are in the dashboard, the accessToken is set to true because the user has first logged in
     // so this condition right now, only executes when we refresh the page
     if (!accessToken) {
-      navigate("/");
+      navigate('/');
     }
   }, [accessToken, navigate]);
 

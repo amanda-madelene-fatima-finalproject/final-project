@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
-import AddTodo from "./AddTodo";
-import TodoItem from "./TodoItem.js";
-import { getTasks } from "../../reducers/todo";
-import TodoCount from "../dashboard-page/TodoCount.js";
-import AllTasksButton from "./AllTasksButton.js";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import AddTodo from './AddTodo';
+import TodoItem from './TodoItem.js';
+import { getTasks } from '../../reducers/todo';
+import TodoCount from '../dashboard-page/TodoCount.js';
+import AllTasksButton from './AllTasksButton.js';
 // import Container from "@material-ui/core/Container";
-import { Typography } from "@material-ui/core";
-import { todo } from "../../reducers/todo";
+// import { Typography } from '@material-ui/core';
+import { todo } from '../../reducers/todo';
 // import EssentialTodoItem from "./EssentialTodoItem";
-
 
 //--------- STYLED COMPONENTS ----------//
 
@@ -20,24 +19,52 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* padding: 40px; */
+  padding: 20px;
   /* border: solid 1px black; */
   border-radius: 50px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+  min-height: 200px;
+  max-width: 260px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
 `;
 
 const Essential = styled.div`
-display: flex;
+  display: flex;
   justify-content: left;
   align-items: center;
-  height: 60px;
-  
-`
+  height: 30px;
+  margin: 0;
+`;
 
+const EssTask = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  text-align: left;
+  color: #ef737d;
+`;
+
+const SubHeading = styled.h4`
+  font-family: 'Poppins', sans-serif;
+  margin: 20px 0;
+`;
+
+const Typography = styled.p`
+  /* display: flex;
+  flex-direction: row;
+  align-items: center; */
+  font-size: 13px;
+  font-weight: 500;
+`;
 //const Tasks = styled.div``;
 
 const TodoList = () => {
-
   //----------- SELECTORS ----------//
   const todoItems = useSelector((store) => store.todo.items);
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -46,7 +73,7 @@ const TodoList = () => {
 
   //--------- OBJECT.KEYS METHOD----------//
   // Method that converts the essentialTasks object to an array so we can iterate through it below
-  const essentialTasksKeys = Object.keys(essentialTasks); 
+  const essentialTasksKeys = Object.keys(essentialTasks);
   // console.log(essentialTasksKeys)
 
   //--------- DISPATCH----------//
@@ -61,43 +88,51 @@ const TodoList = () => {
   }, [dispatch, accessToken, userId]);
 
   const onToggleEssentialTask = (item) => {
-    console.log(item)
-    dispatch(todo.actions.toggleEssentialTasks(item)) 
+    console.log(item);
+    dispatch(todo.actions.toggleEssentialTasks(item));
   };
-
-
+  const textEssentialTasks = (item) => {
+    if (item === 'Hydrate') {
+      return 'Drink at least 5 glasses of water.';
+    } else if (item === 'Move') {
+      return "Move your body, let's dance!";
+    } else if (item === 'Break') {
+      return 'Remember to take breaks.';
+    } else if (item === 'Sleep') {
+      return "Prioritize sleep, it's important.";
+    } else if (item === 'Nature') {
+      return 'Spend time in nature, it heals.';
+    }
+  };
   return (
     // <Container maxWidth={false} disableGutters={true}>
-      <Wrapper>
-        <AddTodo />
-        <div>
-            <h2>Essential Tasks</h2>
-            <Typography>
-            {essentialTasksKeys.map((item) => ( 
-              <Essential key={item}> 
+    <Wrapper>
+      <AddTodo />
+      <div>
+        <SubHeading>Daily Essentials</SubHeading>
+        <Typography>
+          {essentialTasksKeys.map((item) => (
+            <Essential key={item}>
               <StyledCheckBox
-                className='checkbox'
-                type='checkbox'
+                className="checkbox"
+                type="checkbox"
                 checked={essentialTasks[item].done} //this gives us the value of the key selected: true or false
                 onChange={() => onToggleEssentialTask(item)} //passing the key selected here (like hydrate or exercise or break etc)
               />
-              <p>{item}</p> 
-              
-              </Essential>
-            ))}
-            </Typography>
-          
-          
-
-          <Typography variant="h4">
-            {todoItems.map((item) => (
-              <TodoItem data={item} />
-            ))}
-          </Typography>
-        </div>
-        <AllTasksButton />
-        <TodoCount />
-      </Wrapper>
+              <EssTask>{textEssentialTasks(item)}</EssTask>
+            </Essential>
+          ))}
+        </Typography>
+        <SubHeading>Your Tasks</SubHeading>
+        <Typography>
+          {todoItems.map((item) => (
+            <TodoItem data={item} />
+          ))}
+        </Typography>
+      </div>
+      <AllTasksButton />
+      <TodoCount />
+    </Wrapper>
     // </Container>
   );
 };
@@ -110,9 +145,10 @@ const StyledCheckBox = styled.input`
   margin: 0;
   font: inherit;
   color: black;
+  margin: 0 20px 0 0;
   width: 0.7em;
   height: 0.7em;
-  border: 0.10em solid #ef737d;
+  border: 0.1em solid #ef737d;
   border-radius: 1em;
   transform: translateY(-0.075em);
   display: grid;
@@ -132,16 +168,16 @@ const StyledCheckBox = styled.input`
   p {
     margin-right: 20px;
   }
-  @media (max-width: 500px) {
-    width: 1.2em;
-    height: 1.2em;
-  }`
-
-const TodoText = styled.p`
-font-size: 13px;
-font-weight: bold;
+  @media (max-width: 768px) {
+    width: 1em;
+    height: 1em;
+  }
 `;
 
+const TodoText = styled.p`
+  font-size: 13px;
+  font-weight: bold;
+`;
 
-//Link to understand the essentialTasksKeys 
+//Link to understand the essentialTasksKeys
 //https://attacomsian.com/blog/javascript-iterate-objects#:~:text=keys()%20Method-,The%20Object.,the%20value%20of%20each%20property.
