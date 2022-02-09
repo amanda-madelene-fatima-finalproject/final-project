@@ -6,9 +6,13 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
-  width: 600px;
+
   margin: 0 auto;
+
+  @media (min-width: 768px) {
+    height: 500px;
+    width: 600px;
+  }
 `;
 
 const Headline = styled.h1`

@@ -11,6 +11,9 @@ import { user, userAccess } from '../../reducers/user';
 const Label = styled.label`
   font-family: 'Poppins', sans-serif;
   padding: 3px;
+  color: white;
+  font-weight: 600;
+  padding-top: 10px;
 `;
 
 const LoginContainer = styled.section`
@@ -102,11 +105,36 @@ const LinkText = styled.div`
   justify-content: center;
   text-align: center;
   margin: 0 auto;
-  border-top: 1px solid #b4b2b2;
+  margin-bottom: 20px;
+  border-bottom: 1px dotted white;
+  /* border-top: 1px solid #b4b2b2; */
   padding: 10px;
   p {
     margin: 5px;
   }
+`;
+
+const Div = styled.div`
+  /* width: 100px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
+const PButton = styled.p`
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0 10px;
+`;
+
+const PText = styled.p`
+  color: white;
+  font-style: italic;
+  /* font-weight: 700; */
 `;
 
 const Login = () => {
@@ -153,13 +181,99 @@ const Login = () => {
       <Wrapper>
         {mode === 'signin' ? (
           <LinkText>
+            <PText>First time here? </PText>
+            <Div>
+              <PButton onClick={() => setMode('signup')}>Sign Up</PButton>
+            </Div>
+          </LinkText>
+        ) : (
+          <LinkText>
+            <PText>Already have an account? </PText>
+            <Div>
+              <PButton
+                onClick={() => {
+                  setMode('signin');
+                  dispatch(user.actions.setError(null));
+                  setUsername('');
+                  setPassword('');
+                }}
+              >
+                Sign In
+              </PButton>
+            </Div>
+          </LinkText>
+        )}
+        <Form
+          onSubmit={(event) =>
+            onFormSubmit(event, name, username, password, mode)
+          }
+        >
+          {mode === 'signup' ? (
+            <>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                title="name"
+                id="name"
+                type="text"
+                placeholder="Jane Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </>
+          ) : null}
+
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            type="text"
+            placeholder="janedoe1"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          {mode === 'signup' ? (
+            <Button type="submit">Sign Up</Button>
+          ) : (
+            <Button type="submit">Sign In</Button>
+          )}
+        </Form>
+      </Wrapper>
+    </LoginContainer>
+  );
+};
+
+export default Login;
+
+/*----PREVIOUS CODE----- */
+{
+  /* const onFormSubmit = (event, name, username, password, mode) => {
+    event.preventDefault();
+    dispatch(userAccess(name, username, password, mode));
+  }; */
+}
+{
+  /* 
+  return (
+    <LoginContainer>
+      <Wrapper>
+        {mode === "signin" ? (
+          <LinkText>
             <p>First time here? </p>
             <p
-              onClick={() => setMode('signup')}
+              onClick={() => setMode("signup")}
               style={{
-                fontWeight: '700',
-                cursor: 'pointer',
-                textDecoration: 'underline',
+                fontWeight: "700",
+                cursor: "pointer",
+                textDecoration: "underline",
               }}
             >
               Create an account
@@ -170,15 +284,15 @@ const Login = () => {
             <p>Already have an account? </p>
             <p
               onClick={() => {
-                setMode('signin');
+                setMode("signin");
                 dispatch(user.actions.setError(null));
-                setUsername('');
-                setPassword('');
+                setUsername("");
+                setPassword("");
               }}
               style={{
-                fontWeight: '700',
-                cursor: 'pointer',
-                textDecoration: 'underline',
+                fontWeight: "700",
+                cursor: "pointer",
+                textDecoration: "underline",
               }}
             >
               Log in
@@ -191,8 +305,8 @@ const Login = () => {
             <RadioInput
               id="signup"
               type="radio"
-              checked={mode === 'signup'}
-              onChange={() => setMode('signup')}
+              checked={mode === "signup"}
+              onChange={() => setMode("signup")}
             />
           </RadioButton>
 
@@ -202,8 +316,8 @@ const Login = () => {
               title="signin"
               id="signin"
               type="radio"
-              checked={mode === 'signin'}
-              onChange={() => setMode('signin')}
+              checked={mode === "signin"}
+              onChange={() => setMode("signin")}
             />
           </RadioButton>
         </RadioContainer>
@@ -213,14 +327,21 @@ const Login = () => {
             onFormSubmit(event, name, username, password, mode)
           }
         >
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            type="text"
-            placeholder="Jane Doe"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+
+          {mode === "signup" ? (
+            <>
+             <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Jane Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </>
+
+
+             ) : (null)}
 
           <Label htmlFor="username">Username</Label>
           <Input
@@ -244,6 +365,5 @@ const Login = () => {
       </Wrapper>
     </LoginContainer>
   );
-};
-
-export default Login;
+}; */
+}

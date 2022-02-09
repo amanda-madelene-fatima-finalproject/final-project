@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ProfileImage from './ProfileImage.js';
 import TodoCompleted from 'components/profile-page/TodoCompleted.js';
@@ -6,7 +6,7 @@ import Navbar from '../../components/reusable-components/Navbar.js';
 import AdCopyProfile from './AdCopyProfile.js';
 import Footer from 'components/reusable-components/Footer.js';
 import EssentialTasks from './EssentialTasks.js';
-
+import Loader from '../reusable-components/Loader.js';
 const MainContainer = styled.main`
   min-height: 90vh;
   background-color: white;
@@ -37,18 +37,29 @@ const Grid = styled.div`
 `;
 
 const Profile = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  });
+
   return (
     <>
-      <MainContainer>
-        <Navbar />
-        <Grid>
-          <AdCopyProfile />
-          <ProfileImage />
-          <TodoCompleted />
-          <EssentialTasks />
-        </Grid>
-        <Footer />
-      </MainContainer>
+      {loading == true ? (
+        <Loader />
+      ) : (
+        <MainContainer>
+          <Navbar />
+          <Grid>
+            <AdCopyProfile />
+            <ProfileImage />
+            <TodoCompleted />
+            <EssentialTasks />
+          </Grid>
+          <Footer />
+        </MainContainer>
+      )}
     </>
   );
 };

@@ -47,7 +47,7 @@ const EssentialTasks = () => {
       {essentialTasksKeys.map((key) => (
         <div key={key}>
           <EssentialTask>
-            {key}: {essentialTasks[key].toString()}
+            {key}: {essentialTasks[key] !== false ? 'true' : 'false'}
           </EssentialTask>
         </div>
       ))}

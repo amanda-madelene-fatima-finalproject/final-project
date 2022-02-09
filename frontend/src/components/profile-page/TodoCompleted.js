@@ -35,13 +35,16 @@ const TodoCompleted = () => {
   const amountTasks = useSelector((store) => store.todo.items.length);
 
   return (
-    <Section>
-      <h2>Keep up the good work!</h2>
+    <>
+      <Section>
+        <h2>Keep up the good work!</h2>
 
-      <CounterText>
-        You have completed <span>{amountTasks}</span> tasks today<span>!</span>
-      </CounterText>
-    </Section>
+        <CounterText>
+          You have completed <span>{amountTasks}</span> tasks today
+          <span>!</span>
+        </CounterText>
+      </Section>
+    </>
   );
 };
 

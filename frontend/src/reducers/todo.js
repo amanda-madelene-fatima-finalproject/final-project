@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { API_URL } from 'utils/urls';
 import { ui } from './ui.js';
+import { isDoneToday } from '../components/dashboard-page/TodoList.js';
+import moment from 'moment';
 
 export const todo = createSlice({
   name: 'todo',
@@ -13,11 +15,6 @@ export const todo = createSlice({
       Break: false,
       Sleep: false,
       Nature: false,
-      // 'Drink at least 5 glasses of water!': false,
-      // 'Move your body; walk, run, dance!': false,
-      // 'Remember to teak breaks': false,
-      // 'Sleep is important, make it a priority!': false,
-      // 'Spend time in nature, it heals!': false,
     },
 
     // category: null,
@@ -52,7 +49,11 @@ export const todo = createSlice({
       const importantTasks = Object.keys(essentialTasks).find(
         (key) => key === action.payload //importantTask will be always the same as the payload (like nature === nature)
       );
-      essentialTasks[importantTasks] = !essentialTasks[importantTasks]; // here we change the value from false to true
+      essentialTasks[importantTasks] = isDoneToday(
+        essentialTasks[importantTasks]
+      )
+        ? false
+        : new Date(); // here we change the value from false to true
       // console.log(essentialTasks);
       // console.log(importantTasks); // is the same key as the payload
     },

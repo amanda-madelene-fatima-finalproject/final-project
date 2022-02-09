@@ -6,6 +6,7 @@ import TodoItem from './TodoItem.js';
 import { getTasks } from '../../reducers/todo';
 import TodoCount from '../dashboard-page/TodoCount.js';
 import AllTasksButton from './AllTasksButton.js';
+import moment from 'moment';
 // import Container from "@material-ui/core/Container";
 // import { Typography } from '@material-ui/core';
 import { todo } from '../../reducers/todo';
@@ -64,6 +65,10 @@ const Typography = styled.p`
 `;
 //const Tasks = styled.div``;
 
+export const isDoneToday = (date) => {
+  return moment(date).isSame(moment(), 'day');
+};
+
 const TodoList = () => {
   //----------- SELECTORS ----------//
   const todoItems = useSelector((store) => store.todo.items);
@@ -104,6 +109,7 @@ const TodoList = () => {
       return 'Spend time in nature, it heals.';
     }
   };
+
   return (
     // <Container maxWidth={false} disableGutters={true}>
     <Wrapper>
@@ -116,7 +122,7 @@ const TodoList = () => {
               <StyledCheckBox
                 className="checkbox"
                 type="checkbox"
-                checked={essentialTasks[item].done} //this gives us the value of the key selected: true or false
+                checked={isDoneToday(essentialTasks[item])} //this gives us the value of the key selected: true or false
                 onChange={() => onToggleEssentialTask(item)} //passing the key selected here (like hydrate or exercise or break etc)
               />
               <EssTask>{textEssentialTasks(item)}</EssTask>

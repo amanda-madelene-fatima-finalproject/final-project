@@ -38,8 +38,8 @@ const Essentials = () => {
       <Navbar />
       <Grid>
         <EssentialsImage />
-        <Footer />
       </Grid>
+      <Footer />
     </Container>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { Link, animateScroll as scroll } from 'react-scroll';
+// import { Link, animateScroll as scroll } from 'react-scroll';
 
 import logoImg from '../../assets/logo.svg';
-const NavbarWelcome = () => {
+const NavbarNotUser = () => {
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
   const [isOpen, setIsOpen] = useState(false);
@@ -27,16 +27,7 @@ const NavbarWelcome = () => {
         <MenuLink href="/essentialinfo">Essentials</MenuLink>
         <MenuLink href="/aboutus">About</MenuLink>
         <Button size="small" color="secondary" variant="outlined" href="/">
-          <Link
-            activeClass="active"
-            to="name"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-          >
-            Sign In
-          </Link>
+          Sign In
         </Button>
       </Menu>
     </Nav>
@@ -113,6 +104,21 @@ const MenuLink = styled.a`
   }
 `;
 
+const ButtonLink = styled.a`
+  font-family: 'Poppins', sans-serif;
+  /* padding: 1rem 2rem; */
+  /* cursor: pointer;
+  text-align: center; */
+  text-decoration: none;
+  color: #e5e5e5;
+  /* transition: all 0.3s ease-in;
+  font-size: 0.9rem;
+
+  &:hover {
+    color: #e5e5e5;
+  }  */
+`;
+
 const Logo = styled.a`
   padding: 1rem 0;
   color: #7b7fda;
@@ -126,4 +132,4 @@ const Logo = styled.a`
   }
 `;
 
-export default NavbarWelcome;
+export default NavbarNotUser;

@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import Navbar from "../reusable-components/Navbar.js";
+import NavbarNotUser from '../../components/footer-page/NavbarNotUser.js';
 
 //--------- STYLED COMPONENTS ----------//
 const HeadingOne = styled.h1``;
@@ -34,7 +34,7 @@ const Article = styled.article``;
 const AboutUs = () => {
   return (
     <MainContainer>
-      <Navbar />
+      <NavbarNotUser />
       <HeadingOne>Who are we?</HeadingOne>
 
       <Grid>
