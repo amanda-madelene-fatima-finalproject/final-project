@@ -101,7 +101,7 @@ export const getTasks = (accessToken, userId) => {
             dispatch(todo.actions.setItems(data.response));
             dispatch(todo.actions.setError(null));
             // dispatch(add.actions.setCategory(data.response.category));
-          }, 2000);
+          }, 5000);
         } else {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));

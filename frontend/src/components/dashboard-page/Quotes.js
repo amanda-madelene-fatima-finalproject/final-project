@@ -1,7 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { API_URL } from '../../utils/urls.js';
 import styled from 'styled-components';
 
+const Quotes = () => {
+  const [quote, setQuote] = useState([]);
+  const [randomQuote, setRandomQuote] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('https://type.fit/api/quotes');
+      const data = await response.json();
+      setQuote(data);
+      let randIndex = Math.floor(Math.random() * data.length);
+      setRandomQuote(data[randIndex]);
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <Container>
+      {randomQuote ? (
+        <>
+          <Wrapper>
+            <QuoteText>&quot;{randomQuote.text}&quot;</QuoteText>{' '}
+          </Wrapper>
+        </>
+      ) : (
+        <h2>Loading</h2>
+      )}
+    </Container>
+  );
+};
+
+export default Quotes;
+
+//--------- STYLED COMPONENTS ----------//
 const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -38,35 +70,3 @@ const QuoteText = styled.p`
   color: black;
   font-weight: bold;
 `;
-
-const Quotes = () => {
-  const [quote, setQuote] = useState([]);
-  const [randomQuote, setRandomQuote] = useState({});
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://type.fit/api/quotes');
-      const data = await response.json();
-      setQuote(data);
-      let randIndex = Math.floor(Math.random() * data.length);
-      setRandomQuote(data[randIndex]);
-    }
-    fetchData();
-  }, []);
-
-  return (
-    <Container>
-      {randomQuote ? (
-        <>
-          <Wrapper>
-            <QuoteText>&quot;{randomQuote.text}&quot;</QuoteText>{' '}
-          </Wrapper>
-        </>
-      ) : (
-        <h2>Loading</h2>
-      )}
-    </Container>
-  );
-};
-
-export default Quotes;

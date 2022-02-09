@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Image from '../reusable-components/Image.js';
 import EssentialsImg from '../../assets/essentials.png';
 

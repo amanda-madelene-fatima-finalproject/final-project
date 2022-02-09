@@ -1,9 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../reusable-components/Navbar.js';
 import Footer from 'components/reusable-components/Footer.js';
 import EssentialsImage from './EssentialsImage.js';
 import styled from 'styled-components';
+import Loader from 'components/reusable-components/Loader.js';
+import EssentialContainerBox from './EssentialContainerBox.js';
 
+const Essentials = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  });
+  return (
+    <>
+      {loading == true ? (
+        <Loader />
+      ) : (
+        <Container>
+          <Navbar />
+          <Grid>
+            <EssentialsImage />
+            <EssentialContainerBox />
+          </Grid>
+          <Footer />
+        </Container>
+      )}
+    </>
+  );
+};
+
+export default Essentials;
+
+//--------- STYLED COMPONENTS ----------//
 const Container = styled.main`
   min-height: 90vh;
   background-color: white;
@@ -31,17 +61,3 @@ const Grid = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-
-const Essentials = () => {
-  return (
-    <Container>
-      <Navbar />
-      <Grid>
-        <EssentialsImage />
-      </Grid>
-      <Footer />
-    </Container>
-  );
-};
-
-export default Essentials;

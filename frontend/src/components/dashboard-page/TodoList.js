@@ -1,69 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import AddTodo from './AddTodo';
-import TodoItem from './TodoItem.js';
-import { getTasks } from '../../reducers/todo';
+
 import TodoCount from '../dashboard-page/TodoCount.js';
+import AddTodo from './AddTodo';
 import AllTasksButton from './AllTasksButton.js';
+import TodoItem from './TodoItem.js';
+
+import { getTasks } from '../../reducers/todo';
+import { todo } from '../../reducers/todo';
+
 import moment from 'moment';
 // import Container from "@material-ui/core/Container";
 // import { Typography } from '@material-ui/core';
-import { todo } from '../../reducers/todo';
 // import EssentialTodoItem from "./EssentialTodoItem";
-
-//--------- STYLED COMPONENTS ----------//
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  /* border: solid 1px black; */
-  border-radius: 50px;
-  /* background-color: whitesmoke; */
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
-
-  min-height: 200px;
-  max-width: 260px;
-  margin: 50px auto;
-  background: white;
-  border-radius: 10px;
-`;
-
-const Essential = styled.div`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  height: 30px;
-  margin: 0;
-`;
-
-const EssTask = styled.p`
-  font-family: 'Poppins', sans-serif;
-  font-style: italic;
-  text-align: left;
-  color: #ef737d;
-`;
-
-const SubHeading = styled.h4`
-  font-family: 'Poppins', sans-serif;
-  margin: 20px 0;
-`;
-
-const Typography = styled.p`
-  /* display: flex;
-  flex-direction: row;
-  align-items: center; */
-  font-size: 13px;
-  font-weight: 500;
-`;
-//const Tasks = styled.div``;
 
 export const isDoneToday = (date) => {
   return moment(date).isSame(moment(), 'day');
@@ -143,6 +93,57 @@ const TodoList = () => {
   );
 };
 export default TodoList;
+
+//--------- STYLED COMPONENTS ----------//
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  /* border: solid 1px black; */
+  border-radius: 50px;
+  /* background-color: whitesmoke; */
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+  min-height: 200px;
+  max-width: 260px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
+`;
+
+const Essential = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 30px;
+  margin: 0;
+`;
+
+const EssTask = styled.p`
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  text-align: left;
+  color: #ef737d;
+`;
+
+const SubHeading = styled.h4`
+  font-family: 'Poppins', sans-serif;
+  margin: 20px 0;
+`;
+
+const Typography = styled.p`
+  /* display: flex;
+  flex-direction: row;
+  align-items: center; */
+  font-size: 13px;
+  font-weight: 500;
+`;
 
 const StyledCheckBox = styled.input`
   cursor: pointer;

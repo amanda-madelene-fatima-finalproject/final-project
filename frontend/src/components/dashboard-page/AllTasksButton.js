@@ -1,9 +1,26 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { todo } from '../../reducers/todo.js';
-// import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
+const AllTasksButton = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <Container>
+      <Button onClick={() => dispatch(todo.actions.completeAllTasks())}>
+        Complete All
+      </Button>
+
+      <Button onClick={() => dispatch(todo.actions.removeAllTasks())}>
+        Remove All
+      </Button>
+    </Container>
+  );
+};
+export default AllTasksButton;
+
+//--------- STYLED COMPONENTS ----------//
 const Container = styled.main`
   display: flex;
   margin-top: 20px;
@@ -24,22 +41,3 @@ const Button = styled.button`
     cursor: pointer;
   }
 `;
-
-// import Container from '@material-ui/core/Container';
-
-const AllTasksButton = () => {
-  const dispatch = useDispatch();
-
-  return (
-    <Container>
-      <Button onClick={() => dispatch(todo.actions.completeAllTasks())}>
-        Complete All
-      </Button>
-
-      <Button onClick={() => dispatch(todo.actions.removeAllTasks())}>
-        Remove All
-      </Button>
-    </Container>
-  );
-};
-export default AllTasksButton;

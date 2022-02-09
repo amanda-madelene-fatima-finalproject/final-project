@@ -2,6 +2,26 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+const TodoCompleted = () => {
+  const amountTasks = useSelector((store) => store.todo.items.length);
+
+  return (
+    <>
+      <Section>
+        <h2>Keep up the good work!</h2>
+
+        <CounterText>
+          You have completed <span>{amountTasks}</span> tasks today
+          <span>!</span>
+        </CounterText>
+      </Section>
+    </>
+  );
+};
+
+export default TodoCompleted;
+
+//--------- STYLED COMPONENTS ----------//
 const CounterText = styled.p`
   margin-top: 50px;
   span {
@@ -30,22 +50,3 @@ const Section = styled.section`
   background: white;
   border-radius: 10px;
 `;
-
-const TodoCompleted = () => {
-  const amountTasks = useSelector((store) => store.todo.items.length);
-
-  return (
-    <>
-      <Section>
-        <h2>Keep up the good work!</h2>
-
-        <CounterText>
-          You have completed <span>{amountTasks}</span> tasks today
-          <span>!</span>
-        </CounterText>
-      </Section>
-    </>
-  );
-};
-
-export default TodoCompleted;

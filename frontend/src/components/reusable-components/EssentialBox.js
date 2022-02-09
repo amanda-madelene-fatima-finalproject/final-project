@@ -1,29 +1,18 @@
+import React from 'react';
 import styled from 'styled-components';
 
-const InfoText = () => {
+const EssentialBox = (props) => {
+  const { text } = props;
   return (
-    <Container>
-      <Wrapper>
-        <QuoteText>
-          &quot; It is great to dream big, but the way to achieve big is to
-          start small &quot;
-        </QuoteText>
-      </Wrapper>
-    </Container>
+    <Wrapper>
+      <p>{text}</p>
+    </Wrapper>
   );
 };
 
-export default InfoText;
+export default EssentialBox;
 
 //--------- STYLED COMPONENTS ----------//
-const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* min-height: 90vh; */
-`;
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,11 +33,4 @@ const Wrapper = styled.div`
   margin: 50px auto;
   background: white;
   border-radius: 10px;
-`;
-
-const QuoteText = styled.p`
-  font-size: 16px;
-  padding: 20px;
-  color: black;
-  font-weight: bold;
 `;

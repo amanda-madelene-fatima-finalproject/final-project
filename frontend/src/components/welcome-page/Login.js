@@ -6,8 +6,123 @@ import styled from 'styled-components';
 // import { user } from "../../reducers/user"
 import { user, userAccess } from '../../reducers/user';
 
-//--------- STYLED COMPONENTS ----------//
+const Login = () => {
+  //----------- LOCAL STATES ----------//
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [mode, setMode] = useState('signup');
 
+  //----------- SELECTORS ----------//
+  const accessToken = useSelector((store) => store.user.accessToken);
+  const errorMessage = useSelector((store) => store.user.error);
+
+  //--------- DISPATCHES ----------//
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
+  useEffect(() => {
+    // This condition can be only true if the user has signed up first as the accessToken is generated when a newUser model is created in the database.
+    // Once the user has signed up, the accessToken is sent by the backend in the data response and updated in the redux store by the actions.
+    if (accessToken) {
+      navigate('/dashboard');
+    }
+  }, [accessToken, navigate]);
+
+  //--------- USEEFFECT FOR THE ERRORMESSAGE ----------//
+
+  useEffect(() => {
+    // This condition can be only true if the the data comming from the database when fetching is not success.
+    // If the user tries to sign in without having signed up first or if the username does not match the password, this function executes.
+    if (errorMessage) {
+      alert(errorMessage);
+    }
+  }, [errorMessage]);
+
+  const onFormSubmit = (event, name, username, password, mode) => {
+    event.preventDefault();
+    dispatch(userAccess(name, username, password, mode));
+  };
+
+  return (
+    <LoginContainer>
+      <Wrapper>
+        {mode === 'signin' ? (
+          <LinkText>
+            <PText>First time here? </PText>
+            <Div>
+              <PButton onClick={() => setMode('signup')}>Sign Up</PButton>
+            </Div>
+          </LinkText>
+        ) : (
+          <LinkText>
+            <PText>Already have an account? </PText>
+            <Div>
+              <PButton
+                onClick={() => {
+                  setMode('signin');
+                  dispatch(user.actions.setError(null));
+                  setUsername('');
+                  setPassword('');
+                }}
+              >
+                Sign In
+              </PButton>
+            </Div>
+          </LinkText>
+        )}
+        <Form
+          onSubmit={(event) =>
+            onFormSubmit(event, name, username, password, mode)
+          }
+        >
+          {mode === 'signup' ? (
+            <>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                title="name"
+                id="name"
+                type="text"
+                placeholder="Jane Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </>
+          ) : null}
+
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            type="text"
+            placeholder="janedoe1"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          {mode === 'signup' ? (
+            <Button type="submit">Sign Up</Button>
+          ) : (
+            <Button type="submit">Sign In</Button>
+          )}
+        </Form>
+      </Wrapper>
+    </LoginContainer>
+  );
+};
+
+export default Login;
+
+//--------- STYLED COMPONENTS ----------//
 const Label = styled.label`
   font-family: 'Poppins', sans-serif;
   padding: 3px;
@@ -136,234 +251,3 @@ const PText = styled.p`
   font-style: italic;
   /* font-weight: 700; */
 `;
-
-const Login = () => {
-  //----------- LOCAL STATES ----------//
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [mode, setMode] = useState('signup');
-
-  //----------- SELECTORS ----------//
-  const accessToken = useSelector((store) => store.user.accessToken);
-  const errorMessage = useSelector((store) => store.user.error);
-
-  //--------- DISPATCHES ----------//
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
-  useEffect(() => {
-    // This condition can be only true if the user has signed up first as the accessToken is generated when a newUser model is created in the database.
-    // Once the user has signed up, the accessToken is sent by the backend in the data response and updated in the redux store by the actions.
-    if (accessToken) {
-      navigate('/dashboard');
-    }
-  }, [accessToken, navigate]);
-
-  //--------- USEEFFECT FOR THE ERRORMESSAGE ----------//
-
-  useEffect(() => {
-    // This condition can be only true if the the data comming from the database when fetching is not success.
-    // If the user tries to sign in without having signed up first or if the username does not match the password, this function executes.
-    if (errorMessage) {
-      alert(errorMessage);
-    }
-  }, [errorMessage]);
-
-  const onFormSubmit = (event, name, username, password, mode) => {
-    event.preventDefault();
-    dispatch(userAccess(name, username, password, mode));
-  };
-
-  return (
-    <LoginContainer>
-      <Wrapper>
-        {mode === 'signin' ? (
-          <LinkText>
-            <PText>First time here? </PText>
-            <Div>
-              <PButton onClick={() => setMode('signup')}>Sign Up</PButton>
-            </Div>
-          </LinkText>
-        ) : (
-          <LinkText>
-            <PText>Already have an account? </PText>
-            <Div>
-              <PButton
-                onClick={() => {
-                  setMode('signin');
-                  dispatch(user.actions.setError(null));
-                  setUsername('');
-                  setPassword('');
-                }}
-              >
-                Sign In
-              </PButton>
-            </Div>
-          </LinkText>
-        )}
-        <Form
-          onSubmit={(event) =>
-            onFormSubmit(event, name, username, password, mode)
-          }
-        >
-          {mode === 'signup' ? (
-            <>
-              <Label htmlFor="name">Name</Label>
-              <Input
-                title="name"
-                id="name"
-                type="text"
-                placeholder="Jane Doe"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </>
-          ) : null}
-
-          <Label htmlFor="username">Username</Label>
-          <Input
-            id="username"
-            type="text"
-            placeholder="janedoe1"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          {mode === 'signup' ? (
-            <Button type="submit">Sign Up</Button>
-          ) : (
-            <Button type="submit">Sign In</Button>
-          )}
-        </Form>
-      </Wrapper>
-    </LoginContainer>
-  );
-};
-
-export default Login;
-
-/*----PREVIOUS CODE----- */
-{
-  /* const onFormSubmit = (event, name, username, password, mode) => {
-    event.preventDefault();
-    dispatch(userAccess(name, username, password, mode));
-  }; */
-}
-{
-  /* 
-  return (
-    <LoginContainer>
-      <Wrapper>
-        {mode === "signin" ? (
-          <LinkText>
-            <p>First time here? </p>
-            <p
-              onClick={() => setMode("signup")}
-              style={{
-                fontWeight: "700",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}
-            >
-              Create an account
-            </p>
-          </LinkText>
-        ) : (
-          <LinkText>
-            <p>Already have an account? </p>
-            <p
-              onClick={() => {
-                setMode("signin");
-                dispatch(user.actions.setError(null));
-                setUsername("");
-                setPassword("");
-              }}
-              style={{
-                fontWeight: "700",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}
-            >
-              Log in
-            </p>
-          </LinkText>
-        )}
-        <RadioContainer>
-          <RadioButton>
-            <Label htmlFor="signup">Signup</Label>
-            <RadioInput
-              id="signup"
-              type="radio"
-              checked={mode === "signup"}
-              onChange={() => setMode("signup")}
-            />
-          </RadioButton>
-
-          <RadioButton>
-            <Label htmlFor="sigin">Signin</Label>
-            <RadioInput
-              title="signin"
-              id="signin"
-              type="radio"
-              checked={mode === "signin"}
-              onChange={() => setMode("signin")}
-            />
-          </RadioButton>
-        </RadioContainer>
-
-        <Form
-          onSubmit={(event) =>
-            onFormSubmit(event, name, username, password, mode)
-          }
-        >
-
-          {mode === "signup" ? (
-            <>
-             <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Jane Doe"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </>
-
-
-             ) : (null)}
-
-          <Label htmlFor="username">Username</Label>
-          <Input
-            id="username"
-            type="text"
-            placeholder="janedoe1"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Wrapper>
-    </LoginContainer>
-  );
-}; */
-}

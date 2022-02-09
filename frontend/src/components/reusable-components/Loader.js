@@ -1,12 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../../animations/loading';
+import animationData from '../../animations/profile.json';
 import styled from 'styled-components';
-
-const LoaderWrapper = styled.div`
-  min-height: 100vh;
-  width: 100vw;
-`;
 
 const Loader = () => {
   const defaultOptions = {
@@ -20,9 +15,19 @@ const Loader = () => {
 
   return (
     <LoaderWrapper>
-      <Lottie options={defaultOptions} height={800} width={800} />
+      <Lottie options={defaultOptions} height={500} width={500} />
     </LoaderWrapper>
   );
 };
 
 export default Loader;
+
+//--------- STYLED COMPONENTS ----------//
+const LoaderWrapper = styled.div`
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+`;

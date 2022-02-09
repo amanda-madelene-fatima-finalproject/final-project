@@ -1,6 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const AdCopy = (props) => {
+  const { text } = props;
+
+  return (
+    <Container>
+      <Headline>{text}</Headline>
+    </Container>
+  );
+};
+
+export default AdCopy;
+
+//--------- STYLED COMPONENTS ----------//
 const Headline = styled.h1`
   font-size: 30px;
   font-weight: 800;
@@ -26,17 +39,3 @@ const Container = styled.section`
     width: 700px;
   }
 `;
-
-const Text = styled.div``;
-
-const AdCopy = (props) => {
-  const { text } = props;
-
-  return (
-    <Container>
-      <Headline>{text}</Headline>
-    </Container>
-  );
-};
-
-export default AdCopy;

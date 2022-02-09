@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Login from './Login';
@@ -7,6 +7,39 @@ import AdCopyWelcome from './AdCopyWelcome.js';
 import WelcomeImage from './WelcomeImage.js';
 import Footer from '../reusable-components/Footer.js';
 import InfoText from './InfoText.js';
+import WelcomeLoader from './WelcomeLoader.js';
+
+const Welcome = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  });
+
+  return (
+    <>
+      {loading == true ? (
+        <WelcomeLoader />
+      ) : (
+        <Container>
+          <NavbarWelcome />
+          <Grid>
+            <AdCopyWelcome />
+            <WelcomeImage />
+            <Login />
+            <InfoText />
+          </Grid>
+          <Footer />
+        </Container>
+      )}
+    </>
+  );
+};
+
+export default Welcome;
+
+//--------- STYLED COMPONENTS ----------//
 const Container = styled.main`
   min-height: 90vh;
   background-color: white;
@@ -28,20 +61,3 @@ const Grid = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-
-const Welcome = () => {
-  return (
-    <Container>
-      <NavbarWelcome />
-      <Grid>
-        <AdCopyWelcome />
-        <WelcomeImage />
-        <Login />
-        <InfoText />
-      </Grid>
-      <Footer />
-    </Container>
-  );
-};
-
-export default Welcome;

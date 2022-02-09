@@ -1,15 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-
-const CounterText = styled.p`
-  margin-top: 50px;
-  font-family: "Poppins";
-  span {
-    color: #ef737d;
-    font-weight: bold;
-  }
-`;
+import React from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const TodoCount = () => {
   const uncompleteTodos = useSelector(
@@ -26,3 +17,13 @@ const TodoCount = () => {
 };
 
 export default TodoCount;
+
+//--------- STYLED COMPONENTS ----------//
+const CounterText = styled.p`
+  margin-top: 50px;
+  font-family: 'Poppins';
+  span {
+    color: #ef737d;
+    font-weight: bold;
+  }
+`;

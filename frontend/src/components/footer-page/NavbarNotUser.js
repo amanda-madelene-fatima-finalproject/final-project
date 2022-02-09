@@ -34,6 +34,7 @@ const NavbarNotUser = () => {
   );
 };
 
+//--------- STYLED COMPONENTS ----------//
 const Nav = styled.div`
   padding: 0 2rem;
   display: flex;

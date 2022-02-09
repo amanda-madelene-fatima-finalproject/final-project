@@ -1,12 +1,70 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import EditModal from './EditModal.js';
 import moment from 'moment';
-// import { Button } from '@material-ui/core';
 
+import EditModal from './EditModal.js';
 import { deleteTasks, toggleTasks } from '../../reducers/todo';
 
+const TodoItem = ({ data }) => {
+  //----------- SELECTORS ----------//
+  const accessToken = useSelector((store) => store.user.accessToken);
+
+  // const userId = useSelector((store) => store.user.userId);
+  //const taskId = useSelector((store) => store.todo.taskId);
+
+  //--------- DISPATCHES ----------//
+  const dispatch = useDispatch();
+
+  //--------- USEEFFECT FOR DISPATCHING THE GetTASKS THUNK  ----------//
+
+  const onDeleteTasks = (accessToken, taskId) => {
+    dispatch(deleteTasks(accessToken, taskId));
+  };
+
+  const onToggleTasks = (accessToken, taskId, done) => {
+    dispatch(toggleTasks(accessToken, taskId, done));
+  };
+
+  return (
+    <Container>
+      <Section>
+        <StyledCheckBox
+          className="checkbox"
+          type="checkbox"
+          checked={data.done}
+          onChange={() => onToggleTasks(accessToken, data._id, data.done)}
+        />
+
+        <List>
+          <TodoText className={data.done ? 'complete-todo' : 'uncomplete-todo'}>
+            {data.task}
+          </TodoText>
+          <Div>
+            <TimeText>
+              <span>
+                <i className="fas fa-calendar-day"></i>
+              </span>
+              {moment(data.createdAt).format('ddd D MMM')}
+            </TimeText>
+            <CatWrap>
+              <CategoryText>{data.category}</CategoryText>
+            </CatWrap>
+          </Div>
+        </List>
+      </Section>
+
+      <Section>
+        <EditModal data={data} />
+        <Button onClick={() => onDeleteTasks(accessToken, data._id)}>
+          <i className="fas fa-trash"></i>
+        </Button>
+      </Section>
+    </Container>
+  );
+};
+
+//--------- STYLED COMPONENTS ----------//
 const Container = styled.section`
   font-family: 'Poppins', sans-serif;
   display: flex;
@@ -101,65 +159,6 @@ const Button = styled.button`
     cursor: pointer;
   }
 `;
-
-const TodoItem = ({ data }) => {
-  //----------- SELECTORS ----------//
-  const accessToken = useSelector((store) => store.user.accessToken);
-
-  // const userId = useSelector((store) => store.user.userId);
-  //const taskId = useSelector((store) => store.todo.taskId);
-
-  //--------- DISPATCHES ----------//
-  const dispatch = useDispatch();
-
-  //--------- USEEFFECT FOR DISPATCHING THE GetTASKS THUNK  ----------//
-
-  const onDeleteTasks = (accessToken, taskId) => {
-    dispatch(deleteTasks(accessToken, taskId));
-  };
-
-  const onToggleTasks = (accessToken, taskId, done) => {
-    dispatch(toggleTasks(accessToken, taskId, done));
-  };
-
-  return (
-    <Container>
-      <Section>
-        <StyledCheckBox
-          className="checkbox"
-          type="checkbox"
-          checked={data.done}
-          onChange={() => onToggleTasks(accessToken, data._id, data.done)}
-        />
-
-        <List>
-          <TodoText className={data.done ? 'complete-todo' : 'uncomplete-todo'}>
-            {data.task}
-          </TodoText>
-          <Div>
-            <TimeText>
-              <span>
-                <i className="fas fa-calendar-day"></i>
-              </span>
-              {moment(data.createdAt).format('ddd D MMM')}
-            </TimeText>
-            <CatWrap>
-              <CategoryText>{data.category}</CategoryText>
-            </CatWrap>
-          </Div>
-        </List>
-      </Section>
-
-      <Section>
-        <EditModal data={data} />
-
-        <Button onClick={() => onDeleteTasks(accessToken, data._id)}>
-          <i className="fas fa-trash"></i>
-        </Button>
-      </Section>
-    </Container>
-  );
-};
 
 const StyledCheckBox = styled.input`
   cursor: pointer;

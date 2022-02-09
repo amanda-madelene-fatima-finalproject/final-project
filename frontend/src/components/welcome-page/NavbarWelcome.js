@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { Link, animateScroll as scroll } from 'react-scroll';
 
 import logoImg from '../../assets/logo.svg';
+
 const NavbarWelcome = () => {
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
@@ -43,6 +44,9 @@ const NavbarWelcome = () => {
   );
 };
 
+export default NavbarWelcome;
+
+//--------- STYLED COMPONENTS ----------//
 const Nav = styled.div`
   padding: 0 2rem;
   display: flex;
@@ -125,5 +129,3 @@ const Logo = styled.a`
     font-size: 1.3rem;
   }
 `;
-
-export default NavbarWelcome;

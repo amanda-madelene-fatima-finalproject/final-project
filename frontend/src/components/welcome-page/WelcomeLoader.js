@@ -1,9 +1,9 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../../animations/404.json';
+import animationData from '../../animations/todo.json';
 import styled from 'styled-components';
 
-const NotFound = () => {
+const WelcomeLoader = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -15,11 +15,14 @@ const NotFound = () => {
 
   return (
     <LoaderWrapper>
-      <Lottie options={defaultOptions} height={300} width={300} />
+      <Lottie options={defaultOptions} height={500} width={500} />
     </LoaderWrapper>
   );
 };
 
+export default WelcomeLoader;
+
+//--------- STYLED COMPONENTS ----------//
 const LoaderWrapper = styled.div`
   background-color: white;
   display: flex;
@@ -28,4 +31,3 @@ const LoaderWrapper = styled.div`
   min-height: 100vh;
   width: 100vw;
 `;
-export default NotFound;

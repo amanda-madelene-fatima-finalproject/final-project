@@ -54,6 +54,9 @@ const Navbar = () => {
   );
 };
 
+export default Navbar;
+
+//--------- STYLED COMPONENTS ----------//
 const Nav = styled.div`
   padding: 0 2rem;
   display: flex;
@@ -135,5 +138,3 @@ const Logo = styled.a`
     font-size: 1.3rem;
   }
 `;
-
-export default Navbar;

@@ -1,6 +1,7 @@
 import React from 'react';
 import NavbarWelcome from '../welcome-page/NavbarWelcome.js';
 import Loader from 'components/reusable-components/Loader.js';
+
 const EssentialInfo = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
