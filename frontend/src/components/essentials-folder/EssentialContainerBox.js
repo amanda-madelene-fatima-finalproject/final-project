@@ -9,16 +9,6 @@ const EssentialContainerBox = () => {
           'Cat ipsum dolor sit amet, rub face on everything. scratch the walls for scream for no reason at 4 am, whos the baby.'
         }
       />
-      <EssentialBox
-        text={
-          'Cat ipsum dolor sit amet, rub face on everything. scratch the walls for scream for no reason at 4 am, whos the baby.'
-        }
-      />
-      <EssentialBox
-        text={
-          'Cat ipsum dolor sit amet, rub face on everything. scratch the walls for scream for no reason at 4 am, whos the baby.'
-        }
-      />
     </>
   );
 };

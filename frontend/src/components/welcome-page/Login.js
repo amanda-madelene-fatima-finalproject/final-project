@@ -140,22 +140,6 @@ const LoginContainer = styled.section`
 
   // background-color: #ef737d;
 `;
-const RadioContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-const RadioInput = styled.input`
-  opacity: 0.6;
-`;
-
-const RadioButton = styled.div`
-  margin: 0 10px;
-`;
-
 const Input = styled.input`
   border-radius: 5px;
   padding: 10px;
@@ -187,6 +171,10 @@ const Wrapper = styled.div`
   margin: 50px auto;
   /* background: white; */
   border-radius: 10px;
+
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
 `;
 
 const Form = styled.form`
@@ -197,7 +185,7 @@ const Form = styled.form`
 
 const Button = styled.button`
   font-family: 'Poppins', sans-serif;
-  margin-top: 40px;
+  margin-top: 30px;
   padding: 5px 10px;
   font-weight: 600;
   background-color: white;
@@ -235,6 +223,10 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
+
+  @media (min-width: 1440px) {
+    margin-top: 20px;
+  }
 `;
 
 const PButton = styled.p`
@@ -249,5 +241,9 @@ const PButton = styled.p`
 const PText = styled.p`
   color: white;
   font-style: italic;
+
+  @media (min-width: 1440px) {
+    font-size: 20px;
+  }
   /* font-weight: 700; */
 `;

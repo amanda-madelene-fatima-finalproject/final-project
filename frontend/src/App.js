@@ -18,6 +18,7 @@ import Dashboard from './components/dashboard-page/Dashboard';
 import Welcome from './components/welcome-page/Welcome';
 import Profile from './components/profile-page/Profile.js';
 import AboutUs from './components/footer-page/AboutUs.js';
+import AboutProject from './components/footer-page/AboutProject.js';
 import EssentialInfo from 'components/welcome-page/EssentialInfo.js';
 import Essentials from 'components/essentials-folder/Essentials.js';
 
@@ -92,6 +93,7 @@ export const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/aboutproject" element={<AboutProject />} />
             <Route path="/essentialinfo" element={<EssentialInfo />} />
             <Route path="/essentials" element={<Essentials />} />
             <Route path="*" element={<NotFound />} />

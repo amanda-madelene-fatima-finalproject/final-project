@@ -9,6 +9,7 @@ import EssentialTasks from './EssentialTasks.js';
 import Loader from '../reusable-components/Loader.js';
 
 const Profile = () => {
+  //--------- LOCAL STATE ----------//
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -19,7 +20,7 @@ const Profile = () => {
   return (
     <>
       {loading == true ? (
-        <Loader />
+        <Loader animationType="profileData" />
       ) : (
         <MainContainer>
           <Navbar />
@@ -42,13 +43,6 @@ export default Profile;
 const MainContainer = styled.main`
   min-height: 90vh;
   background-color: white;
-  /* grid-template-columns: 1fr; */
-  /* justify-content: center;
-  align-items: center; */
-  /* width: 400px; */
-  /* height: 100vh; */
-  /* margin-left: 20px;
-  margin-right: 20px; */
   margin: 0 15px 0 15px;
 
   @media (min-width: 768px) {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-// import { Link, animateScroll as scroll } from 'react-scroll';
-
 import logoImg from '../../assets/logo.svg';
+
 const NavbarNotUser = () => {
+  //--------- LOCAL STATE ----------//
   // "useState" for code snippet
   // inital state set to false so that when you load the page the menu is closed.
   const [isOpen, setIsOpen] = useState(false);
@@ -24,8 +24,9 @@ const NavbarNotUser = () => {
       {/* passing prop isOpen here */}
       <Menu isOpen={isOpen}>
         <MenuLink href="/">Home</MenuLink>
-        <MenuLink href="/essentialinfo">Essentials</MenuLink>
-        <MenuLink href="/aboutus">About</MenuLink>
+        <MenuLink href="/essentialinfo">Essential Info</MenuLink>
+        <MenuLink href="/aboutus">About Us</MenuLink>
+        <MenuLink href="/aboutproject">About This Project</MenuLink>
         <Button size="small" color="secondary" variant="outlined" href="/">
           Sign In
         </Button>
@@ -34,14 +35,27 @@ const NavbarNotUser = () => {
   );
 };
 
+export default NavbarNotUser;
+
 //--------- STYLED COMPONENTS ----------//
 const Nav = styled.div`
-  padding: 0 2rem;
+  padding: 0 2rem 0 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   background: white;
+
+  @media (min-width: 768px) {
+    padding: 0 3.5rem 0 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 3.5rem 0 4.5rem;
+  }
+  @media (min-width: 1440px) {
+    padding: 0 5rem 0 6.5rem;
+  }
 `;
 
 const Img = styled.img`
@@ -49,8 +63,8 @@ const Img = styled.img`
   width: 170px;
 
   @media (min-width: 768px) {
-    height: 70px;
-    width: 250px;
+    height: auto;
+    width: 170px;
   }
 `;
 
@@ -98,7 +112,7 @@ const MenuLink = styled.a`
   text-decoration: none;
   color: #ef737d;
   transition: all 0.3s ease-in;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 
   &:hover {
     color: #e5e5e5;
@@ -122,15 +136,8 @@ const ButtonLink = styled.a`
 
 const Logo = styled.a`
   padding: 1rem 0;
-  color: #7b7fda;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 1.7rem;
 
-  span {
-    font-weight: 300;
-    font-size: 1.3rem;
+  @media (min-width: 768px) {
+    padding: 2rem 0;
   }
 `;
-
-export default NavbarNotUser;

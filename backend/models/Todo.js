@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 // ----- TodoSchema --------//
 const TodoSchema = new mongoose.Schema({
@@ -8,14 +8,10 @@ const TodoSchema = new mongoose.Schema({
     trim: true,
     minlength: 1,
   },
-  // essentialTasks: {
-  //   type: String,
-  //   enum: ["hydrate", "exercise", "break", "restore", "nature"],
-  // },
   category: {
     type: String,
     required: true,
-    enum: ["work", "home", "social", "wellness", "other"],
+    enum: ['work', 'home', 'social', 'wellness', 'other'],
   },
   createdAt: {
     type: Number,
@@ -28,10 +24,10 @@ const TodoSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "User",
+    ref: 'User',
   },
 });
 
 // Todo model that uses the TodoSchema
-const Todo = mongoose.model("Todo", TodoSchema);
+const Todo = mongoose.model('Todo', TodoSchema);
 module.exports = Todo;

@@ -2,25 +2,14 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-// const textEssentialTasks = (key) => {
-//   if (essentialTasks[key] !== false) {
-//     return 'Drink at least 5 glasses of water.';
-//   } else if (key === 'Move') {
-//     return "Move your body, let's dance!";
-//   } else if (key === 'Break') {
-//     return 'Remember to take breaks.';
-//   } else if (key === 'Sleep') {
-//     return "Prioritize sleep, it's important.";
-//   } else if (key === 'Nature') {
-//     return 'Spend time in nature, it heals.';
-//   }
-// };
-
 const EssentialTasks = () => {
-  const essentialTasks = useSelector((store) => store.todo.essentialTasks);
-  const essentialTasksKeys = Object.keys(essentialTasks);
-  console.log(essentialTasks);
+  //--------- LOCAL STATE ----------//
 
+  const essentialTasks = useSelector((store) => store.todo.essentialTasks);
+  const essentialTasksKeys = Object.keys(essentialTasks); //
+
+  //converting the essentialTasks object in an array to be able to iterate
+  // converting the essentialTasks object in an array to be a  // to show a different message instead of only the key from the reducer.
   const textEssentialTasks = (key) => {
     if (key === 'Hydrate') {
       return 'Did you drink enough water?';
@@ -34,36 +23,15 @@ const EssentialTasks = () => {
       return 'Have you spent time in nature?';
     }
   };
-
-  // const displayMessage = (key) => {
-  //   return (
-  //     <>
-  //       <p>
-  //         {key === 'Hydrate' && essentialTasks[key] === false
-  //           ? "Don't worry, go chug some water right now!"
-  //           : "Great job! Keep doing what you're doing!"}
-  //       </p>
-  //       <p>
-  //         {key === 'Move' && essentialTasks[key] === false
-  //           ? "Don't worry, there's still time today! You can do it!"
-  //           : "Great job! Keep doing what you're doing!"}
-  //       </p>
-  //       <p>
-  //         {key === 'Break' && essentialTasks[key] === false
-  //           ? "Don't worry, there's still time today! You can do it!"
-  //           : "Great job! Keep doing what you're doing!"}
-  //       </p>
-  //       {key === 'Sleep' && essentialTasks[key] === false
-  //         ? "Don't worry, there's still time today! You can do it!"
-  //         : "Great job! Keep doing what you're doing!"}
-  //       <p>
-  //         {key === 'Nature' && essentialTasks[key] === false
-  //           ? "Don't worry, there's still time today! You can do it!"
-  //           : "Great job! Keep doing what you're doing!"}
-  //       </p>
-  //     </>
-  //   );
-  // };
+  // and object containing arrays of strings that we use to display a message
+  // Anthe profile depending on if the task is done or not.
+  const displayFeedback = {
+    Hydrate: ['Did you drink enough water?', 'checked'],
+    Move: ['Have you moved your body?', 'checked'],
+    Break: ['Have you moved your body?', 'checked'],
+    Sleep: ['Did you prioritize your sleep?', 'checked'],
+    Nature: ['Have you spent time in nature?', 'checked'],
+  };
 
   return (
     <Section>
@@ -74,48 +42,24 @@ const EssentialTasks = () => {
           We hope you are making some tiny steps in the right direction?
         </SubHeader>
       </SubWrap>
-      <p>Let's have a look at your day so far!</p>
+      <EssDiv>
+        <EssP>Let's have a look at your day so far!</EssP>
 
-      {essentialTasksKeys.map((key) => (
-        <div key={key}>
-          <EssentialTask>
-            <KeyText>{textEssentialTasks(key)}</KeyText>
-            <Message>
-              {essentialTasks[key] !== false
-                ? "Yes, great job! Keep doing what you're doing!"
-                : "Not yet. but don't worry, there's still time today!"}
-            </Message>
-          </EssentialTask>
-        </div>
-      ))}
+        {essentialTasksKeys.map((key) => (
+          <div key={key}>
+            <EssentialTask>
+              <KeyText>{textEssentialTasks(key)}</KeyText>
+              {/* here we go into the displayFeedback object and look for the dynamic key value
+              to display, depending on if the task is done or not we show the first or second string in the object */}
+              <Message>
+                {displayFeedback[key][essentialTasks[key] ? 1 : 0]}
+              </Message>
+            </EssentialTask>
+          </div>
+        ))}
+      </EssDiv>
     </Section>
   );
-
-  //     {essentialTasksKeys.map((key) => (
-  //       <div key={key}>
-  //         <EssentialTask>
-  //           <KeyText>{key}:</KeyText>
-
-  //            {key key === 'Hydrate' && essentialTasks[key] === false
-  //             ? "Don't worry, go chug some water right now!"
-  //             : "Great job! Keep doing what you're doing!")}
-  //           {key === 'Hydrate' && essentialTasks[key] === false
-  //             ? "Don't worry, go chug some water right now!"
-  //             : "Great job! Keep doing what you're doing!"}
-  //           {key === 'Move' && essentialTasks[key] === false
-  //             ? "Don't worry, there's still time today! You can do it!"
-  //             : "Great job! Keep doing what you're doing!"}
-  //           {key === 'Break' && essentialTasks[key] === false
-  //             ? "Don't worry, there's still time today! You can do it!"
-  //             : "Great job! Keep doing what you're doing!"}
-  //           {key === 'Sleep' && essentialTasks[key] === false
-  //             ? "Don't worry, there's still time today! You can do it!"
-  //             : "Great job! Keep doing what you're doing!"}
-  //           {key === 'Nature' && essentialTasks[key] === false
-  //             ? "Don't worry, there's still time today! You can do it!"
-  //             : "Great job! Keep doing what you're doing!"}
-  //         </EssentialTask>
-  //       </div>
 };
 
 export default EssentialTasks;
@@ -128,19 +72,21 @@ const Section = styled.section`
   align-items: center;
   text-align: center;
   padding: 20px;
-  /* border: solid 1px black; */
   border-radius: 50px;
-  /* background-color: whitesmoke; */
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
 
   min-height: 200px;
-  max-width: 260px;
+  min-width: 260px;
   margin: 50px auto;
   background: white;
   border-radius: 10px;
+
+  @media (min-width: 1024px) {
+    width: 350px;
+  }
 `;
 
 const Header = styled.h1`
@@ -164,6 +110,16 @@ const SubWrap = styled.h3`
   border-radius: 5px;
 `;
 
+const EssP = styled.p`
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 30px;
+`;
+
+const EssDiv = styled.div`
+  text-align: left;
+`;
+
 const EssentialTask = styled.p`
   display: flex;
   flex-direction: column;
@@ -185,4 +141,5 @@ const Message = styled.p`
   font-size: 14px;
   font-weight: 500;
   margin-top: 0;
+  margin-bottom: 20px;
 `;

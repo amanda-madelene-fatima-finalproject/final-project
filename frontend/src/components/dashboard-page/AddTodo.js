@@ -17,6 +17,8 @@ const AddTodo = () => {
   //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
 
+  //--------- ONCLICK DISPATCHING POST TASKS THUNK ----------//
+
   const onPostTasks = (accessToken, userId, task, category) => {
     dispatch(postTasks(accessToken, userId, task, category));
     setTask(''); // clears the input

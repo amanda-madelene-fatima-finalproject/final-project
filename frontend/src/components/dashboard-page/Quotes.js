@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Quotes = () => {
+  //--------- LOCAL STATE ----------//
   const [quote, setQuote] = useState([]);
   const [randomQuote, setRandomQuote] = useState({});
+
+  //--------- USEEFFECT----------//
 
   useEffect(() => {
     async function fetchData() {
@@ -62,6 +65,14 @@ const Wrapper = styled.div`
   margin: 50px auto;
   background: white;
   border-radius: 10px;
+
+  @media (min-width: 768px) {
+    min-height: 350px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 300px;
+  }
 `;
 
 const QuoteText = styled.p`
@@ -69,4 +80,8 @@ const QuoteText = styled.p`
   padding: 20px;
   color: black;
   font-weight: bold;
+
+  @media (min-width: 1024px) {
+    font-size: 21px;
+  }
 `;

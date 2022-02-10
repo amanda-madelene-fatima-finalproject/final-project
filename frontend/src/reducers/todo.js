@@ -16,8 +16,6 @@ export const todo = createSlice({
       Sleep: false,
       Nature: false,
     },
-
-    // category: null,
   },
   reducers: {
     setItems: (store, action) => {
@@ -43,19 +41,19 @@ export const todo = createSlice({
     },
 
     toggleEssentialTasks: (store, action) => {
-      const essentialTasks = store.essentialTasks; // selecting the object from the store and storing it in a variable
-      //object.key is a method that we need here in order to be able to use the method find,
+      // selecting the object from the store and storing it in a variable
+      const essentialTasks = store.essentialTasks;
+      //object.key is a method that converts the object into an array
+      // and we need it here in order to be able to use the method find,
       // we need to first find the key inside the essentialTasks object and then, we compare it with the key sent in the payload from tddoList component.
       const importantTasks = Object.keys(essentialTasks).find(
-        (key) => key === action.payload //importantTask will be always the same as the payload (like nature === nature)
+        (key) => key === action.payload
       );
       essentialTasks[importantTasks] = isDoneToday(
         essentialTasks[importantTasks]
       )
         ? false
-        : new Date(); // here we change the value from false to true
-      // console.log(essentialTasks);
-      // console.log(importantTasks); // is the same key as the payload
+        : new Date(); // here we change the value from false to new Date
     },
 
     completeAllTasks: (store) => {
@@ -74,10 +72,6 @@ export const todo = createSlice({
         items: [],
       };
     },
-
-    // setCategory: (store, action) => {
-    //   store.category = action.payload;
-    // },
   },
 });
 
@@ -158,10 +152,6 @@ export const editTasks = (accessToken, taskId, task, userId) => {
       .then((data) => {
         if (data.success) {
           dispatch(getTasks(accessToken, userId));
-
-          // dispatch(todo.actions.setItems(data.response));
-          // dispatch(todo.actions.editTask(taskId));
-
           dispatch(todo.actions.setError(null));
         } else {
           dispatch(todo.actions.setItems([]));
@@ -182,14 +172,12 @@ export const deleteTasks = (accessToken, taskId) => {
         'Content-Type': 'application/json',
         Authorization: accessToken,
       },
-      // body: JSON.stringify({ taskId }),
     };
     dispatch(ui.actions.setLoading(true));
     fetch(API_URL(`tasks/${taskId}/delete`), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // dispatch(getTasks(accessToken, taskId));
           dispatch(todo.actions.deleteTask(taskId));
           dispatch(todo.actions.setError(null));
         } else {
@@ -223,7 +211,6 @@ export const toggleTasks = (accessToken, taskId, done) => {
           dispatch(todo.actions.toggleTask(taskId));
           dispatch(todo.actions.setError(null));
         } else {
-          // dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
         }
       })

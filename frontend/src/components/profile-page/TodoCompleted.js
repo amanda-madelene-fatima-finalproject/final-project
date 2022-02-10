@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const TodoCompleted = () => {
+  //--------- LOCAL STATE ----------//
   const amountTasks = useSelector((store) => store.todo.items.length);
 
   return (
@@ -23,7 +24,7 @@ export default TodoCompleted;
 
 //--------- STYLED COMPONENTS ----------//
 const CounterText = styled.p`
-  margin-top: 50px;
+  margin-top: 20px;
   span {
     color: #ef737d;
     font-weight: bold;
@@ -45,8 +46,20 @@ const Section = styled.section`
     0 100px 80px rgba(0, 0, 0, 0.12);
 
   min-height: 200px;
-  max-width: 260px;
+  min-width: 200px;
   margin: 50px auto;
   background: white;
   border-radius: 10px;
+
+  h2 {
+    color: #ef737d;
+  }
+
+  @media (min-width: 768px) {
+    min-height: 350px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 350px;
+  }
 `;

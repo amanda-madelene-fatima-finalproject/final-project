@@ -16,7 +16,7 @@ import {
   accessUserProfile,
 } from './endpoints/AccessAccount.js';
 import authenticateUser from './authorization/authenticateUser.js';
-import quotesData from './data/quotes.json';
+// import quotesData from './data/quotes.json';
 
 // Madelene and Amanda
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
@@ -66,13 +66,13 @@ app.post('/signup', signUp);
 app.post('/signin', signIn);
 app.post('/role', assignRole);
 
-// Quote Endpoint //
-app.get('/quotes', async (req, res) => {
-  const Quotes = quotesData;
-  const getRandomQuote = () =>
-    Quotes[Math.floor(Math.random() * Quotes.length)];
-  res.status(200).json({ response: getRandomQuote(), success: true });
-});
+// // Quote Endpoint //
+// app.get('/quotes', async (req, res) => {
+//   const Quotes = quotesData;
+//   const getRandomQuote = () =>
+//     Quotes[Math.floor(Math.random() * Quotes.length)];
+//   res.status(200).json({ response: getRandomQuote(), success: true });
+// });
 
 // Start the server
 app.listen(port, () => {

@@ -1,9 +1,9 @@
-const Todo = require("../models/Todo");
-const User = require("../models/User.js");
+const Todo = require('../models/Todo');
+const User = require('../models/User.js');
 
 // ----- Task Endpoints --------//
 
-// Endpoint to add todo tasks
+// 1- Endpoint to add a task
 export const addTask = async (req, res) => {
   const { task, userId, category } = req.body;
 
@@ -20,23 +20,21 @@ export const addTask = async (req, res) => {
           author: newTask.user.username,
           category: newTask.category,
         },
-        // response: newTask,
-        success: true,
       });
     } else {
       res.status(404).json({
-        message: "Could not find task",
+        message: 'Could not find task',
         success: false,
       });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };
 
-// Endpoint to get all the tasks
+// 2 - Endpoint to get all the tasks
 export const getTask = async (req, res) => {
   const { userId } = req.params;
 
@@ -52,18 +50,18 @@ export const getTask = async (req, res) => {
         .json({ response: queriedTasks, user: userId, success: true });
     } else {
       res.status(404).json({
-        message: "Could not find tasks",
+        message: 'Could not find tasks',
         success: false,
       });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ messe: 'Invalid request', response: error, success: false });
   }
 };
 
-// Endpoint to edit todo tasks
+// 3 - Endpoint to edit a task
 export const editTask = async (req, res) => {
   const { taskId } = req.params;
   const { task } = req.body;
@@ -78,20 +76,20 @@ export const editTask = async (req, res) => {
       res.status(200).json({ response: updatedTask, success: true });
     } else {
       res.status(404).json({
-        message: "Could not find task",
+        message: 'Could not find task',
         success: false,
       });
     }
   } catch (error) {
     res.status(400).json({
-      message: "Invalid request",
+      message: 'Invalid request',
       error: error,
       success: false,
     });
   }
 };
 
-// Endpoint to delete todo tasks
+// 4 - Endpoint to delete todo tasks
 export const deleteTask = async (req, res) => {
   const { taskId } = req.params;
 
@@ -100,16 +98,16 @@ export const deleteTask = async (req, res) => {
     if (deleteTask) {
       res.status(200).json({ response: deleteTask, success: true });
     } else {
-      res.status(404).json({ response: "Could not find task", success: false });
+      res.status(404).json({ response: 'Could not find task', success: false });
     }
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };
 
-// Endpoint to toggle todo tasks
+// 5 - Endpoint to toggle a task
 export const toggleTask = async (req, res) => {
   const { taskId } = req.params;
   const { done } = req.body;
@@ -124,6 +122,6 @@ export const toggleTask = async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };

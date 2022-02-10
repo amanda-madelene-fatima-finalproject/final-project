@@ -9,14 +9,10 @@ const Footer = () => {
   return (
     <Container className={classes.wrapper}>
       <Link className={classes.link} to="/aboutproject">
-        About the Project
+        About This Project
       </Link>
       <Link className={classes.link} to="/aboutus">
         About Us{' '}
-      </Link>
-
-      <Link className={classes.link} to="/contactus">
-        Contact Us{' '}
       </Link>
     </Container>
   );

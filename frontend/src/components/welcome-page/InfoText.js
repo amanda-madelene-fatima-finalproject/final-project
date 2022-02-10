@@ -21,7 +21,6 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* min-height: 90vh; */
 `;
 
 const Wrapper = styled.div`
@@ -44,6 +43,14 @@ const Wrapper = styled.div`
   margin: 50px auto;
   background: white;
   border-radius: 10px;
+
+  @media (min-width: 768px) {
+    min-height: 430px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
 `;
 
 const QuoteText = styled.p`
@@ -51,4 +58,8 @@ const QuoteText = styled.p`
   padding: 20px;
   color: black;
   font-weight: bold;
+
+  @media (min-width: 1440px) {
+    font-size: 26px;
+  }
 `;

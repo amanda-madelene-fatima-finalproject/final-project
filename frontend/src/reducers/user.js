@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { batch } from "react-redux";
-import { API_URL } from "utils/urls";
+import { createSlice } from '@reduxjs/toolkit';
+import { batch } from 'react-redux';
+import { API_URL } from 'utils/urls';
 
 export const user = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     userId: null,
     name: null,
@@ -34,9 +34,9 @@ export const user = createSlice({
 export const userAccess = (name, username, password, mode) => {
   return (dispatch) => {
     const options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ name, username, password }),
     };
@@ -58,8 +58,6 @@ export const userAccess = (name, username, password, mode) => {
             dispatch(user.actions.setName(null));
             dispatch(user.actions.setAccessToken(null));
             dispatch(user.actions.setError(data.response)); // here we send the message we have recieved from the database to the redux store and the error key from the store gets updated.
-            // setUsername(""); // This clears the username's value in the input
-            // setPassword("")  // This clears the password's value in the input
           });
         }
       });

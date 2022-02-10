@@ -20,9 +20,13 @@ const Headline = styled.h1`
   width: 300px;
 
   @media (min-width: 768px) {
-    font-size: 60px;
+    font-size: 45px;
     font-weight: 900;
-    width: 600px;
+    width: 370px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 500px;
   }
 `;
 
@@ -32,10 +36,10 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   /* height: 400px; */
-  width: 400px;
+  /* width: 400px; */
   /* margin: 0 auto; */
 
   @media (min-width: 768px) {
-    width: 700px;
+    /* width: 500px; */
   }
 `;

@@ -42,12 +42,12 @@ export default Welcome;
 //--------- STYLED COMPONENTS ----------//
 const Container = styled.main`
   min-height: 90vh;
+
+  width: 100%;
   background-color: white;
-  margin: 0 15px 0 15px;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-    margin: 0 50px 0 50px;
   }
 `;
 

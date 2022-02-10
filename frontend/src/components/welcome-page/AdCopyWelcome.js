@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// const AdCopyContainer = styled.div``;
-
 const AdCopyWelcome = () => {
   return (
     <Container>
@@ -14,10 +12,7 @@ const AdCopyWelcome = () => {
         Do you have a tendency to disappear into your work? Maybe you sit down
         in front of your computer and the next time you look up you realize it’s
         been 5 hours? At this point your really tired, your eyes are dry and so
-        is your mouth. Maybe your body hurts in more places than one? Don’t get
-        us wrong, it’s amazing that you love your work, but you know what? We
-        bet you could love it even more, and be even more efficient if you took
-        a minute look over your daily habits.{' '}
+        is your mouth.
       </Text>
     </Container>
   );
@@ -31,12 +26,10 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   margin: 0 auto;
 
   @media (min-width: 768px) {
-    height: 500px;
-    width: 600px;
+    margin: 0;
   }
 `;
 
@@ -46,13 +39,27 @@ const Headline = styled.h1`
   width: 300px;
 
   @media (min-width: 768px) {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 900;
-    width: 600px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 50px;
+  }
+  @media (min-width: 1440px) {
+    font-size: 60px;
+    width: 450px;
   }
 `;
 const Text = styled.p`
   width: 300px;
+
+  @media (min-width: 1024px) {
+    font-size: 18px;
+  }
+  @media (min-width: 1440px) {
+    font-size: 21px;
+    width: 450px;
+  }
 `;
 
 const Span = styled.span`

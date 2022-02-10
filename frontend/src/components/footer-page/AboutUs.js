@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Footer from 'components/reusable-components/Footer.js';
 
+import Footer from 'components/reusable-components/Footer.js';
 import NavbarNotUser from '../../components/footer-page/NavbarNotUser.js';
 import amanda from '../../assets/amanda.png';
 import madelene from '../../assets/madelene.png';
+import fatima from '../../assets/fatima.png';
+import { FaGithub, FaLinkedin } from 'react-icons/fa'; //icons from react-icons-library-font-awesome
 
 //--------- ABOUT US  ----------//
 const AboutUs = () => {
@@ -17,7 +19,7 @@ const AboutUs = () => {
       <MainContainer>
         <Grid>
           <ImageContainer>
-            <Img src={amanda} alt="Amanda" />
+            <Img src={amanda} alt="Amanda frontend developer" />
           </ImageContainer>
 
           <HeadingTwoContainer>
@@ -25,12 +27,18 @@ const AboutUs = () => {
           </HeadingTwoContainer>
 
           <Navigation>
-            <a href="https://github.com/amandatilly?tab=repositories">
-              <i class="fa-brands fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/amanda-tilly/">
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
+            <Anchor
+              href="https://github.com/amandatilly?tab=repositories"
+              target="_blank"
+            >
+              <FaGithub size="2em" color="black" />
+            </Anchor>
+            <Anchor
+              href="https://www.linkedin.com/in/amanda-tilly/"
+              target="_blank"
+            >
+              <FaLinkedin size="2em" color="black" />
+            </Anchor>
           </Navigation>
 
           <Article>
@@ -57,7 +65,7 @@ const AboutUs = () => {
 
         <Grid>
           <ImageContainer>
-            <Img src={madelene} alt="Madelene" />
+            <Img src={madelene} alt="Madelene frontend developer" />
           </ImageContainer>
 
           <HeadingTwoContainer>
@@ -65,12 +73,18 @@ const AboutUs = () => {
           </HeadingTwoContainer>
 
           <Navigation>
-            <a href="https://github.com/MT-dotse?tab=repositories">
-              <i class="fa-brands fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/madelene-trang-dev/">
-              <i>linkedin Icon</i>
-            </a>
+            <Anchor
+              href="https://github.com/MT-dotse?tab=repositories"
+              target="_blank"
+            >
+              <FaGithub size="2em" color="black" />
+            </Anchor>
+            <Anchor
+              href="https://www.linkedin.com/in/madelene-trang-dev/"
+              target="_blank"
+            >
+              <FaLinkedin size="2em" color="black" />
+            </Anchor>
           </Navigation>
 
           <Article>
@@ -97,7 +111,7 @@ const AboutUs = () => {
 
         <Grid>
           <ImageContainer>
-            <Img src={amanda} alt="Fatima" />
+            <Img src={fatima} alt="Fatima frontend developer" />
           </ImageContainer>
 
           <HeadingTwoContainer>
@@ -105,12 +119,18 @@ const AboutUs = () => {
           </HeadingTwoContainer>
 
           <Navigation>
-            <a href="https://github.com/Fatima-GR?tab=repositories">
-              <i className="fa-brands fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/fatima-gamero-romero-071224212/">
-              <i className="fa-brands fa-linkedin"></i>
-            </a>
+            <Anchor
+              href="https://github.com/Fatima-GR?tab=repositories"
+              target="_blank"
+            >
+              <FaGithub size="2em" color="black" />
+            </Anchor>
+            <Anchor
+              href="https://www.linkedin.com/in/fatima-gamero-romero-071224212/"
+              target="_blank"
+            >
+              <FaLinkedin size="2em" color="black" />
+            </Anchor>
           </Navigation>
 
           <Article>
@@ -147,7 +167,8 @@ const HeadingOne = styled.h1`
 `;
 
 const MainContainer = styled.main`
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: auto;
 
   @media (min-width: 768px) {
     display: flex;
@@ -161,6 +182,7 @@ const Wrapper = styled.div`
   justify-content: center;
   margin-bottom: 30px;
 `;
+
 const Grid = styled.section`
   display: grid;
   grid-template-columns: 1fr;
@@ -192,6 +214,13 @@ const Navigation = styled.nav`
   align-items: center;
   justify-content: center;
 `;
+const Anchor = styled.a`
+  margin: 0 3px;
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
+`;
+
 const HeadingThreeContainer = styled.div`
   display: flex;
   align-items: center;

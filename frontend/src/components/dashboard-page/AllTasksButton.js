@@ -4,6 +4,7 @@ import { todo } from '../../reducers/todo.js';
 import styled from 'styled-components';
 
 const AllTasksButton = () => {
+  //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
 
   return (

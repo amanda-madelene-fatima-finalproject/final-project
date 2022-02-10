@@ -5,23 +5,32 @@ import EssentialsImage from './EssentialsImage.js';
 import styled from 'styled-components';
 import Loader from 'components/reusable-components/Loader.js';
 import EssentialContainerBox from './EssentialContainerBox.js';
+import AdCopyEssentials from './AdCopyEssentials.js';
 
 const Essentials = () => {
+  //--------- LOCAL STATE ----------//
   const [loading, setLoading] = useState(true);
+
+  //--------- USEEFFECT ----------//
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
   });
+
   return (
     <>
       {loading == true ? (
-        <Loader />
+        <Loader animationType="balanceData" />
       ) : (
         <Container>
           <Navbar />
           <Grid>
+            <AdCopyEssentials />
             <EssentialsImage />
+            <EssentialContainerBox />
+            <EssentialContainerBox />
+            <EssentialContainerBox />
             <EssentialContainerBox />
           </Grid>
           <Footer />

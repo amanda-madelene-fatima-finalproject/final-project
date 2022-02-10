@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 const TodoCount = () => {
+  //----------- SELECTORS ----------//
   const uncompleteTodos = useSelector(
     (store) => store.todo.items.filter((item) => !item.done).length
   );

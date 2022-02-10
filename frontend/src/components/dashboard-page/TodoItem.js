@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import moment from 'moment';
-
 import EditModal from './EditModal.js';
 import { deleteTasks, toggleTasks } from '../../reducers/todo';
 
@@ -10,18 +9,15 @@ const TodoItem = ({ data }) => {
   //----------- SELECTORS ----------//
   const accessToken = useSelector((store) => store.user.accessToken);
 
-  // const userId = useSelector((store) => store.user.userId);
-  //const taskId = useSelector((store) => store.todo.taskId);
-
   //--------- DISPATCHES ----------//
   const dispatch = useDispatch();
 
-  //--------- USEEFFECT FOR DISPATCHING THE GetTASKS THUNK  ----------//
-
+  //--------- ONCLICK DISPATCHING DELETE TASK THUNK ----------//
   const onDeleteTasks = (accessToken, taskId) => {
     dispatch(deleteTasks(accessToken, taskId));
   };
 
+  //--------- ONCHANGE DISPATCHING TOGGLE TASK THUNK ----------//
   const onToggleTasks = (accessToken, taskId, done) => {
     dispatch(toggleTasks(accessToken, taskId, done));
   };
@@ -78,17 +74,12 @@ const Section = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* input {
-    display: none;
-  } */
 `;
 
 const List = styled.li`
   list-style: none;
   display: flex;
   flex-direction: column;
-  /* margin-left: 5px; */
   font-size: 12px;
   margin-left: 20px;
 
@@ -121,11 +112,6 @@ const TimeText = styled.p`
 `;
 
 const CategoryText = styled.span`
-  /* display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: #000;
-  font-size: 10px; */
   font-size: 10px;
   line-height: 13px;
   letter-spacing: 0.01em;
@@ -138,8 +124,6 @@ const CategoryText = styled.span`
   padding: 3px;
   margin-left: 5px;
   letter-spacing: 1px;
-  /* margin-right: 8px;
-  margin-top: 10px; */
 `;
 
 const CatWrap = styled.div`

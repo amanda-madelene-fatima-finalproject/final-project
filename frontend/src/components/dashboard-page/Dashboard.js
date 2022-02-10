@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
 import TodoList from './TodoList';
 import Footer from 'components/reusable-components/Footer.js';
 import DashboardImage from '../dashboard-page/DashboardImage.js';
@@ -16,10 +15,7 @@ const Dashboard = () => {
   const accessToken = useSelector((store) => store.user.accessToken);
   const loading = useSelector((store) => store.ui.Loading);
 
-  //const userId = useSelector((store) => store.user.userId);
-
-  //--------- DISPATCHES ----------//
-  // const dispatch = useDispatch();
+  // ------------- NAVIGATE ----------//
   const navigate = useNavigate();
 
   //--------- USEEFFECT FOR THE ACCESSTOKEN ----------//
@@ -54,13 +50,6 @@ export default Dashboard;
 const MainContainer = styled.main`
   min-height: 90vh;
   background-color: white;
-  /* grid-template-columns: 1fr; */
-  /* justify-content: center;
-  align-items: center; */
-  /* width: 400px; */
-  /* height: 100vh; */
-  /* margin-left: 20px;
-  margin-right: 20px; */
   margin: 0 15px 0 15px;
 
   @media (min-width: 768px) {

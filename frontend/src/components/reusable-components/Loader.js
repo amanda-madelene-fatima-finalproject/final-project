@@ -1,13 +1,25 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../../animations/profile.json';
+import profileData from '../../animations/profile.json';
+import loadingData from '../../animations/loading.json';
+import todoData from '../../animations/todo.json';
+import balanceData from '../../animations/dashboard.json';
+import helloData from '../../animations/hello.json';
 import styled from 'styled-components';
 
-const Loader = () => {
+const animationData = {
+  helloData,
+  balanceData,
+  profileData,
+  loadingData,
+  todoData,
+};
+
+const Loader = ({ animationType }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
+    animationData: animationData[animationType],
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },

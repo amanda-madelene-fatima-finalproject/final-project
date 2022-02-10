@@ -20,7 +20,12 @@ const ImageContainer = styled.section`
   margin: 40px 0;
 
   @media (min-width: 768px) {
-    margin-bottom: 0;
+    margin-bottom: 100px;
+    margin-top: 90px;
+  }
+  @media (min-width: 1024px) {
+    width: auto;
+    height: 400px;
   }
 `;
 
@@ -29,6 +34,11 @@ const Img = styled.img`
   height: 300px;
 
   @media (min-width: 768px) {
+    width: auto;
+    height: 300px;
+  }
+
+  @media (min-width: 1024px) {
     width: auto;
     height: 400px;
   }
