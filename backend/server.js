@@ -11,7 +11,7 @@ import {
   deleteTask,
   toggleTask,
 } from './endpoints/Tasks.js';
-import { assignRole, signIn, signUp } from './endpoints/CreateAccount.js';
+import { assignRole, signIn, signUp } from './endpoints/createAccount.js';
 import {
   accessDashboard,
   accessUserProfile,
