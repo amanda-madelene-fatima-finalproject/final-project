@@ -17,7 +17,7 @@ const EssentialInfo = () => {
   return (
     <>
       {loading == true ? (
-        <Loader />
+        <Loader animationType="balanceData" />
       ) : (
         <Container>
           <NavbarNotUser />

@@ -1,7 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 import profileData from '../../animations/profile.json';
-import loadingData from '../../animations/loading.json';
 import todoData from '../../animations/todo.json';
 import balanceData from '../../animations/dashboard.json';
 import helloData from '../../animations/hello.json';
@@ -11,7 +10,6 @@ const animationData = {
   helloData,
   balanceData,
   profileData,
-  loadingData,
   todoData,
 };
 
