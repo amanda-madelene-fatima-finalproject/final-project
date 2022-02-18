@@ -46,9 +46,7 @@ app.get('/', (req, res) => {
 });
 
 // Get all the endpoints
-app.get('/endpoints', (req, res) => {
-  res.send(listEndpoints(app));
-});
+app.get('/endpoints', (req, res) => res.send(listEndpoints(app)));
 
 // ----- Task Endpoints --------//
 app.post('/tasks/addtask', authenticateUser, addTask);

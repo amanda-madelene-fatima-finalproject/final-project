@@ -10,7 +10,7 @@
     "dev": "nodemon server.js --exec babel-node",
     "lint": "eslint ."
   },
-  "author": "",
+  "author": "Madelene Trang, Amanda Tilly, Fatima Gamero Romero ",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.17.5",
