@@ -38,7 +38,7 @@ export const userAccess = (name, username, password, mode) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, username, password, mode }),
+      body: JSON.stringify({ name, username, password }),
     };
     fetch(API_URL(mode), options)
       .then((res) => res.json())
