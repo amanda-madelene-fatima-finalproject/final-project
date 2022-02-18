@@ -42,7 +42,9 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get('/', (req, res) => {
-  res.send('Hello World, Welcome to our Debug Todo app 🐞!');
+  res.send(
+    'Hello World, Welcome to our Debug Todo app 🐞. A Technigo final project by Madelene Trang, Amanda Tilly, Fatima Gamero Romero!'
+  );
 });
 
 // Get all the endpoints

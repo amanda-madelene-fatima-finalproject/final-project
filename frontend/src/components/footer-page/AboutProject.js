@@ -38,7 +38,7 @@ const AboutProject = () => {
           </Text>
           <Text>
             This web application was made by Amanda Tilly, Madelene Trang and
-            Fatima Romero Gamero as our final project during the Technigo
+            Fatima Gamero Romero as our final project during the Technigo
             Frontend Developer boot camp. It is a multipage application where
             the frontend is built with React, Redux, Thunks and styled with
             Styled Components. The backend is built using Node.js, Express and
