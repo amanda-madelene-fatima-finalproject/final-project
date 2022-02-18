@@ -143,7 +143,7 @@ export default AboutUs;
 
 //--------- STYLED COMPONENTS ----------//
 const MainContainerWrap = styled.main`
-  height: 90vh;
+  height: 100vh;
   width: 100%;
   background-color: white;
 `;
@@ -177,6 +177,14 @@ const MainContainer = styled.main`
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 0 60px;
+  }
+
+  @media (min-width: 1440px) {
+    margin: 0 300px;
   }
 `;
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../reusable-components/Navbar.js';
 import Loader from '../reusable-components/Loader.js';
-import Footer from '../reusable-components/Footer.js';
 import EssentialImage from '../essentials-folder/EssentialsImage.js';
 import styled from 'styled-components';
 import AdCopyInfoEssen from '../essentials-folder/AdCopyEssentials.js';
@@ -28,7 +27,6 @@ const EssentialInfo = () => {
             <EssentialImage />
             <EssentialContainerBox />
           </Grid>
-          <Footer />
         </Container>
       )}
     </>
