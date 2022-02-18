@@ -76,10 +76,7 @@ const AddContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* min-height: 100vh; */
-  /* background-color: whitesmoke; */
   border-radius: 50px;
-  /* margin-bottom: 20px; */
   margin: 0;
 `;
 

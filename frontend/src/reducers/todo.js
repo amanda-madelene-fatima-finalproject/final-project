@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { API_URL } from 'utils/urls';
 import { ui } from './ui.js';
 import { isDoneToday } from '../components/dashboard-page/TodoList.js';
-import moment from 'moment';
 
 export const todo = createSlice({
   name: 'todo',
@@ -94,8 +93,7 @@ export const getTasks = (accessToken, userId) => {
           setTimeout(() => {
             dispatch(todo.actions.setItems(data.response));
             dispatch(todo.actions.setError(null));
-            // dispatch(add.actions.setCategory(data.response.category));
-          }, 5000);
+          }, 10000);
         } else {
           dispatch(todo.actions.setItems([]));
           dispatch(todo.actions.setError(data.response));
@@ -192,8 +190,6 @@ export const deleteTasks = (accessToken, taskId) => {
 // REDUX THUNK: to complete a task
 
 export const toggleTasks = (accessToken, taskId, done) => {
-  console.log('test');
-  console.log(accessToken, taskId, done);
   return (dispatch) => {
     const options = {
       method: 'POST',

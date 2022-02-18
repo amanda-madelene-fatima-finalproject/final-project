@@ -7,7 +7,7 @@ import AdCopyWelcome from './AdCopyWelcome.js';
 import WelcomeImage from './WelcomeImage.js';
 import Footer from '../reusable-components/Footer.js';
 import InfoText from './InfoText.js';
-import WelcomeLoader from './WelcomeLoader.js';
+import Loader from 'components/reusable-components/Loader.js';
 
 const Welcome = () => {
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ const Welcome = () => {
   return (
     <>
       {loading == true ? (
-        <WelcomeLoader />
+        <Loader animationType="todoData" />
       ) : (
         <Container>
           <NavbarWelcome />

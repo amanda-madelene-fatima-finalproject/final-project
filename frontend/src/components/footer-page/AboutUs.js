@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import Footer from 'components/reusable-components/Footer.js';
 import NavbarNotUser from '../../components/footer-page/NavbarNotUser.js';
+import Footer from 'components/reusable-components/Footer.js';
+import Loader from 'components/reusable-components/Loader.js';
 import amanda from '../../assets/amanda.png';
 import madelene from '../../assets/madelene.png';
 import fatima from '../../assets/fatima.png';
@@ -10,205 +11,192 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa'; //icons from react-icons-
 
 //--------- ABOUT US  ----------//
 const AboutUs = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  });
   return (
     <>
-      <NavbarNotUser />
-      <Wrapper>
-        <HeadingOne>Who are we?</HeadingOne>
-      </Wrapper>
-      <MainContainer>
-        <Grid>
-          <ImageContainer>
-            <Img src={amanda} alt="Amanda frontend developer" />
-          </ImageContainer>
+      {loading == true ? (
+        <Loader animationType="profileData" />
+      ) : (
+        <MainContainerWrap>
+          <NavbarNotUser />
+          <HeadingOne>Who are we?</HeadingOne>
+          <MainContainer>
+            <Flex>
+              <Img src={amanda} alt="Amanda frontend developer" />
 
-          <HeadingTwoContainer>
-            <h2>Amanda Tilly</h2>
-          </HeadingTwoContainer>
+              <HeadingTwo>Amanda Tilly</HeadingTwo>
 
-          <Navigation>
-            <Anchor
-              href="https://github.com/amandatilly?tab=repositories"
-              target="_blank"
-            >
-              <FaGithub size="2em" color="black" />
-            </Anchor>
-            <Anchor
-              href="https://www.linkedin.com/in/amanda-tilly/"
-              target="_blank"
-            >
-              <FaLinkedin size="2em" color="black" />
-            </Anchor>
-          </Navigation>
+              <Navigation>
+                <Anchor
+                  href="https://github.com/amandatilly?tab=repositories"
+                  target="_blank"
+                >
+                  <FaGithub size="2em" color="black" />
+                </Anchor>
+                <Anchor
+                  href="https://www.linkedin.com/in/amanda-tilly/"
+                  target="_blank"
+                >
+                  <FaLinkedin size="2em" color="black" />
+                </Anchor>
+              </Navigation>
 
-          <Article>
-            <HeadingThreeContainer>
-              <h3>Frontend-developer</h3>
-            </HeadingThreeContainer>
-            {/* <TextWrapper> */}
-            <Text>
-              Cat ipsum dolor sit amet, fart in owners food but good morning
-              sunshine for human give me attention meow. Meow in empty rooms hit
-              you unexpectedly, for paw your face to wake you up in the morning.
-              Catch mouse and gave it as a present plan steps for world
-              domination grab pompom in mouth and put in water dish toilet paper
-              attack claws fluff everywhere meow miao french ciao litterbox.
-              Hiss at vacuum cleaner meow to be let out headbutt owner's knee
-              but furrier and even more furrier hairball or bite the neighbor's
-              bratty kid allways wanting food. Howl uncontrollably for no reason
-              lick arm hair i heard this rumor where the humans are our owners,
-              pfft, what do they know?
-            </Text>
-            {/* </TextWrapper> */}
-          </Article>
-        </Grid>
+              <Article>
+                <HeadingThree>Frontend-developer</HeadingThree>
 
-        <Grid>
-          <ImageContainer>
-            <Img src={madelene} alt="Madelene frontend developer" />
-          </ImageContainer>
+                <Text>
+                  Hi, I am a frontend developer &amp; a yoga+meditation teacher.
+                  I love learning and trying new things, first and foremost I am
+                  and will always be a student. There is always more to know, to
+                  explore and add to the blend. My unique journey is what fules
+                  my creativity and piece by piece I hope that my ever-growing
+                  experience can truly help make a difference in this world. I
+                  want to create solutions to problems that matter and develop
+                  tools and services that will help to solve our global
+                  challenges.
+                </Text>
+              </Article>
+            </Flex>
 
-          <HeadingTwoContainer>
-            <h2>Madelene Trang</h2>
-          </HeadingTwoContainer>
+            <Flex>
+              <Img src={madelene} alt="Madelene frontend developer" />
 
-          <Navigation>
-            <Anchor
-              href="https://github.com/MT-dotse?tab=repositories"
-              target="_blank"
-            >
-              <FaGithub size="2em" color="black" />
-            </Anchor>
-            <Anchor
-              href="https://www.linkedin.com/in/madelene-trang-dev/"
-              target="_blank"
-            >
-              <FaLinkedin size="2em" color="black" />
-            </Anchor>
-          </Navigation>
+              <HeadingTwo>Madelene Trang</HeadingTwo>
 
-          <Article>
-            <HeadingThreeContainer>
-              <h3>Frontend-developer</h3>
-            </HeadingThreeContainer>
-            {/* <TextWrapper> */}
-            <Text>
-              Cat ipsum dolor sit amet, fart in owners food but good morning
-              sunshine for human give me attention meow. Meow in empty rooms hit
-              you unexpectedly, for paw your face to wake you up in the morning.
-              Catch mouse and gave it as a present plan steps for world
-              domination grab pompom in mouth and put in water dish toilet paper
-              attack claws fluff everywhere meow miao french ciao litterbox.
-              Hiss at vacuum cleaner meow to be let out headbutt owner's knee
-              but furrier and even more furrier hairball or bite the neighbor's
-              bratty kid allways wanting food. Howl uncontrollably for no reason
-              lick arm hair i heard this rumor where the humans are our owners,
-              pfft, what do they know?
-            </Text>
-            {/* </TextWrapper> */}
-          </Article>
-        </Grid>
+              <Navigation>
+                <Anchor
+                  href="https://github.com/MT-dotse?tab=repositories"
+                  target="_blank"
+                >
+                  <FaGithub size="2em" color="black" />
+                </Anchor>
+                <Anchor
+                  href="https://www.linkedin.com/in/madelene-trang-dev/"
+                  target="_blank"
+                >
+                  <FaLinkedin size="2em" color="black" />
+                </Anchor>
+              </Navigation>
 
-        <Grid>
-          <ImageContainer>
-            <Img src={fatima} alt="Fatima frontend developer" />
-          </ImageContainer>
+              <Article>
+                <HeadingThree>Frontend-developer</HeadingThree>
 
-          <HeadingTwoContainer>
-            <h2>Fatima Gamero Romero</h2>
-          </HeadingTwoContainer>
+                <Text>
+                  Hi, I am a creative frontend developer with a background in
+                  project management and sustainability. I was drawn to
+                  programming by the possibility to develop my creative side and
+                  along the journey I found my knack for solving problems and
+                  passion for building useful applications with color and
+                  meaning. I consider myself a lifelong learner who strives to
+                  be the best version of myself in my personal and professional
+                  life.
+                </Text>
+              </Article>
+            </Flex>
 
-          <Navigation>
-            <Anchor
-              href="https://github.com/Fatima-GR?tab=repositories"
-              target="_blank"
-            >
-              <FaGithub size="2em" color="black" />
-            </Anchor>
-            <Anchor
-              href="https://www.linkedin.com/in/fatima-gamero-romero-071224212/"
-              target="_blank"
-            >
-              <FaLinkedin size="2em" color="black" />
-            </Anchor>
-          </Navigation>
+            <Flex>
+              <Img src={fatima} alt="Fatima frontend developer" />
 
-          <Article>
-            <HeadingThreeContainer>
-              <h3>Frontend-developer</h3>
-            </HeadingThreeContainer>
-            {/* <TextWrapper> */}
-            <Text>
-              Cat ipsum dolor sit amet, fart in owners food but good morning
-              sunshine for human give me attention meow. Meow in empty rooms hit
-              you unexpectedly, for paw your face to wake you up in the morning.
-              Catch mouse and gave it as a present plan steps for world
-              domination grab pompom in mouth and put in water dish toilet paper
-              attack claws fluff everywhere meow miao french ciao litterbox.
-              Hiss at vacuum cleaner meow to be let out headbutt owner's knee
-              but furrier and even more furrier hairball or bite the neighbor's
-              bratty kid allways wanting food. Howl uncontrollably for no reason
-              lick arm hair i heard this rumor where the humans are our owners,
-              pfft, what do they know?
-            </Text>
-            {/* </TextWrapper> */}
-          </Article>
-        </Grid>
-      </MainContainer>
-      <Footer />
+              <HeadingTwo>Fatima Gamero Romero</HeadingTwo>
+
+              <Navigation>
+                <Anchor
+                  href="https://github.com/Fatima-GR?tab=repositories"
+                  target="_blank"
+                >
+                  <FaGithub size="2em" color="black" />
+                </Anchor>
+                <Anchor
+                  href="https://www.linkedin.com/in/fatima-gamero-romero-071224212/"
+                  target="_blank"
+                >
+                  <FaLinkedin size="2em" color="black" />
+                </Anchor>
+              </Navigation>
+
+              <Article>
+                <HeadingThree>Frontend-developer</HeadingThree>
+
+                <Text>
+                  Hi, I am a frontend developer based in Zurich but willing to
+                  work remotely. Throughout my various working experiences, I’ve
+                  learned to cope with stress and fast paced working
+                  environments, where quick decision making, problem solving and
+                  flexibility is essential. I always strive to improve as a
+                  person and get better at what I do.
+                </Text>
+              </Article>
+            </Flex>
+          </MainContainer>
+          <Footer />
+        </MainContainerWrap>
+      )}
     </>
   );
 };
 export default AboutUs;
 
 //--------- STYLED COMPONENTS ----------//
+const MainContainerWrap = styled.main`
+  height: 90vh;
+  width: 100%;
+  background-color: white;
+`;
+
 const HeadingOne = styled.h1`
   color: #ef737d;
-`;
-
-const MainContainer = styled.main`
-  /* min-height: 100vh; */
-  height: auto;
-
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: row;
-  }
-`;
-
-const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
 `;
-
-const Grid = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  justify-content: center;
-`;
-const ImageContainer = styled.div`
-  margin: 0 auto;
-`;
-const Img = styled.img`
-  width: 100px;
-  height: 100px;
-`;
-
-const Text = styled.p`
-  font-size: 16px;
-`;
-const TextWrapper = styled.div`
-  padding: 10px;
-`;
-const HeadingTwoContainer = styled.div`
+const HeadingThree = styled.h3`
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 `;
+
+const HeadingTwo = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+const MainContainer = styled.main`
+  /* min-height: 100vh; */
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
+
+const Flex = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+`;
+
+const Img = styled.img`
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+`;
+const Text = styled.p`
+  font-size: 16px;
+`;
+
 const Navigation = styled.nav`
   display: flex;
   align-items: center;
@@ -220,12 +208,6 @@ const Anchor = styled.a`
     transform: scale(1.1, 1.1);
   }
 `;
-
-const HeadingThreeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 const Article = styled.article`
-  margin: 30px;
+  margin: 0 30px;
 `;

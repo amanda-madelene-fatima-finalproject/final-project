@@ -6,11 +6,7 @@ import WelcomeImg from '../../assets/welcome.png';
 const WelcomeImage = () => {
   return (
     <>
-      <Image
-        img={WelcomeImg}
-        alt="Welcome image"
-        // style={margin:20px ; border:2px solid red;}
-      />
+      <Image img={WelcomeImg} alt="Welcome image" />
     </>
   );
 };

@@ -16,7 +16,7 @@ const EssentialTasks = () => {
     } else if (key === 'Move') {
       return 'Have you moved your body?';
     } else if (key === 'Break') {
-      return 'Remember to take breaks?';
+      return 'Remembered to take breaks?';
     } else if (key === 'Sleep') {
       return 'Did you prioritize your sleep?';
     } else if (key === 'Nature') {
@@ -26,11 +26,26 @@ const EssentialTasks = () => {
   // and object containing arrays of strings that we use to display a message
   // Anthe profile depending on if the task is done or not.
   const displayFeedback = {
-    Hydrate: ['Did you drink enough water?', 'checked'],
-    Move: ['Have you moved your body?', 'checked'],
-    Break: ['Have you moved your body?', 'checked'],
-    Sleep: ['Did you prioritize your sleep?', 'checked'],
-    Nature: ['Have you spent time in nature?', 'checked'],
+    Hydrate: [
+      "No. Don't worry, go chug some water right now!",
+      'Yes, great job! Your body will thank you for it.',
+    ],
+    Move: [
+      'No. Remember that a little goes a long way. Put on your favourite music and dance, do some gardening or play with your kids.',
+      'Yes, awesome! You can always find ways to incorporate motion into your daily life in a way that feels good.',
+    ],
+    Break: [
+      'No. Taking time to do nothing often brings everything into perspective. Come on, give it a go!',
+      'Yes! It is okay to be a glowstick. Sometimes we have to break before we shine.',
+    ],
+    Sleep: [
+      "No. Remember that tired minds don't plan well. Sleep first, plan later.",
+      "Yes, sleep solves everything and you're doing it just right. Invest in rest. ",
+    ],
+    Nature: [
+      "No. Do it now, sometimes you need to unplug and enjoy nature's company.",
+      'Yes! The antidote for stress and exhaustion is nature.',
+    ],
   };
 
   return (
@@ -104,7 +119,7 @@ const SubHeader = styled.h3`
   letter-spacing: 2px;
 `;
 
-const SubWrap = styled.h3`
+const SubWrap = styled.div`
   border: 1px dotted #808080;
   padding: 10px;
   border-radius: 5px;
@@ -120,7 +135,7 @@ const EssDiv = styled.div`
   text-align: left;
 `;
 
-const EssentialTask = styled.p`
+const EssentialTask = styled.div`
   display: flex;
   flex-direction: column;
   font-family: 'Poppins', sans-serif;

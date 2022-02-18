@@ -45,11 +45,11 @@ const TodoList = () => {
   };
   const textEssentialTasks = (item) => {
     if (item === 'Hydrate') {
-      return 'Drink at least 5 glasses of water.';
+      return 'Drink at least 8 glasses of water.';
     } else if (item === 'Move') {
-      return "Move your body, let's dance!";
+      return 'Move your body! A little goes a long way.';
     } else if (item === 'Break') {
-      return 'Remember to take breaks.';
+      return 'Take regular breaks throughout the day.';
     } else if (item === 'Sleep') {
       return "Prioritize sleep, it's important.";
     } else if (item === 'Nature') {
@@ -62,7 +62,7 @@ const TodoList = () => {
       <AddTodo />
       <div>
         <SubHeading>Daily Essentials</SubHeading>
-        <Typography>
+        <EssDiv>
           {essentialTasksKeys.map((item) => (
             <Essential key={item}>
               <StyledCheckBox
@@ -74,13 +74,13 @@ const TodoList = () => {
               <EssTask>{textEssentialTasks(item)}</EssTask>
             </Essential>
           ))}
-        </Typography>
+        </EssDiv>
         <SubHeading>Your Tasks</SubHeading>
-        <Typography>
+        <EssDiv>
           {todoItems.map((item) => (
-            <TodoItem data={item} />
+            <TodoItem key={item.task} data={item} />
           ))}
-        </Typography>
+        </EssDiv>
       </div>
       <AllTasksButton />
       <TodoCount />
@@ -134,7 +134,7 @@ const SubHeading = styled.h4`
   margin: 20px 0;
 `;
 
-const Typography = styled.p`
+const EssDiv = styled.div`
   font-size: 13px;
   font-weight: 500;
 `;
@@ -173,11 +173,6 @@ const StyledCheckBox = styled.input`
     width: 1em;
     height: 1em;
   }
-`;
-
-const TodoText = styled.p`
-  font-size: 13px;
-  font-weight: bold;
 `;
 
 //Link to understand the essentialTasksKeys

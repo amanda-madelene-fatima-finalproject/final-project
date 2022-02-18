@@ -1,72 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../reusable-components/Navbar.js';
-import Footer from 'components/reusable-components/Footer.js';
-import EssentialsImage from './EssentialsImage.js';
+import React from 'react';
 import styled from 'styled-components';
-import Loader from 'components/reusable-components/Loader.js';
-import EssentialContainerBox from './EssentialContainerBox.js';
-import AdCopyEssentials from './AdCopyEssentials.js';
 
-const Essentials = () => {
-  //--------- LOCAL STATE ----------//
-  const [loading, setLoading] = useState(true);
-
-  //--------- USEEFFECT ----------//
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  });
-
+const Image = (props) => {
+  const { img, alt } = props;
   return (
-    <>
-      {loading == true ? (
-        <Loader animationType="balanceData" />
-      ) : (
-        <Container>
-          <Navbar />
-          <Grid>
-            <AdCopyEssentials />
-            <EssentialsImage />
-            <EssentialContainerBox />
-            <EssentialContainerBox />
-            <EssentialContainerBox />
-            <EssentialContainerBox />
-          </Grid>
-          <Footer />
-        </Container>
-      )}
-    </>
+    <ImageContainer>
+      <Img src={img} alt={alt} />
+    </ImageContainer>
   );
 };
 
-export default Essentials;
+export default Image;
 
 //--------- STYLED COMPONENTS ----------//
-const Container = styled.main`
-  min-height: 90vh;
-  background-color: white;
-  /* grid-template-columns: 1fr; */
-  /* justify-content: center;
-  align-items: center; */
-  /* width: 400px; */
-  /* height: 100vh; */
-  /* margin-left: 20px;
-  margin-right: 20px; */
-  margin: 0 15px 0 15px;
+const ImageContainer = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 0 50px 0 50px;
+    margin-bottom: 100px;
+    margin-top: 90px;
+  }
+  @media (min-width: 1024px) {
+    width: auto;
+    height: 400px;
   }
 `;
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  justify-content: center;
+
+const Img = styled.img`
+  width: auto;
+  height: 300px;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    width: auto;
+    height: 300px;
+  }
+
+  @media (min-width: 1024px) {
+    width: auto;
+    height: 400px;
   }
 `;

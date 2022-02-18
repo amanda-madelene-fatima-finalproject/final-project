@@ -1,11 +1,11 @@
-const User = require("../models/User.js");
+const User = require('../models/User.js');
 
 // Authentication:  to check if you are a user
 // When a user signs up, an accessToken is created and sent from the backend to the frontend so each user have their own tocken.
 
 const authenticateUser = async (req, res, next) => {
   // Authorization: When signed in this authorizes what you have access to and can do
-  const accessToken = req.header("Authorization");
+  const accessToken = req.header('Authorization');
 
   try {
     // Checks if user has an accessToken
@@ -17,7 +17,7 @@ const authenticateUser = async (req, res, next) => {
     } else {
       res.status(401).json({
         response: {
-          message: "Please, login!",
+          message: 'Please, login!',
         },
         success: false,
       });
@@ -25,7 +25,7 @@ const authenticateUser = async (req, res, next) => {
   } catch (error) {
     res
       .status(400)
-      .json({ message: "Invalid request", response: error, success: false });
+      .json({ message: 'Invalid request', response: error, success: false });
   }
 };
 

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import ProfileImage from './ProfileImage.js';
 import TodoCompleted from 'components/profile-page/TodoCompleted.js';
 import Navbar from '../../components/reusable-components/Navbar.js';
-import AdCopyProfile from './AdCopyProfile.js';
 import Footer from 'components/reusable-components/Footer.js';
-import EssentialTasks from './EssentialTasks.js';
 import Loader from '../reusable-components/Loader.js';
+import AdCopyProfile from './AdCopyProfile.js';
+import EssentialTasks from './EssentialTasks.js';
 
 const Profile = () => {
   //--------- LOCAL STATE ----------//

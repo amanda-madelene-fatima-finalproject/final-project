@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TodoList from './TodoList';
+import Navbar from 'components/reusable-components/Navbar.js';
 import Footer from 'components/reusable-components/Footer.js';
 import DashboardImage from '../dashboard-page/DashboardImage.js';
 import AdCopyDashboard from '../../components/dashboard-page/AdCopyDashboard.js';
-import Navbar from 'components/reusable-components/Navbar.js';
 import LoadingIndicator from 'components/LoadingIndicator.js';
 import Quotes from './Quotes.js';
 

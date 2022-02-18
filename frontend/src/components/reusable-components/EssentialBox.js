@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const EssentialBox = (props) => {
-  const { text } = props;
+  const { header, quote, text } = props;
   return (
     <Wrapper>
+      <h3>{header}</h3>
+      <h4>{quote}</h4>
       <p>{text}</p>
     </Wrapper>
   );
@@ -33,4 +35,14 @@ const Wrapper = styled.div`
   margin: 50px auto;
   background: white;
   border-radius: 10px;
+
+  h3 {
+    color: #ef737d;
+  }
+  @media (min-width: 1024px) {
+    width: 300px;
+  }
+  @media (min-width: 1440px) {
+    width: 400px;
+  }
 `;

@@ -5,7 +5,8 @@ import Footer from 'components/reusable-components/Footer.js';
 import EssentialImageBall from '../welcome-page/EssentialImageBall.js';
 import styled from 'styled-components';
 import AdCopyInfoEssen from './AdCopyInfoEssen.js';
-import EssentialInfoBox from '../welcome-page/EssentialInfoBox.js';
+import EssentialContainerBox from '../essentials-folder/EssentialContainerBox.js';
+
 const EssentialInfo = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -25,10 +26,7 @@ const EssentialInfo = () => {
               <AdCopyInfoEssen />
             </CopyWrap>
             <EssentialImageBall />
-            <EssentialInfoBox />
-            <EssentialInfoBox />
-            <EssentialInfoBox />
-            <EssentialInfoBox />
+            <EssentialContainerBox />
           </Grid>
           <Footer />
         </Container>

@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
 
+//Import the endpoint functions
 import {
   addTask,
   editTask,
@@ -15,8 +16,7 @@ import {
   accessDashboard,
   accessUserProfile,
 } from './endpoints/AccessAccount.js';
-import authenticateUser from './authorization/authenticateUser.js';
-// import quotesData from './data/quotes.json';
+import authenticateUser from './authorization/authenticateUser.js'; //import authenticate user
 
 // Madelene and Amanda
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
@@ -65,14 +65,6 @@ app.get('/user/:userId/profile', authenticateUser, accessUserProfile);
 app.post('/signup', signUp);
 app.post('/signin', signIn);
 app.post('/role', assignRole);
-
-// // Quote Endpoint //
-// app.get('/quotes', async (req, res) => {
-//   const Quotes = quotesData;
-//   const getRandomQuote = () =>
-//     Quotes[Math.floor(Math.random() * Quotes.length)];
-//   res.status(200).json({ response: getRandomQuote(), success: true });
-// });
 
 // Start the server
 app.listen(port, () => {

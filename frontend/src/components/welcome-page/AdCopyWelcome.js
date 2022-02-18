@@ -11,8 +11,12 @@ const AdCopyWelcome = () => {
       <Text>
         Do you have a tendency to disappear into your work? Maybe you sit down
         in front of your computer and the next time you look up you realize it’s
-        been 5 hours? At this point your really tired, your eyes are dry and so
-        is your mouth.
+        been 5 hours?
+      </Text>
+      <Text>
+        Don’t get us wrong, it’s amazing that you love your work, but you know
+        what? We bet you could love it even more, and be even more efficient if
+        you took a minute look over your <span>daily habits</span>.
       </Text>
     </Container>
   );
@@ -44,6 +48,7 @@ const Headline = styled.h1`
   }
   @media (min-width: 1024px) {
     font-size: 50px;
+    width: 400px;
   }
   @media (min-width: 1440px) {
     font-size: 60px;
@@ -53,8 +58,13 @@ const Headline = styled.h1`
 const Text = styled.p`
   width: 300px;
 
+  span {
+    font-weight: bold;
+  }
+
   @media (min-width: 1024px) {
     font-size: 18px;
+    width: 400px;
   }
   @media (min-width: 1440px) {
     font-size: 21px;

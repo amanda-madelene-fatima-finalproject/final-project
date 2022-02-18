@@ -1,5 +1,5 @@
-const Todo = require('../models/Todo');
-const User = require('../models/User.js');
+const Todo = require('../models/Todo'); //Connects to the model
+const User = require('../models/User.js'); //Connects to the model
 
 // ----- Task Endpoints --------//
 
@@ -20,6 +20,7 @@ export const addTask = async (req, res) => {
           author: newTask.user.username,
           category: newTask.category,
         },
+        success: true,
       });
     } else {
       res.status(404).json({
@@ -40,10 +41,9 @@ export const getTask = async (req, res) => {
 
   try {
     const queriedTasks = await Todo.find({
-      // user: mongoose.Types.ObjectId(userId),
       user: userId,
     });
-    // const tasks = await Todo.find({ user: userId, completed: false });//here need to find the userId
+
     if (queriedTasks) {
       res
         .status(200)

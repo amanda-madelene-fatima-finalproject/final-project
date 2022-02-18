@@ -119,21 +119,6 @@ const MenuLink = styled.a`
   }
 `;
 
-const ButtonLink = styled.a`
-  font-family: 'Poppins', sans-serif;
-  /* padding: 1rem 2rem; */
-  /* cursor: pointer;
-  text-align: center; */
-  text-decoration: none;
-  color: #e5e5e5;
-  /* transition: all 0.3s ease-in;
-  font-size: 0.9rem;
-
-  &:hover {
-    color: #e5e5e5;
-  }  */
-`;
-
 const Logo = styled.a`
   padding: 1rem 0;
 

@@ -28,7 +28,7 @@ const NavbarWelcome = () => {
         <MenuLink href="/essentialinfo">Essential Info</MenuLink>
         <MenuLink href="/aboutus">About Us</MenuLink>
         <MenuLink href="/aboutproject">About This Project</MenuLink>
-        <Button size="small" color="secondary" variant="outlined" href="/">
+        <Button size="small" color="secondary" variant="outlined">
           <Link
             activeClass="active"
             to="name"
