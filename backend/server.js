@@ -15,7 +15,7 @@ import { assignRole, signIn, signUp } from './endpoints/createAccount.js';
 import {
   accessDashboard,
   accessUserProfile,
-} from './endpoints/AccessAccount.js';
+} from './endpoints/accessAccount.js';
 import authenticateUser from './authorization/authenticateUser.js'; //import authenticate user
 
 // Madelene and Amanda
