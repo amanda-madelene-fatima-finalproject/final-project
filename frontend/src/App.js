@@ -11,8 +11,6 @@ import {
   compose,
 } from '@reduxjs/toolkit';
 
-//Import components
-// import Login from "./components/welcome-page/Login";
 import NotFound from './components/notfound-page/NotFound';
 import Dashboard from './components/dashboard-page/Dashboard';
 import Welcome from './components/welcome-page/Welcome';

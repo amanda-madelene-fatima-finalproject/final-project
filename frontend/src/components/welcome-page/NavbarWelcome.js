@@ -14,7 +14,6 @@ const NavbarWelcome = () => {
     <Nav>
       <Logo href="/">
         <Img src={logoImg} alt="logo" />
-        {/* Debug <span>Task Manager</span> */}
       </Logo>
       {/* Here we setIsOpen to the opposite of false, this way when it is false it will set it to true and vice versa */}
       <Hamburger onClick={() => setIsOpen(!isOpen)}>

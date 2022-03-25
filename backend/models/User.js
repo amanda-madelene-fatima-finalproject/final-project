@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import crypto from "crypto";
+import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 //----- UserSchema ------//
 const UserSchema = new mongoose.Schema({
@@ -16,8 +16,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Role",
-    // required: true,
+    ref: 'Role',
   },
   password: {
     type: String,
@@ -27,12 +26,11 @@ const UserSchema = new mongoose.Schema({
   // Unique identifier for authentication when signing in
   accessToken: {
     type: String,
-    // required: true,
     // creates the accessToken by randomizing a string (128 is the length), hex means letters (if removed it generates symbols).
-    default: () => crypto.randomBytes(128).toString("hex"),
+    default: () => crypto.randomBytes(128).toString('hex'),
   },
 });
 
 // User model that uses the UserSchema
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 module.exports = User;

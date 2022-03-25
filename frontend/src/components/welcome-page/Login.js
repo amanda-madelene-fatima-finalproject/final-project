@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-// import { API_URL } from "../../utils/urls";
-// import { user } from "../../reducers/user"
 import { user, userAccess } from '../../reducers/user';
 
 const Login = () => {
@@ -45,6 +43,13 @@ const Login = () => {
     dispatch(userAccess(name, username, password, mode));
   };
 
+  const handleOnClick = () => {
+    setMode('signin');
+    dispatch(user.actions.setError(null));
+    setUsername('');
+    setPassword('');
+  };
+
   return (
     <LoginContainer>
       <Wrapper>
@@ -61,10 +66,7 @@ const Login = () => {
             <Div>
               <PButton
                 onClick={() => {
-                  setMode('signin');
-                  dispatch(user.actions.setError(null));
-                  setUsername('');
-                  setPassword('');
+                  handleOnClick();
                 }}
               >
                 Sign In
@@ -137,8 +139,6 @@ const LoginContainer = styled.section`
   justify-content: center;
   align-items: center;
   min-height: 80vh;
-
-  // background-color: #ef737d;
 `;
 const Input = styled.input`
   border-radius: 5px;
@@ -148,8 +148,6 @@ const Input = styled.input`
 `;
 
 const Wrapper = styled.div`
-  /* border: 1px solid black; */
-  /* border-radius: 50px; */
   padding: 50px;
   background-color: #ef737d;
   display: flex;
@@ -158,9 +156,7 @@ const Wrapper = styled.div`
   align-items: center;
   text-align: center;
   padding: 20px;
-  /* border: solid 1px black; */
   border-radius: 50px;
-  /* background-color: whitesmoke; */
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
@@ -169,7 +165,6 @@ const Wrapper = styled.div`
   min-height: 200px;
   width: 260px;
   margin: 50px auto;
-  /* background: white; */
   border-radius: 10px;
 
   @media (min-width: 1440px) {
@@ -198,7 +193,6 @@ const Button = styled.button`
     background-color: #ef737d;
     color: whitesmoke;
     border: solid 1px whitesmoke;
-    /* transform: scale(1.2, 1.2); */
   }
 `;
 
@@ -210,7 +204,6 @@ const LinkText = styled.div`
   margin: 0 auto;
   margin-bottom: 20px;
   border-bottom: 1px dotted white;
-  /* border-top: 1px solid #b4b2b2; */
   padding: 10px;
   p {
     margin: 5px;
@@ -218,7 +211,6 @@ const LinkText = styled.div`
 `;
 
 const Div = styled.div`
-  /* width: 100px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,5 +237,4 @@ const PText = styled.p`
   @media (min-width: 1440px) {
     font-size: 20px;
   }
-  /* font-weight: 700; */
 `;

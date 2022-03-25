@@ -90,11 +90,10 @@ const AboutUs = () => {
                   Hi, I am a creative frontend developer with a background in
                   project management and sustainability. I was drawn to
                   programming by the possibility to develop my creative side and
-                  along the journey I found my knack for solving problems and
-                  passion for building useful applications with color and
-                  meaning. I consider myself a lifelong learner who strives to
-                  be the best version of myself in my personal and professional
-                  life.
+                  along the journey I found my passion for solving problems and
+                  building useful applications with color and meaning. I
+                  consider myself a lifelong learner who strives to be the best
+                  version of myself in my personal and professional life.
                 </Text>
               </Article>
             </Flex>
