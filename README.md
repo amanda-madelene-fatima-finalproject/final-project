@@ -1,4 +1,4 @@
-# Final project Debug
+# Final project Debug 🐞🎓 
 
 As new developers we quickly realized that it’s easy to get into negative work habits when spending time so much time in front of a computer. When you’re passionate about what you do it can be hard to drag yourself away from the screen. At least this was our experience, and many seemed to agree, and that is where the idea for DeBug was born. We spend so much time debugging our code every day, so why not DeBug our lives while we’re at it.
 
